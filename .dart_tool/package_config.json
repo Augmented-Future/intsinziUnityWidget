@@ -104,10 +104,22 @@
       "languageVersion": "2.15"
     },
     {
+      "name": "flutter_plugin_android_lifecycle",
+      "rootUri": "file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///home/sele/snap/flutter/common/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_unity_widget",
+      "rootUri": "file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_unity_widget-2020.3.25",
+      "packageUri": "lib/",
+      "languageVersion": "2.13"
     },
     {
       "name": "flutter_web_plugins",
@@ -194,6 +206,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "stream_transform",
+      "rootUri": "file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/stream_transform-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "string_scanner",
       "rootUri": "file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0",
       "packageUri": "lib/",
@@ -248,7 +266,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-03-25T11:14:09.750227Z",
+  "generated": "2022-04-06T09:20:05.510425Z",
   "generator": "pub",
   "generatorVersion": "2.16.1"
 }

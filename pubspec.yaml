@@ -35,6 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.12.0
   flutter_native_splash: ^2.1.0
+  flutter_unity_widget: ^2020.3.25
 
 dev_dependencies:
   flutter_test:

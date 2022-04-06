@@ -66,6 +66,14 @@ flutter_native_splash
 2.15
 file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.1.0/
 file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.1.0/lib/
+flutter_plugin_android_lifecycle
+2.12
+file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5/
+file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5/lib/
+flutter_unity_widget
+2.13
+file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_unity_widget-2020.3.25/
+file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_unity_widget-2020.3.25/lib/
 image
 2.12
 file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.1.3/
@@ -114,6 +122,10 @@ stream_channel
 2.12
 file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.1.0/
 file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.1.0/lib/
+stream_transform
+2.12
+file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/stream_transform-2.0.0/
+file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/stream_transform-2.0.0/lib/
 string_scanner
 2.12
 file:///home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0/

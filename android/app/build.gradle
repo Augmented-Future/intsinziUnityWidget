@@ -56,15 +56,6 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
-        debug {
-            signingConfig signingConfigs.debug
-        }
-        profile {
-            signingConfig signingConfigs.debug
-        }
-        innerTest {
-            matchingFallbacks = ['debug', 'release']
-        }
     }
 }
 

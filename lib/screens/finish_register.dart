@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/register.dart';
 import 'package:globaltrailblazersapp/screens/verify_phone.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class FinishRegisterScreen extends StatelessWidget {
+  const FinishRegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: const Text(
-                      'Login',
+                      'Register',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -128,7 +127,7 @@ class LoginScreen extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(8)),
                       ),
                       child: const Text(
-                        'Login',
+                        'Register',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -138,37 +137,46 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 48),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Don’t have account?',
-                        style: TextStyle(color: grayColor200),
-                      ),
-                      const SizedBox(width: 4),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const RegisterScreen()),
-                          );
-                        },
-                        child: const Text(
-                          'Register',
-                          style: TextStyle(
-                              color: grayColor200, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  )
+                  const CheckboxWidget(),
                 ]),
               ),
             ]),
           ),
         ),
       ),
+    );
+  }
+}
+
+class CheckboxWidget extends StatefulWidget {
+  const CheckboxWidget({Key? key}) : super(key: key);
+
+  @override
+  _CheckboxWidgetState createState() => _CheckboxWidgetState();
+}
+
+class _CheckboxWidgetState extends State<CheckboxWidget> {
+  bool checkedValue = false;
+
+  void handleCheckbox(value) {
+    setState(() {
+      checkedValue = !value;
+    });
+  }
+
+  // ···
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      title: const Text(
+        "By registering you agreee to the Terms and conditions and Privacy policy",
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+      value: checkedValue,
+      onChanged: handleCheckbox,
+      controlAffinity: ListTileControlAffinity.leading, //  <-- leading Checkbox
     );
   }
 }

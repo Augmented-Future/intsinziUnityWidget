@@ -67,6 +67,7 @@ flutter:
     - assets/images/avatar3.png
     - assets/images/avatar4.png
     - assets/images/fullBtn.png
+    - assets/images/register.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

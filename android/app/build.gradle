@@ -26,6 +26,9 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    configurations {
+        all*.exclude module: 'unity-classes' // This removes all other versions of `support-v4` if gets duplicated from all the artifacts.
+    }
     compileSdkVersion flutter.compileSdkVersion
 
     compileOptions {

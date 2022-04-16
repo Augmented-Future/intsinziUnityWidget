@@ -21,7 +21,8 @@ class LoginScreen extends StatelessWidget {
             color: Colors.white,
           ),
           child: SingleChildScrollView(
-            child: Column(children: [
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                 padding: const EdgeInsets.all(32),
                 child: Image.asset(
@@ -129,6 +130,20 @@ class LoginScreen extends StatelessWidget {
                             textAlign: TextAlign.center,
                           ),
                         ),
+                      ),
+                      const SizedBox(height: 22),
+                      Row(
+                        children: [
+                          Text(
+                            'Don’t have account?',
+                            style: TextStyle(color: grayColor200),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text('Register',
+                                style: TextStyle(color: grayColor200)),
+                          ),
+                        ],
                       )
                     ]),
               ),

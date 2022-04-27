@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/screens/home.dart';
 
 class VerifyPhoneScreen extends StatelessWidget {
   const VerifyPhoneScreen({Key? key}) : super(key: key);
@@ -157,7 +158,13 @@ class VerifyPhoneScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
+                      );
+                    },
                     child: Container(
                       width: double.infinity,
                       padding: const EdgeInsets.only(

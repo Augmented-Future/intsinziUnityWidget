@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 
-class TwoCardPageView extends StatefulWidget {
-  const TwoCardPageView({Key? key}) : super(key: key);
+class TipTwoCardPageView extends StatefulWidget {
+  const TipTwoCardPageView({Key? key}) : super(key: key);
 
   @override
-  _TwoCardPageViewState createState() => _TwoCardPageViewState();
+  _TipTwoCardPageViewState createState() => _TipTwoCardPageViewState();
 }
 
-class _TwoCardPageViewState extends State<TwoCardPageView> {
+class _TipTwoCardPageViewState extends State<TipTwoCardPageView> {
   final List<Item> _items = [
     Item('No word in the dictionary rhyme with the word orange.', color100),
     Item('Number four is the only one with the same amount of letters.',
@@ -38,6 +38,17 @@ class _TwoCardPageViewState extends State<TwoCardPageView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Container(
+            padding: const EdgeInsets.all(32),
+            width: double.infinity,
+            child: const Text(
+              'Daily Tips',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: colorPurple,
+              ),
+            )),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 200,

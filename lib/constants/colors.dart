@@ -7,3 +7,5 @@ const grayColor200 = Color(0xffB8B8B8);
 const brandYellowColor = Color(0xffFDE047);
 const color100 = Color(0xffAD6359);
 const secondaryBlack = Color(0xff263238);
+const colorPurple = Color(0xff7F58AF);
+const colorGreen = Color(0xff10B981);

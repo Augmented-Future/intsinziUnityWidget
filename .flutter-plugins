@@ -1,6 +1,4 @@
 # This is a generated file; do not edit or check into version control.
-firebase_core=/home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.14.0/
-firebase_core_web=/home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.1/
-flutter_native_splash=/home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.1.5/
-flutter_plugin_android_lifecycle=/home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.5/
-flutter_unity_widget=/home/sele/snap/flutter/common/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_unity_widget-2020.3.25/
+firebase_core=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.14.0/
+firebase_core_web=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.6.1/
+flutter_native_splash=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_native_splash-2.1.5/

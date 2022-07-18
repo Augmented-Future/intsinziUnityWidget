@@ -1,6 +1,7 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/screens/authentication/choose_avatar.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/screens/authentication/verify_phone.dart';
 
@@ -292,7 +293,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                 onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => const VerifyPhoneScreen())),
+                        builder: (_) => const ChooseAvatarScreen())),
                 child: Container(
                   width: double.infinity,
                   padding: const EdgeInsets.only(

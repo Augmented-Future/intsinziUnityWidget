@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/models/trailbrazer.dart';
+import 'package:globaltrailblazersapp/models/animations_content.dart';
 
 class AnimationsCardView extends StatefulWidget {
   const AnimationsCardView({Key? key}) : super(key: key);
@@ -10,94 +10,59 @@ class AnimationsCardView extends StatefulWidget {
 }
 
 class _AnimationsCardViewState extends State<AnimationsCardView> {
-  final List<Trailbrazer> _items = [
-    Trailbrazer('Trailbrazers 1', 'Chapter 3,', 'Mathematics', '28 March 2022',
-        'Adekunle Gold'),
-    Trailbrazer('Trailbrazers 1', 'Chapter 3,', 'Kinyarwanda', '28 March 2022',
-        'Adekunle Gold'),
-    Trailbrazer('Trailbrazers 1', 'Chapter 3,', 'English', '28 March 2022',
-        'Adekunle Gold'),
-    Trailbrazer('Trailbrazers 1', 'Chapter 3,', 'Science', '28 March 2022',
-        'Adekunle Gold'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          padding: const EdgeInsets.only(left: 32, right: 32),
-          child: Row(
-            children: [
-              const Expanded(
-                flex: 4,
-                child: Text(
-                  "TV Zone",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Text(
+              "Animations Zone",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
               ),
-              Expanded(
-                flex: 6,
-                child: Row(children: [
-                  Expanded(
-                    flex: 5,
-                    child: ElevatedButton(
-                      child: const Text(
-                        'Free',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(3.0),
-                            side: const BorderSide(color: Colors.red),
-                          ),
-                        ),
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.red),
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  ElevatedButton(
-                    child: const Text(
-                      'View All',
-                      style: TextStyle(color: primaryColor),
-                    ),
-                    onPressed: () {},
-                    style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(3.0),
-                          side: const BorderSide(color: brandYellowColor),
-                        ),
-                      ),
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(brandYellowColor),
-                    ),
-                  ),
-                ]),
+            ),
+            const SizedBox(width: 10),
+            ElevatedButton(
+              child: const Text(
+                'Free',
+                style: TextStyle(color: Colors.white),
               ),
-            ],
-          ),
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  primary: coolGreen,
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6))),
+            ),
+            ElevatedButton(
+              child: const Text(
+                'View All',
+                style: TextStyle(color: primaryColor),
+              ),
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  primary: coolYellow,
+                  elevation: 0.0,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6))),
+            ),
+          ],
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: 200,
           child: PageView.builder(
-              itemCount: _items.length,
+              itemCount: animations.length,
               itemBuilder: (context, index) {
                 return SizedBox(
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
                       ItemBuilder(
-                        items: _items,
+                        items: animations,
                         index: index,
                       ),
                     ],
@@ -113,12 +78,12 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
 class ItemBuilder extends StatelessWidget {
   const ItemBuilder({
     Key? key,
-    required List<Trailbrazer> items,
+    required List<AnimationsContent> items,
     required this.index,
   })  : _items = items,
         super(key: key);
 
-  final List<Trailbrazer> _items;
+  final List<AnimationsContent> _items;
   final int index;
 
   @override
@@ -151,10 +116,10 @@ class ItemBuilder extends StatelessWidget {
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(3.0),
-                    side: const BorderSide(color: colorGreen),
+                    side: const BorderSide(color: coolGreen),
                   ),
                 ),
-                backgroundColor: MaterialStateProperty.all<Color>(colorGreen),
+                backgroundColor: MaterialStateProperty.all<Color>(coolGreen),
               ),
             ),
           ),
@@ -168,7 +133,7 @@ class ItemBuilder extends StatelessWidget {
                 ),
               ),
               Text(
-                _items[index].courseName + ', ' + _items[index].chapter,
+                _items[index].title + ', ' + _items[index].unit,
                 style: const TextStyle(
                   fontSize: 18,
                   color: Colors.red,

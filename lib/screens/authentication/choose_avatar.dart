@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
@@ -115,7 +113,7 @@ class _ChooseAvatarScreenState extends State<ChooseAvatarScreen> {
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: () => Navigator.push(context,
+              onTap: () => Navigator.pushReplacement(context,
                   MaterialPageRoute(builder: (_) => const VerifyPhoneScreen())),
               child: Container(
                 width: 260,

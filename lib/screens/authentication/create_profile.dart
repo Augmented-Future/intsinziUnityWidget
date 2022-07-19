@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/choose_avatar.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:globaltrailblazersapp/screens/authentication/verify_phone.dart';
 
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen({Key? key}) : super(key: key);
@@ -70,280 +69,296 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/register.png"),
+            image: AssetImage("assets/images/background_body.png"),
             fit: BoxFit.cover,
           ),
           color: Colors.white,
         ),
         child: Form(
           key: _formKey,
-          child: ListView(
-            children: [
-              Container(
-                padding: const EdgeInsets.only(left: 170, top: 120),
-                child: const Text(
-                  'Register',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 170),
-                child: const Text(
-                  'To get customized  courses',
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: grayColor,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 120),
-              TextField(
-                autofocus: false,
-                cursorColor: primaryColor,
-                decoration: InputDecoration(
-                  hintText: 'Full name',
-                  hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                  filled: true,
-                  fillColor: softGray,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              DropDownTextField(
-                textFieldDecoration: InputDecoration(
-                  hintText: 'Choose Country',
-                  hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                  filled: true,
-                  fillColor: softGray,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                singleController: _country,
-                clearOption: false,
-                enableSearch: true,
-                validator: (value) {
-                  if (value == null) {
-                    return "Required field";
-                  } else {
-                    return null;
-                  }
-                },
-                dropDownItemCount: 4,
-                dropDownList: countries,
-                onChanged: (val) {},
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              DropDownTextField(
-                textFieldDecoration: InputDecoration(
-                  hintText: 'Choose Curriculum',
-                  hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                  filled: true,
-                  fillColor: softGray,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                singleController: _curriculum,
-                clearOption: false,
-                enableSearch: true,
-                validator: (value) {
-                  if (value == null) {
-                    return "Required field";
-                  } else {
-                    return null;
-                  }
-                },
-                dropDownItemCount: 4,
-                dropDownList: curriculums,
-                onChanged: (val) {},
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              DropDownTextField(
-                textFieldDecoration: InputDecoration(
-                  hintText: 'Choose Grade',
-                  hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                  filled: true,
-                  fillColor: softGray,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                singleController: _grade,
-                clearOption: false,
-                enableSearch: true,
-                validator: (value) {
-                  if (value == null) {
-                    return "Required field";
-                  } else {
-                    return null;
-                  }
-                },
-                dropDownItemCount: 4,
-                dropDownList: grades,
-                onChanged: (val) {},
-              ),
-              const SizedBox(height: 10),
-              TextField(
-                autofocus: false,
-                cursorColor: primaryColor,
-                decoration: InputDecoration(
-                  hintText: 'School name',
-                  hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                  filled: true,
-                  fillColor: softGray,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              DropDownTextField(
-                textFieldDecoration: InputDecoration(
-                  hintText: 'Choose Gender',
-                  hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                  filled: true,
-                  fillColor: softGray,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                singleController: _gender,
-                clearOption: false,
-                enableSearch: true,
-                validator: (value) {
-                  if (value == null) {
-                    return "Required field";
-                  } else {
-                    return null;
-                  }
-                },
-                dropDownItemCount: 4,
-                dropDownList: genders,
-                onChanged: (val) {},
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                autofocus: false,
-                cursorColor: primaryColor,
-                decoration: InputDecoration(
-                  hintText: 'Age',
-                  hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                  filled: true,
-                  fillColor: softGray,
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: Colors.white,
-                    ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.white),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 25),
-              GestureDetector(
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => const ChooseAvatarScreen())),
-                child: Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.only(
-                    left: 48,
-                    right: 48,
-                    top: 16,
-                    bottom: 16,
-                  ),
-                  decoration: const BoxDecoration(
-                    color: brandYellowColor,
-                    borderRadius: BorderRadius.all(Radius.circular(30)),
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: ListView(
+              children: [
+                Container(
+                  padding: const EdgeInsets.only(left: 80),
                   child: const Text(
                     'Register',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      color: primaryColor,
-                    ),
-                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
-              const SizedBox(height: 48),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Already have an account?',
-                    style: TextStyle(color: grayColor200),
-                  ),
-                  const SizedBox(width: 4),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginScreen()),
-                      );
-                    },
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(
-                          color: grayColor200, fontWeight: FontWeight.bold),
+                Container(
+                  padding: const EdgeInsets.only(left: 80),
+                  child: const Text(
+                    'To get customized  courses',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: grayColor,
                     ),
                   ),
-                ],
-              )
-            ],
+                ),
+                Image.asset('assets/images/pencil_boy.png', height: 200),
+                TextField(
+                  autofocus: false,
+                  cursorColor: primaryColor,
+                  decoration: InputDecoration(
+                    hintText: 'Full name',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                DropDownTextField(
+                  textFieldDecoration: InputDecoration(
+                    hintText: 'Choose Country',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  singleController: _country,
+                  clearOption: false,
+                  enableSearch: true,
+                  validator: (value) {
+                    if (value == null) {
+                      return "Required field";
+                    } else {
+                      return null;
+                    }
+                  },
+                  dropDownItemCount: 4,
+                  dropDownList: countries,
+                  onChanged: (val) {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                DropDownTextField(
+                  textFieldDecoration: InputDecoration(
+                    hintText: 'Choose Curriculum',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  singleController: _curriculum,
+                  clearOption: false,
+                  enableSearch: true,
+                  validator: (value) {
+                    if (value == null) {
+                      return "Required field";
+                    } else {
+                      return null;
+                    }
+                  },
+                  dropDownItemCount: 4,
+                  dropDownList: curriculums,
+                  onChanged: (val) {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                DropDownTextField(
+                  textFieldDecoration: InputDecoration(
+                    hintText: 'Choose Grade',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  singleController: _grade,
+                  clearOption: false,
+                  enableSearch: true,
+                  validator: (value) {
+                    if (value == null) {
+                      return "Required field";
+                    } else {
+                      return null;
+                    }
+                  },
+                  dropDownItemCount: 4,
+                  dropDownList: grades,
+                  onChanged: (val) {},
+                ),
+                const SizedBox(height: 10),
+                TextField(
+                  autofocus: false,
+                  cursorColor: primaryColor,
+                  decoration: InputDecoration(
+                    hintText: 'School name',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                DropDownTextField(
+                  textFieldDecoration: InputDecoration(
+                    hintText: 'Choose Gender',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  singleController: _gender,
+                  clearOption: false,
+                  enableSearch: true,
+                  validator: (value) {
+                    if (value == null) {
+                      return "Required field";
+                    } else {
+                      return null;
+                    }
+                  },
+                  dropDownItemCount: 4,
+                  dropDownList: genders,
+                  onChanged: (val) {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  autofocus: false,
+                  cursorColor: primaryColor,
+                  decoration: InputDecoration(
+                    hintText: 'Age',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 25),
+                GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const ChooseAvatarScreen())),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    decoration: BoxDecoration(
+                      color: brandYellowColor.withOpacity(0.85),
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    ),
+                    child: const Text(
+                      'Register',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: primaryColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'Already have an account?',
+                      style: TextStyle(color: grayColor200),
+                    ),
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()),
+                        );
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(
+                            color: grayColor200, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

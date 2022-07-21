@@ -7,12 +7,14 @@ import 'package:globaltrailblazersapp/screens/pages/books_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/components/painters.dart';
 import 'package:globaltrailblazersapp/screens/pages/games_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
 import 'package:globaltrailblazersapp/screens/pages/profile_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/secondary/animations.dart';
 import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
 
 class IndexPage extends StatefulWidget {
-  const IndexPage({Key? key}) : super(key: key);
+  final int index;
+  const IndexPage({Key? key, required this.index}) : super(key: key);
 
   @override
   State<IndexPage> createState() => _IndexPageState();
@@ -20,13 +22,15 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   String? _selectedCategory;
-  int currentIndex = 0;
+  int? currentIndex;
 
   final List _pages = [
-    const HomePage(),
-    const TvZonePage(),
-    const BooksZonePage(),
-    const GamesZonePage(),
+    const HomePage(), //0
+    const TvZonePage(), //1
+    const BooksZonePage(), //2
+    const GamesZonePage(), //3
+    const AnimationsPageScreen(), //4
+    const ProfilePage(), //5
   ];
   var categories = [
     "Primary 4",
@@ -38,6 +42,7 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   void initState() {
+    currentIndex = widget.index;
     _selectedCategory = "Primary 4";
     super.initState();
   }
@@ -137,7 +142,7 @@ class _IndexPageState extends State<IndexPage> {
         width: screenWidth(context) * 0.95,
         child: const NavigationDrawerWidget(),
       ),
-      body: _pages[currentIndex],
+      body: _pages[currentIndex!],
       backgroundColor: whiteColor,
       bottomNavigationBar: Container(
         height: 100,
@@ -296,6 +301,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: whiteColor,
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
@@ -306,10 +312,13 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomPaint(
-                      size: Size(80, (80 * 1).toDouble()),
-                      painter: RPSCustomPainter(),
+                    Container(),
+                    const CircleAvatar(
+                      backgroundColor: primaryColor,
+                      backgroundImage: AssetImage('assets/images/Avatar.jpeg'),
+                      radius: 30,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -325,7 +334,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => const ProfilePage()));
+                                    builder: (_) => const IndexPage(index: 5)));
                           },
                           child: Ink(
                             child: const Text(
@@ -341,13 +350,16 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     ),
                     Container(),
                     InkWell(
-                        onTap: () => Navigator.pop(context),
-                        splashColor: whiteColor,
-                        highlightColor: brandYellowColor.withOpacity(0.5),
-                        child: Ink(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20)),
-                            child: SvgPicture.asset('assets/icons/close.svg')))
+                      onTap: () => Navigator.pop(context),
+                      splashColor: whiteColor,
+                      highlightColor: brandYellowColor.withOpacity(0.5),
+                      child: Ink(
+                        padding: const EdgeInsets.only(right: 10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20)),
+                        child: SvgPicture.asset('assets/icons/close.svg'),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -501,37 +513,40 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   ),
                 ),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 60),
             ],
           ),
           Container(
-            height: 60,
-            margin: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50),
-              gradient: const LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color(0xFF581C87),
-                  Color(0xFF831843),
+            color: whiteColor,
+            child: Container(
+              height: 60,
+              margin: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                gradient: const LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [
+                    Color(0xFF581C87),
+                    Color(0xFF831843),
+                  ],
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset('assets/icons/switch_ar.png'),
+                  ShaderMask(
+                    shaderCallback: (Rect rect) {
+                      return _gradient.createShader(rect);
+                    },
+                    child: const Text(
+                      'Switch to Augmented Reality',
+                      style: TextStyle(color: whiteColor, fontSize: 15.0),
+                    ),
+                  )
                 ],
               ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/icons/switch_ar.png'),
-                ShaderMask(
-                  shaderCallback: (Rect rect) {
-                    return _gradient.createShader(rect);
-                  },
-                  child: const Text(
-                    'Switch to Augmented Reality',
-                    style: TextStyle(color: whiteColor, fontSize: 15.0),
-                  ),
-                )
-              ],
             ),
           ),
         ],
@@ -549,87 +564,23 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
           if (direction != null) {
             Navigator.pop(context);
             Navigator.push(
-                context, MaterialPageRoute(builder: (_) => direction));
+              context,
+              MaterialPageRoute(builder: (_) => direction),
+            );
           } else {
-            print("No Route Specified yet. ");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => const Page404(
+                  message: "Page Not Found!",
+                  error: "Error 404",
+                ),
+              ),
+            );
           }
         },
         title: Text(text),
       ),
     );
-  }
-}
-
-class RPSCustomPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Path path_0 = Path();
-    path_0.moveTo(size.width * 0.5249880, size.height * 0.0002234280);
-    path_0.cubicTo(
-        size.width * 0.6676800,
-        size.height * -0.005065200,
-        size.width * 0.7960400,
-        size.height * 0.08425600,
-        size.width * 0.8883320,
-        size.height * 0.1914392);
-    path_0.cubicTo(
-        size.width * 0.9732980,
-        size.height * 0.2901140,
-        size.width * 1.010604,
-        size.height * 0.4202040,
-        size.width * 0.9974080,
-        size.height * 0.5488680);
-    path_0.cubicTo(
-        size.width * 0.9854120,
-        size.height * 0.6658260,
-        size.width * 0.9074780,
-        size.height * 0.7589040,
-        size.width * 0.8217360,
-        size.height * 0.8407820);
-    path_0.cubicTo(
-        size.width * 0.7376920,
-        size.height * 0.9210380,
-        size.width * 0.6421140,
-        size.height * 1.000880,
-        size.width * 0.5249880,
-        size.height * 0.9999920);
-    path_0.cubicTo(
-        size.width * 0.4084720,
-        size.height * 0.9991100,
-        size.width * 0.3204940,
-        size.height * 0.9117740,
-        size.width * 0.2327820,
-        size.height * 0.8363160);
-    path_0.cubicTo(
-        size.width * 0.1354282,
-        size.height * 0.7525640,
-        size.width * 0.009772080,
-        size.height * 0.6757700,
-        size.width * 0.0005961280,
-        size.height * 0.5488680);
-    path_0.cubicTo(
-        size.width * -0.008883660,
-        size.height * 0.4177620,
-        size.width * 0.09650540,
-        size.height * 0.3131520,
-        size.width * 0.1880298,
-        size.height * 0.2173960);
-    path_0.cubicTo(
-        size.width * 0.2836500,
-        size.height * 0.1173518,
-        size.width * 0.3854960,
-        size.height * 0.005393560,
-        size.width * 0.5249880,
-        size.height * 0.0002234280);
-    path_0.close();
-
-    Paint paintfill = Paint()..style = PaintingStyle.fill;
-    paintfill.color = const Color(0xff3B82F6).withOpacity(0.2);
-    canvas.drawPath(path_0, paintfill);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
   }
 }

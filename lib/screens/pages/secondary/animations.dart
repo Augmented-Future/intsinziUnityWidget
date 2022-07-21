@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AnimationsPageScreen extends StatefulWidget {
   const AnimationsPageScreen({Key? key}) : super(key: key);
@@ -14,7 +12,8 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Animations Page. "),
+        title: Text("Animations Page "),
+        elevation: 0.0,
       ),
     );
   }

@@ -7,11 +7,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        TipTwoCardPageView(),
-        AnimationsCardView(),
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        children: const [
+          TipTwoCardPageView(),
+          AnimationsCardView(),
+          AnimationsCardView(),
+        ],
+      ),
     );
   }
 }

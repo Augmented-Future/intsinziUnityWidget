@@ -188,7 +188,7 @@ class VerifyPhoneScreen extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const IndexPage()),
+                          builder: (context) => const IndexPage(index: 0)),
                     );
                   },
                   child: Container(

@@ -128,6 +128,42 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "get",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
+      "name": "google_sign_in",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_android",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_android-6.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_ios",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_ios-5.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "google_sign_in_platform_interface",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_platform_interface-2.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "google_sign_in_web",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in_web-0.10.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "html",
       "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/html-0.15.0",
       "packageUri": "lib/",
@@ -222,6 +258,12 @@
       "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/process-4.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "quiver",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",
@@ -374,7 +416,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-07-23T09:24:50.765028Z",
+  "generated": "2022-07-23T16:03:40.762475Z",
   "generator": "pub",
   "generatorVersion": "2.17.0"
 }

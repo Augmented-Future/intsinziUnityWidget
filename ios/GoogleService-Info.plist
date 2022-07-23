@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>831413394400-9ri6584p5ufv47rl2b8v7dcg46e7du9s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.831413394400-9ri6584p5ufv47rl2b8v7dcg46e7du9s</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>831413394400-5li14ub6o1oklplmsmu0uchs16vfcstr.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDLmaVLsoJs0DFh02-tlyaRfT8ISRzE-KA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>831413394400</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.augmentedfuture.augmentedfuturecoreapp</string>
+	<key>PROJECT_ID</key>
+	<string>intsinziapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>intsinziapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:831413394400:ios:9957ab538f35411685e985</string>
+</dict>
+</plist>

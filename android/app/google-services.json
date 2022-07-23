@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "831413394400",
+    "project_id": "intsinziapp",
+    "storage_bucket": "intsinziapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831413394400:android:1678777d55f8342085e985",
+        "android_client_info": {
+          "package_name": "com.augmentedfuture.augmentedfuturecore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "831413394400-5li14ub6o1oklplmsmu0uchs16vfcstr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.augmentedfuture.augmentedfuturecore",
+            "certificate_hash": "b0d5bcc15f7200613cf2e8fccdae89477bb73252"
+          }
+        },
+        {
+          "client_id": "831413394400-dsg6u9i2o0hsegrnqik8tseid7tqcrnf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg7x9F6pSYRNe-GSYLCujIyxw867tPPcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "831413394400-dsg6u9i2o0hsegrnqik8tseid7tqcrnf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

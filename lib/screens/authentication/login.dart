@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/forgot_pwd.dart';
+import 'package:globaltrailblazersapp/screens/authentication/login_controller.dart';
 import 'package:globaltrailblazersapp/screens/authentication/register.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final controller = Get.put(LoginController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,38 +61,60 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 child: Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 12),
-                      decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/gmail.svg',
-                            height: 30,
-                          ),
-                          const Text(
-                            "Login in with Google",
-                            style: TextStyle(color: blackColor, fontSize: 18),
-                          ),
-                          Container()
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        controller.login();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 12),
+                        decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/gmail.svg',
+                              height: 30,
+                            ),
+                            const Text(
+                              "Login in with Google",
+                              style: TextStyle(color: blackColor, fontSize: 18),
+                            ),
+                            Container()
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 15),
-                    Container(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: const Text(
-                        'LOGIN WITH EMAIL',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    Obx(() {
+                      if (controller.googleAccount.value == null) {
+                        return Container(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: const Text(
+                            'LOGIN WITH EMAIL',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        );
+                      } else {
+                        print(controller.googleAccount.value);
+                        return Container(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Text(
+                            controller.googleAccount.value?.displayName ?? '',
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        );
+                      }
+                    }),
                     const SizedBox(height: 18),
                     TextField(
                       inputFormatters: <TextInputFormatter>[

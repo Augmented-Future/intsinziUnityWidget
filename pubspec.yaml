@@ -39,6 +39,10 @@ dependencies:
   badges: ^2.0.3
   font_awesome_flutter: ^10.1.0
   appinio_video_player: ^1.1.1
+  get: ^4.6.5
+
+  #Google Auth
+  google_sign_in: ^5.4.0
 
 dev_dependencies:
   flutter_test:

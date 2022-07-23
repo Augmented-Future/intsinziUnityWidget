@@ -10,7 +10,7 @@ class AuthWrapper extends StatefulWidget {
 }
 
 class _AuthWrapperState extends State<AuthWrapper> {
-  final bool isSignedIn = true;
+  final bool isSignedIn = false;
   @override
   Widget build(BuildContext context) {
     return isSignedIn ? const IndexPage(index: 0) : const LoginScreen();

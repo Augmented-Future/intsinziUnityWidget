@@ -1,6 +1,5 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';

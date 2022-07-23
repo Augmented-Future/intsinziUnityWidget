@@ -3,6 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
+import 'package:globaltrailblazersapp/screens/pages/secondary/animations.dart';
+import 'package:globaltrailblazersapp/screens/pages/secondary/video_portrait_form.dart';
 
 class AnimationsCardView extends StatefulWidget {
   const AnimationsCardView({Key? key}) : super(key: key);
@@ -44,7 +46,12 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                 'View All',
                 style: TextStyle(color: primaryColor),
               ),
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_context) => const AnimationsPageScreen(),
+                ),
+              ),
               style: ElevatedButton.styleFrom(
                   primary: coolYellow,
                   elevation: 0.0,
@@ -70,16 +77,30 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                           Container(
                             width: ((screenWidth(context) * 0.6) / 2) + 20,
                             decoration: BoxDecoration(
-                              color: Colors.blue,
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(0xFFD97706),
+                                  Color(0xFFFBBF24),
+                                ],
+                              ),
                               borderRadius: BorderRadius.circular(10),
-                              image: const DecorationImage(
-                                  image:
-                                      AssetImage('assets/images/Avatar.jpeg'),
-                                  fit: BoxFit.cover),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      animations[index].featuredImage),
+                                  fit: BoxFit.contain),
                             ),
                           ),
                           ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => VideoPortraitForm(
+                                  animation: animations[index],
+                                ),
+                              ),
+                            ),
                             icon: const Icon(Icons.play_arrow),
                             label: const Text("Play"),
                             style: ElevatedButton.styleFrom(
@@ -88,40 +109,43 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 7, vertical: 12),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Trailblazers 1",
-                              style: TextStyle(
-                                color: darkPink,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 7, vertical: 12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                animations[index].title,
+                                style: const TextStyle(
+                                  color: darkPink,
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 3),
-                            const Text(
-                              "Chapter 3, Mathematics",
-                              style: TextStyle(color: darkPink),
-                            ),
-                            const Spacer(),
-                            Row(
-                              children: [
-                                SvgPicture.asset('assets/icons/time_sharp.svg'),
-                                const SizedBox(width: 5),
-                                const Text("28 March 2018"),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                    'assets/icons/user_outlined.svg'),
-                                const SizedBox(width: 5),
-                                const Text("Adenkule Gold"),
-                              ],
-                            ),
-                          ],
+                              const SizedBox(height: 3),
+                              Text(
+                                " ${animations[index].unit}, ${animations[index].course}",
+                                style: const TextStyle(color: darkPink),
+                              ),
+                              const Spacer(),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                      'assets/icons/time_sharp.svg'),
+                                  const SizedBox(width: 5),
+                                  Text(animations[index].createAt),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                      'assets/icons/user_outlined.svg'),
+                                  const SizedBox(width: 5),
+                                  Text(animations[index].contentCreator),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

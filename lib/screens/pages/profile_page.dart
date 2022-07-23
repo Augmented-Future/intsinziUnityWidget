@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -12,8 +14,16 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const BackButtonWidget(),
+        backgroundColor: whiteColor,
+        automaticallyImplyLeading: false,
+        elevation: 0.0,
+        toolbarHeight: 80,
+        centerTitle: false,
+      ),
+      body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -110,6 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
+      bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
 }

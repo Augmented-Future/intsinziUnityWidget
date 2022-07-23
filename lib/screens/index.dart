@@ -29,8 +29,6 @@ class _IndexPageState extends State<IndexPage> {
     const TvZonePage(), //1
     const BooksZonePage(), //2
     const GamesZonePage(), //3
-    const AnimationsPageScreen(), //4
-    const ProfilePage(), //5
   ];
   var categories = [
     "Primary 4",
@@ -334,7 +332,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => const IndexPage(index: 5)));
+                                    builder: (_) => const ProfilePage()));
                           },
                           child: Ink(
                             child: const Text(

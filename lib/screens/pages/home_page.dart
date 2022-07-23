@@ -12,7 +12,6 @@ class HomePage extends StatelessWidget {
         children: const [
           TipTwoCardPageView(),
           AnimationsCardView(),
-          AnimationsCardView(),
         ],
       ),
     );

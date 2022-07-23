@@ -14,47 +14,47 @@ class ChooseAvatarScreen extends StatefulWidget {
 class _ChooseAvatarScreenState extends State<ChooseAvatarScreen> {
   List<Avatar> avatars = [
     Avatar(
-      avatarId: '1',
-      color: const Color(0xFF892383),
-      imgUrl:
-          'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
-      name: 'Male',
-    ),
+        avatarId: '1',
+        color: const Color(0xFF892383),
+        imgUrl:
+            'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
+        name: 'Male',
+        gender: 'Male'),
     Avatar(
-      avatarId: '1',
-      color: const Color(0xFF892383),
-      imgUrl:
-          'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
-      name: 'Male',
-    ),
+        avatarId: '1',
+        color: const Color(0xFF892383),
+        imgUrl:
+            'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
+        name: 'Male',
+        gender: 'Male'),
     Avatar(
-      avatarId: '1',
-      color: const Color(0xFF892383),
-      imgUrl:
-          'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
-      name: 'Male',
-    ),
+        avatarId: '1',
+        color: const Color(0xFF892383),
+        imgUrl:
+            'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
+        name: 'Male',
+        gender: 'Male'),
     Avatar(
-      avatarId: '1',
-      color: const Color(0xFF892383),
-      imgUrl:
-          'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
-      name: 'Male',
-    ),
+        avatarId: '1',
+        color: const Color(0xFF892383),
+        imgUrl:
+            'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
+        name: 'Male',
+        gender: 'Male'),
     Avatar(
-      avatarId: '1',
-      color: const Color(0xFF892383),
-      imgUrl:
-          'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
-      name: 'Male',
-    ),
+        avatarId: '1',
+        color: const Color(0xFF892383),
+        imgUrl:
+            'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
+        name: 'Male',
+        gender: 'Male'),
     Avatar(
-      avatarId: '1',
-      color: const Color(0xFF892383),
-      imgUrl:
-          'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
-      name: 'Male',
-    ),
+        avatarId: '1',
+        color: const Color(0xFF892383),
+        imgUrl:
+            'https://cdn.pixabay.com/photo/2016/08/20/05/38/avatar-1606916_1280.png',
+        name: 'Male',
+        gender: 'Male'),
   ];
   @override
   Widget build(BuildContext context) {

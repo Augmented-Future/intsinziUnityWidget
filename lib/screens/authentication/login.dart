@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/forgot_pwd.dart';
-import 'package:globaltrailblazersapp/screens/authentication/login_controller.dart';
 import 'package:globaltrailblazersapp/screens/authentication/register.dart';
+import 'package:globaltrailblazersapp/screens/index.dart';
+import 'package:globaltrailblazersapp/services/auth_service.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -15,7 +16,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final controller = Get.put(LoginController());
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        controller.login();
-                      },
+                      onTap: () {},
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 12),
@@ -88,41 +88,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 15),
-                    Obx(() {
-                      if (controller.googleAccount.value == null) {
-                        return Container(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: const Text(
-                            'LOGIN WITH EMAIL',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        );
-                      } else {
-                        print(controller.googleAccount.value);
-                        return Container(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Text(
-                            controller.googleAccount.value?.displayName ?? '',
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        );
-                      }
-                    }),
+                    Container(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: const Text(
+                        'LOGIN WITH EMAIL',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 18),
                     TextField(
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      autofocus: false,
+                      controller: _email,
                       cursorColor: primaryColor,
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
@@ -144,6 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextField(
+                      controller: _password,
                       autofocus: false,
                       obscureText: true,
                       obscuringCharacter: '*',
@@ -171,6 +153,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     InkWell(
                       highlightColor: Colors.white,
                       splashColor: Colors.red,
+                      onTap: () async {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) =>
+                              const BottomSheetLoadingIndicator(),
+                        );
+                        dynamic result =
+                            await AuthService.loginWithEmailAndPassword(
+                                _email.text, _password.text);
+
+                        if (result.runtimeType == ErrorException) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AuthPageError(
+                                  statusCode: result.statusCode,
+                                  message: result.errorMessage),
+                            ),
+                          );
+                        } else {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const IndexPage(index: 0),
+                            ),
+                          );
+                        }
+                      },
                       child: Ink(
                         child: Container(
                           width: double.infinity,
@@ -236,6 +247,35 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class BottomSheetLoadingIndicator extends StatelessWidget {
+  const BottomSheetLoadingIndicator({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(20),
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(30),
+        ),
+      ),
+      height: 200,
+      child: const SizedBox(
+        height: 60,
+        child: LoadingIndicator(
+          indicatorType: Indicator.lineScaleParty,
+          colors: [primaryColor, brandYellowColor, coolGreen, color100],
+          strokeWidth: 2,
         ),
       ),
     );

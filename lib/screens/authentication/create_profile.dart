@@ -1,12 +1,17 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/choose_avatar.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
+import 'package:globaltrailblazersapp/services/auth_service.dart';
 
 class CreateProfileScreen extends StatefulWidget {
-  const CreateProfileScreen({Key? key}) : super(key: key);
-
+  const CreateProfileScreen(
+      {Key? key, required this.email, required this.password})
+      : super(key: key);
+  final String email;
+  final String password;
   @override
   State<CreateProfileScreen> createState() => _CreateProfileScreenState();
 }
@@ -31,7 +36,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
     DropDownValueModel(name: "None of the above", value: "None of the above"),
   ];
   List<DropDownValueModel> grades = const [
-    DropDownValueModel(name: "A+", value: "A+"),
+    DropDownValueModel(name: "Nursary 1", value: "Nursary 1"),
     DropDownValueModel(name: "A", value: "A"),
     DropDownValueModel(name: "B", value: "B"),
     DropDownValueModel(name: "C", value: "C"),
@@ -41,7 +46,7 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   List<DropDownValueModel> genders = const [
     DropDownValueModel(name: "Male", value: "Male"),
     DropDownValueModel(name: "Female", value: "Female"),
-    DropDownValueModel(name: "Prefer not to say", value: "Prefer not to say"),
+    //DropDownValueModel(name: "Prefer not to say", value: "Prefer not to say"),
   ];
 
   late SingleValueDropDownController _country;
@@ -50,6 +55,10 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
   late SingleValueDropDownController _gender;
   FocusNode searchFocusNode = FocusNode();
   FocusNode textFieldFocusNode = FocusNode();
+
+  //TextEditingControllers
+  final TextEditingController _firstName = TextEditingController();
+  final TextEditingController _lastName = TextEditingController();
 
   @override
   void initState() {
@@ -99,10 +108,34 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                 ),
                 Image.asset('assets/images/pencil_boy.png', height: 200),
                 TextField(
-                  autofocus: false,
+                  controller: _firstName,
                   cursorColor: primaryColor,
                   decoration: InputDecoration(
-                    hintText: 'Full name',
+                    hintText: 'First name',
+                    hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                    filled: true,
+                    fillColor: softGray,
+                    contentPadding: const EdgeInsets.only(left: 10),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          const BorderSide(color: primaryColor, width: 0.0),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextField(
+                  controller: _lastName,
+                  cursorColor: primaryColor,
+                  decoration: InputDecoration(
+                    hintText: 'Last name',
                     hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
                     filled: true,
                     fillColor: softGray,
@@ -310,10 +343,32 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                 ),
                 const SizedBox(height: 25),
                 GestureDetector(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => const ChooseAvatarScreen())),
+                  onTap: () async {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) => const BottomSheetLoadingIndicator(),
+                    );
+                    dynamic result =
+                        await AuthService.registerWithEmailAndPassword(
+                      widget.email,
+                      widget.password,
+                      _firstName.text,
+                      _lastName.text,
+                    );
+                    if (result.runtimeType == ErrorException) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => AuthPageError(
+                              statusCode: result.statusCode,
+                              message: result.errorMessage),
+                        ),
+                      );
+                    } else {
+                      Navigator.push(context, MaterialPageRoute(builder: (_)=>ChooseAvatarScreen(userInfo:result)));
+                    }
+                  },
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     decoration: BoxDecoration(

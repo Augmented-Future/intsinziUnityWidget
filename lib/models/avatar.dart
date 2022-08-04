@@ -1,14 +1,24 @@
-import 'package:flutter/material.dart';
-
 class Avatar {
-  String avatarId;
-  String imgUrl;
-  Color color;
+  int id;
   String name;
+  String url;
   String gender;
-  Avatar(
-      {required this.avatarId,
-      required this.color,
-      required this.imgUrl,
-      required this.name,required this.gender});
+  DateTime createdAt;
+  DateTime updatedAt;
+  Avatar({
+    required this.id,
+    required this.name,
+    required this.url,
+    required this.gender,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+  static Avatar fromJson(Map<String, dynamic> json) => Avatar(
+        id: json["id"],
+        name: json["name"],
+        url: json["url"],
+        gender: json["gender"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+      );
 }

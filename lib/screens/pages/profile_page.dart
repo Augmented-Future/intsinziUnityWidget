@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:globaltrailblazersapp/screens/authentication/login_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 
@@ -15,7 +12,6 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final controller = Get.put(LoginController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,16 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
-                  controller.logout();
-
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => const LoginScreen()),
-                      ),
-                      (route) => false);
-                },
+                onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
                   elevation: 0.0,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/create_profile.dart';
@@ -14,6 +13,8 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool agreed = true;
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,12 +93,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 18),
                     TextField(
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ],
-                      autofocus: false,
+                      controller: _email,
                       cursorColor: primaryColor,
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'Email',
                         hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
@@ -119,7 +117,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 10),
                     TextField(
-                      autofocus: false,
+                      controller: _password,
                       obscureText: true,
                       obscuringCharacter: '*',
                       cursorColor: primaryColor,
@@ -145,9 +143,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     const SizedBox(height: 22),
                     InkWell(
                       onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const CreateProfileScreen())),
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => CreateProfileScreen(
+                              email: _email.text, password: _password.text),
+                        ),
+                      ),
                       highlightColor: Colors.white,
                       splashColor: Colors.red,
                       child: Ink(

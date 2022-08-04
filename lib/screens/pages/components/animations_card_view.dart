@@ -18,47 +18,48 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Text(
-              "Animations Zone",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 10),
-            ElevatedButton(
-              child: const Text(
-                'Free',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                  primary: coolGreen,
-                  elevation: 0.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6))),
-            ),
-            ElevatedButton(
-              child: const Text(
-                'View All',
-                style: TextStyle(color: primaryColor),
-              ),
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_context) => const AnimationsPageScreen(),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Animations Zone",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                  primary: coolYellow,
-                  elevation: 0.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6))),
-            ),
-          ],
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(0),
+                  color: coolGreen,
+                ),
+                child: const Text(
+                  'Free',
+                  style: TextStyle(color: whiteColor, fontSize: 8),
+                ),
+              ),
+              ElevatedButton(
+                child: const Text(
+                  'View All',
+                  style: TextStyle(color: primaryColor),
+                ),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_context) => const AnimationsPageScreen(),
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: coolYellow,
+                    elevation: 0.0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6))),
+              ),
+            ],
+          ),
         ),
         SizedBox(
           height: 150,
@@ -133,7 +134,7 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                                   SvgPicture.asset(
                                       'assets/icons/time_sharp.svg'),
                                   const SizedBox(width: 5),
-                                  Text(animations[index].createAt),
+                                  const Text('28 July 2018'),
                                 ],
                               ),
                               Row(

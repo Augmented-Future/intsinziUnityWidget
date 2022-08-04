@@ -1,10 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/constants/url.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/screens/pages/secondary/video_portrait_form.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
+import 'package:http/http.dart' as http;
+import 'package:shimmer/shimmer.dart';
 
 class AnimationsPageScreen extends StatefulWidget {
   const AnimationsPageScreen({Key? key}) : super(key: key);
@@ -14,6 +20,27 @@ class AnimationsPageScreen extends StatefulWidget {
 }
 
 class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
+  Map? data;
+  bool isLoading = true;
+  void getAnimations() async {
+    try {
+      Uri url = Uri.parse(databaseUrl + '/animations');
+      http.Response resp = await http.get(url);
+      setState(() {
+        data = jsonDecode(resp.body);
+        isLoading = false;
+      });
+    } catch (e) {
+      //print("Something went wrong, $e");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getAnimations();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +50,10 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             delegate: CustomSliverAppBarDelegate(expandedHeight: 300),
             pinned: true,
           ),
-          const SliverToBoxAdapter(
-            child: FilterCategoryWidget(),
+          SliverToBoxAdapter(
+            child: isLoading
+                ? const CategoryShimmerLoading()
+                : const FilterCategoryWidget(),
           ),
           buildAnimationWidget(),
         ],
@@ -33,60 +62,169 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
     );
   }
 
-  Widget buildAnimationWidget() => SliverGrid(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) => Container(
+  Widget buildAnimationWidget() {
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Container(
             margin: const EdgeInsets.all(10),
+            child: isLoading
+                ? const MyCustomShimmerAnimationsWidget()
+                : Container(),
+          );
+        },
+        childCount: isLoading ? 8 : animations.length,
+      ),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+      ),
+    );
+  }
 
-            //decoration: const BoxDecoration(color: primaryColor),
-            child: Column(
-              children: [
-                Stack(
-                  alignment: Alignment.bottomLeft,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.network(
-                        animations[index].featuredImage,
-                        height: 120,
-                        fit: BoxFit.cover,
-                      ),
+  Column buildGridCard(
+      int index, BuildContext context, AnimationsContent animationData) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.bottomLeft,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                animations[index].featuredImage,
+                height: 120,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.fromLTRB(12, 0, 0, 4),
+              child: ElevatedButton.icon(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => VideoPortraitForm(
+                      animation: animations[index],
                     ),
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(12, 0, 0, 4),
-                      child: ElevatedButton.icon(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => VideoPortraitForm(
-                              animation: animations[index],
-                            ),
-                          ),
-                        ),
-                        icon: const Icon(Icons.play_arrow),
-                        label: const Text("Play"),
-                        style: ElevatedButton.styleFrom(
-                            primary: const Color(0xFF10B981), elevation: 0.0),
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '${animations[index].unit}: ${animations[index].title}',
-                    style: const TextStyle(color: blackColor, fontSize: 16),
                   ),
                 ),
-              ],
+                icon: const Icon(Icons.play_arrow),
+                label: const Text("Play"),
+                style: ElevatedButton.styleFrom(
+                    primary: const Color(0xFF10B981), elevation: 0.0),
+              ),
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            '${animations[index].unit}: ${animations[index].title}',
+            style: const TextStyle(color: blackColor, fontSize: 16),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class CategoryShimmerLoading extends StatelessWidget {
+  const CategoryShimmerLoading({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Shimmer.fromColors(
+          baseColor: Colors.grey[200]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: screenWidth(context) / 5,
+            height: 30,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: whiteColor,
             ),
           ),
-          childCount: animations.length,
         ),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+        Shimmer.fromColors(
+          baseColor: Colors.grey[200]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: screenWidth(context) / 4,
+            height: 45,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: whiteColor,
+            ),
+          ),
         ),
-      );
+        Shimmer.fromColors(
+          baseColor: Colors.grey[200]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: screenWidth(context) / 4,
+            height: 45,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: whiteColor,
+            ),
+          ),
+        ),
+        Shimmer.fromColors(
+          baseColor: Colors.grey[200]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: screenWidth(context) / 4,
+            height: 45,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: whiteColor,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class MyCustomShimmerAnimationsWidget extends StatelessWidget {
+  const MyCustomShimmerAnimationsWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Shimmer.fromColors(
+          baseColor: Colors.grey[200]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 200,
+            height: 120,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: whiteColor,
+            ),
+          ),
+        ),
+        const SizedBox(height: 8),
+        Shimmer.fromColors(
+          baseColor: Colors.grey[200]!,
+          highlightColor: Colors.grey[100]!,
+          child: Container(
+            width: 200,
+            height: 33,
+            decoration: BoxDecoration(
+                color: whiteColor, borderRadius: BorderRadius.circular(8)),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class FilterCategoryWidget extends StatelessWidget {

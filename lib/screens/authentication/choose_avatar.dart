@@ -155,8 +155,7 @@ class _ChooseAvatarScreenState extends State<ChooseAvatarScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (_) => SignupComplete(
-                        user: widget.userInfo,
-                        avatar: avatars![selectedIndexAvatar],
+                        user: widget.userInfo
                       ),
                     ),
                     (route) => false),

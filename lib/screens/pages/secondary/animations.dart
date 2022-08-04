@@ -1,15 +1,14 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
-import 'package:globaltrailblazersapp/constants/url.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
+import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/secondary/video_portrait_form.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
-import 'package:http/http.dart' as http;
+import 'package:globaltrailblazersapp/services/auth_service.dart';
+import 'package:globaltrailblazersapp/services/database_service.dart';
 import 'package:shimmer/shimmer.dart';
 
 class AnimationsPageScreen extends StatefulWidget {
@@ -22,16 +21,25 @@ class AnimationsPageScreen extends StatefulWidget {
 class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   Map? data;
   bool isLoading = true;
+  List<AnimationsContent>? animationList;
+
   void getAnimations() async {
-    try {
-      Uri url = Uri.parse(databaseUrl + '/animations');
-      http.Response resp = await http.get(url);
+    dynamic result = await DatabaseService.fetchAnimations();
+    if (result.runtimeType == ErrorException) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => AuthPageError(
+            statusCode: result.statusCode,
+            message: result.errorMessage,
+          ),
+        ),
+      );
+    } else {
       setState(() {
-        data = jsonDecode(resp.body);
+        animationList = result;
         isLoading = false;
       });
-    } catch (e) {
-      //print("Something went wrong, $e");
     }
   }
 
@@ -70,10 +78,10 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             margin: const EdgeInsets.all(10),
             child: isLoading
                 ? const MyCustomShimmerAnimationsWidget()
-                : Container(),
+                : buildGridCard(index, context, animationList),
           );
         },
-        childCount: isLoading ? 8 : animations.length,
+        childCount: isLoading ? 8 : animationList?.length,
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -81,8 +89,8 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
     );
   }
 
-  Column buildGridCard(
-      int index, BuildContext context, AnimationsContent animationData) {
+  Column buildGridCard(int index, BuildContext context,
+      List<AnimationsContent>? _animationsList) {
     return Column(
       children: [
         Stack(
@@ -91,7 +99,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                animations[index].featuredImage,
+                "https://cdn.pixabay.com/photo/2022/07/28/23/42/rainbow-7350780_1280.jpg",
                 height: 120,
                 fit: BoxFit.cover,
               ),
@@ -103,7 +111,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
                   context,
                   MaterialPageRoute(
                     builder: (_) => VideoPortraitForm(
-                      animation: animations[index],
+                      animation: _animationsList![index],
                     ),
                   ),
                 ),
@@ -118,7 +126,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            '${animations[index].unit}: ${animations[index].title}',
+            '${_animationsList?[index].unit}: ${_animationsList?[index].title}',
             style: const TextStyle(color: blackColor, fontSize: 16),
           ),
         ),

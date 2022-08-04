@@ -354,7 +354,6 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                       widget.email,
                       widget.password,
                       _firstName.text,
-                      _lastName.text,
                     );
                     if (result.runtimeType == ErrorException) {
                       Navigator.push(

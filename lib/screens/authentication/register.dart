@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/authentication/create_profile.dart';
+import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
+import 'package:globaltrailblazersapp/screens/authentication/signup_complete.dart';
+import 'package:globaltrailblazersapp/services/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool agreed = true;
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  final TextEditingController _firstName = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +96,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 18),
                     TextField(
+                      controller: _firstName,
+                      cursorColor: primaryColor,
+                      keyboardType: TextInputType.name,
+                      decoration: InputDecoration(
+                        hintText: 'First name',
+                        hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
+                        filled: true,
+                        fillColor: softGray,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SvgPicture.asset('assets/icons/user_icon.svg'),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 18),
+                    TextField(
                       controller: _email,
                       cursorColor: primaryColor,
                       keyboardType: TextInputType.emailAddress,
@@ -142,36 +169,53 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                     const SizedBox(height: 22),
                     InkWell(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => CreateProfileScreen(
-                              email: _email.text, password: _password.text),
+                      onTap: () async {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (context) =>
+                              const BottomSheetLoadingIndicator(),
+                        );
+                        dynamic result =
+                            await AuthService.registerWithEmailAndPassword(
+                                _email.text, _password.text, _firstName.text);
+                        if (result.runtimeType == ErrorException) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AuthPageError(
+                                  statusCode: result.statusCode,
+                                  message: result.errorMessage),
+                            ),
+                          );
+                        } else {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => SignupComplete(user: result),
+                              ),
+                              ((route) => false));
+                        }
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        height: 50,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/fullBtn.png"),
+                            fit: BoxFit.cover,
+                          ),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(30)),
                         ),
-                      ),
-                      highlightColor: Colors.white,
-                      splashColor: Colors.red,
-                      child: Ink(
-                        child: Container(
-                          width: double.infinity,
-                          height: 50,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage("assets/images/fullBtn.png"),
-                              fit: BoxFit.cover,
-                            ),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                        child: const Text(
+                          'Register',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
                           ),
-                          child: const Text(
-                            'Continue',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ),

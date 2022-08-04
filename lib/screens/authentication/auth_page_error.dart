@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,8 +28,12 @@ class AuthPageError extends StatelessWidget {
           children: [
             Text(
               message,
-              style: const TextStyle(fontSize: 20),
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 20,
+              ),
             ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
@@ -42,7 +47,8 @@ class AuthPageError extends StatelessWidget {
                   if (await canLaunchUrl(url)) {
                     await launchUrl(url);
                   } else {
-                    //Will display toast here.
+                    Fluttertoast.showToast(
+                        msg: "We can not open Gmail App for now.");
                   }
                 },
                 style: ElevatedButton.styleFrom(

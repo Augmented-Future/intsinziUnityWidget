@@ -81,15 +81,51 @@
     },
     {
       "name": "ffi",
-      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-2.0.1",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-1.2.1",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.12"
     },
     {
       "name": "file",
       "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/file-6.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "firebase_auth",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.6.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_auth_platform_interface",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_platform_interface-6.5.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_auth_web",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-4.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_core",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.20.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_core_platform_interface",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_platform_interface-4.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
+    },
+    {
+      "name": "firebase_core_web",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.7.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "flutter",
@@ -188,6 +224,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.4",
       "packageUri": "lib/",
@@ -255,9 +297,9 @@
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.0",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.0.7",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.12"
     },
     {
       "name": "petitparser",
@@ -477,7 +519,7 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.7.0",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/win32-2.6.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -500,7 +542,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-08-04T08:17:51.796207Z",
+  "generated": "2022-08-05T12:31:13.902892Z",
   "generator": "pub",
   "generatorVersion": "2.17.0"
 }

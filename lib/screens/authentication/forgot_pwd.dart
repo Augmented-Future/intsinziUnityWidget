@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:globaltrailblazersapp/screens/authentication/verify_otp.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -101,8 +100,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       onTap: () {
                         if (_recoveryEmail.text.contains("@") &&
                             _recoveryEmail.text.toLowerCase().length > 5) {
-                          displayBottomSheet(
-                              context, _recoveryEmail.text.trim());
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const VerifyOtpScreen(),
+                            ),
+                          );
                         } else {
                           Fluttertoast.showToast(
                             msg: "Invalid email",
@@ -143,101 +146,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Future<dynamic> displayBottomSheet(BuildContext context, String email) {
-    final String domain = email.substring(email.indexOf('@') + 1);
-
-    return showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        padding: const EdgeInsets.all(20),
-        // height: 300,
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(30),
-          ),
-        ),
-        child: Column(
-          children: [
-            const Spacer(),
-            const Text(
-              "We've sent reset link to your email,",
-              style: TextStyle(fontSize: 18.0),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              email,
-              style:
-                  const TextStyle(fontSize: 18.0, fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              " Please check and come back. ",
-              style: TextStyle(fontSize: 18.0),
-            ),
-            domain == 'gmail.com'
-                ? TextButton.icon(
-                    icon: const Icon(Icons.open_in_browser),
-                    onPressed: () async {
-                      Uri url = Uri.parse("https://gmail.com");
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: "You do not have proper app to open this link. ",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 2,
-                          backgroundColor: Colors.grey[200],
-                          textColor: primaryColor,
-                          fontSize: 16.0,
-                        );
-                      }
-                    },
-                    label: const Text("Open Gmail App"),
-                  )
-                : TextButton.icon(
-                    icon: const Icon(Icons.link),
-                    onPressed: () async {
-                      Uri url = Uri.parse("https://$domain");
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: "You do not have proper app to open this link. ",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 2,
-                          backgroundColor: Colors.grey[200],
-                          textColor: primaryColor,
-                          fontSize: 16.0,
-                        );
-                      }
-                    },
-                    label: Text('Visit https://$domain'),
-                  ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () => Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const LoginScreen(),
-                ),
-                (route) => false,
-              ),
-              style: ElevatedButton.styleFrom(
-                  primary: primaryColor, elevation: 0.0),
-              child: const Text("Go to Login"),
-            ),
-            const Spacer()
-          ],
         ),
       ),
     );

@@ -1,12 +1,21 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/url.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
 enum IsSubmitting { submitting, error, failed, done }
 
-class AuthService {
+class AuthService extends GetxController {
+  final _googleSignin = GoogleSignIn();
+  var googleAccount = Rx<GoogleSignInAccount?>(null);
+  loginWithGoogleCredentials() async {
+    await _googleSignin.signOut();
+    googleAccount.value = await _googleSignin.signIn();
+  }
+
   //Login with Email and Password
   static Future loginWithEmailAndPassword(String email, String password) async {
     try {
@@ -35,11 +44,8 @@ class AuthService {
       String email, String password, String firstName) async {
     try {
       Uri url = Uri.parse(databaseUrl + '/auth/student/register');
-      final response = await http.post(url, body: {
-        "email": email,
-        "password": password,
-        "firstName": firstName
-      });
+      final response = await http.post(url,
+          body: {"email": email, "password": password, "firstName": firstName});
       if (response.statusCode == 201) {
         return UserAccount.fromJson(jsonDecode(response.body)["user"]);
       } else {

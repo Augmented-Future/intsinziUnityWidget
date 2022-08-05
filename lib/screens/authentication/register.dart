@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/screens/authentication/signup_complete.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
+import 'package:get/get.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final TextEditingController _firstName = TextEditingController();
+  final signInWithGoogleController = Get.put(AuthService());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,25 +65,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 child: Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 12),
-                      decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(30)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SvgPicture.asset(
-                            'assets/icons/gmail.svg',
-                            height: 30,
-                          ),
-                          const Text(
-                            "Register with Google",
-                            style: TextStyle(color: blackColor, fontSize: 18),
-                          ),
-                          Container()
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        signInWithGoogleController.loginWithGoogleCredentials();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 12),
+                        decoration: BoxDecoration(
+                            color: whiteColor,
+                            borderRadius: BorderRadius.circular(30)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SvgPicture.asset(
+                              'assets/icons/gmail.svg',
+                              height: 30,
+                            ),
+                            const Text(
+                              "Register with Google",
+                              style: TextStyle(color: blackColor, fontSize: 18),
+                            ),
+                            Container()
+                          ],
+                        ),
                       ),
                     ),
                     const SizedBox(height: 15),
@@ -95,53 +103,123 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ),
                     const SizedBox(height: 18),
-                    TextField(
-                      controller: _firstName,
-                      cursorColor: primaryColor,
-                      keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                        hintText: 'First name',
-                        hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                        filled: true,
-                        fillColor: softGray,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset('assets/icons/user_icon.svg'),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 18),
-                    TextField(
-                      controller: _email,
-                      cursorColor: primaryColor,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
-                        filled: true,
-                        fillColor: softGray,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        prefixIcon: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SvgPicture.asset('assets/icons/mail_box.svg'),
-                        ),
-                      ),
-                    ),
+                    Obx(() {
+                      if (signInWithGoogleController.googleAccount.value ==
+                          null) {
+                        return Column(
+                          children: [
+                            TextField(
+                              controller: _firstName,
+                              cursorColor: primaryColor,
+                              keyboardType: TextInputType.name,
+                              decoration: InputDecoration(
+                                hintText: 'First name',
+                                hintStyle:
+                                    const TextStyle(color: Color(0xFFbdc6cf)),
+                                filled: true,
+                                fillColor: softGray,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SvgPicture.asset(
+                                      'assets/icons/user_icon.svg'),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextField(
+                              controller: _email,
+                              cursorColor: primaryColor,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                hintText: 'Email',
+                                hintStyle:
+                                    const TextStyle(color: Color(0xFFbdc6cf)),
+                                filled: true,
+                                fillColor: softGray,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      const BorderSide(color: Colors.white),
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                prefixIcon: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: SvgPicture.asset(
+                                      'assets/icons/mail_box.svg'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          children: [
+                            Container(
+                              width: screenWidth(context),
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                  color: softGray,
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/icons/user_icon.svg',
+                                    width: 35,
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    signInWithGoogleController
+                                            .googleAccount.value?.displayName ??
+                                        "",
+                                    style: const TextStyle(color: grayColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                           const SizedBox(height: 10),
+                            Container(
+                              width: screenWidth(context),
+                              padding: const EdgeInsets.all(12),
+                              decoration: BoxDecoration(
+                                  color: softGray,
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset('assets/icons/mail_box.svg'),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    signInWithGoogleController
+                                            .googleAccount.value?.email ??
+                                        "",
+                                    style: const TextStyle(color: grayColor),
+                                  ),
+                                ],
+                              ),
+                            ),
+                           const SizedBox(height: 6),
+                            const Text(
+                              "One more step, Add your password.👇",
+                              style:
+                                  TextStyle(color: whiteColor, fontSize: 16.0),
+                            )
+                          ],
+                        );
+                      }
+                    }),
                     const SizedBox(height: 10),
                     TextField(
                       controller: _password,
@@ -178,7 +256,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         );
                         dynamic result =
                             await AuthService.registerWithEmailAndPassword(
-                                _email.text, _password.text, _firstName.text);
+                                signInWithGoogleController
+                                        .googleAccount.value?.email ??
+                                    _email.text,
+                                _password.text,
+                                signInWithGoogleController
+                                        .googleAccount.value?.displayName ??
+                                    _firstName.text);
                         if (result.runtimeType == ErrorException) {
                           Navigator.push(
                             context,

@@ -7,6 +7,7 @@ import 'package:globaltrailblazersapp/screens/authentication/register.dart';
 import 'package:globaltrailblazersapp/screens/index.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,6 +19,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+
+  final signInWithGoogleController = Get.put(AuthService());
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +67,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        signInWithGoogleController.loginWithGoogleCredentials();
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 12),
@@ -87,6 +92,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
+                    Obx(() {
+                      if (signInWithGoogleController.googleAccount.value ==
+                          null) {
+                        return Container();
+                      } else {
+                        return Text(
+                          signInWithGoogleController
+                                  .googleAccount.value?.email ??
+                              "",
+                          style: const TextStyle(color: whiteColor),
+                        );
+                      }
+                    }),
                     const SizedBox(height: 15),
                     Container(
                       padding: const EdgeInsets.only(bottom: 8),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/screens/index.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({Key? key}) : super(key: key);
@@ -10,9 +11,25 @@ class AuthWrapper extends StatefulWidget {
 }
 
 class _AuthWrapperState extends State<AuthWrapper> {
-  final bool isSignedIn = false;
+  bool? isSignedIn;
+
+  checkAuthChanges() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isSignedIn = prefs.getBool("signedIn") ?? false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkAuthChanges();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return isSignedIn ? const IndexPage(index: 0) : const LoginScreen();
+    return isSignedIn ?? false
+        ? const IndexPage(index: 0)
+        : const LoginScreen();
   }
 }

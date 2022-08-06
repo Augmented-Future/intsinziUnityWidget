@@ -8,6 +8,7 @@ import 'package:globaltrailblazersapp/screens/index.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -92,6 +93,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
+                    // ElevatedButton(
+                    //   onPressed: () async {
+                    //     final prefs = await SharedPreferences.getInstance();
+                    //     prefs.setBool('signedIn', true);
+                    //   },
+                    //   child: Text("Fake Set Auth"),
+                    // ),
                     Obx(() {
                       if (signInWithGoogleController.googleAccount.value ==
                           null) {
@@ -187,8 +195,9 @@ class _LoginScreenState extends State<LoginScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (_) => AuthPageError(
-                                  statusCode: result.statusCode,
-                                  message: result.errorMessage),
+                                statusCode: result.statusCode,
+                                message: result.errorMessage,
+                              ),
                             ),
                           );
                         } else {

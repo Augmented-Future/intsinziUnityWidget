@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/authentication/reset_new_password.dart';
 
 class VerifyOtpScreen extends StatelessWidget {
   const VerifyOtpScreen({Key? key}) : super(key: key);
@@ -186,13 +185,7 @@ class VerifyOtpScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ResetNewPasswordScreen()),
-                    );
-                  },
+                  onTap: () {},
                   child: Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(

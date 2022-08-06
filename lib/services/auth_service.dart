@@ -16,6 +16,15 @@ class AuthService extends GetxController {
     googleAccount.value = await _googleSignin.signIn();
   }
 
+  static Future<bool> googleSignOut() async {
+    try {
+      await GoogleSignIn().signOut();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   //Login with Email and Password
   static Future loginWithEmailAndPassword(String email, String password) async {
     try {

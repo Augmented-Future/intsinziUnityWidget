@@ -37,6 +37,7 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
   @override
   void initState() {
     super.initState();
+
     videoUrl = widget.animation.videoUrl;
 
     videoPlayerController = VideoPlayerController.network(videoUrl!)
@@ -78,13 +79,12 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    const Text(
-                      'Loading...',
-                      style: TextStyle(color: blackColor),
+                    const CircularProgressIndicator(
+                      color: brandYellowColor,
                     ),
                     CustomVideoPlayer(
-                        customVideoPlayerController:
-                            _customVideoPlayerController),
+                      customVideoPlayerController: _customVideoPlayerController,
+                    ),
                   ],
                 ),
               ),

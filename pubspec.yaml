@@ -46,7 +46,6 @@ dependencies:
   url_launcher: ^6.1.5
   fluttertoast: ^8.0.9
   google_sign_in: ^5.4.0
-  flutter_unity_widget: ^2022.1.7+1
   firebase_core: ^1.20.0
   firebase_auth: ^3.6.2
 

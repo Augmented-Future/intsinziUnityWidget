@@ -82,9 +82,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               'assets/icons/gmail.svg',
                               height: 30,
                             ),
-                            const Text(
-                              "Register with Google",
-                              style: TextStyle(color: blackColor, fontSize: 18),
+                            const Expanded(
+                              child: Text(
+                                "Register with Google",
+                                style:
+                                    TextStyle(color: blackColor, fontSize: 18),
+                              ),
                             ),
                             Container()
                           ],
@@ -190,7 +193,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ],
                               ),
                             ),
-                           const SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Container(
                               width: screenWidth(context),
                               padding: const EdgeInsets.all(12),
@@ -210,7 +213,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ],
                               ),
                             ),
-                           const SizedBox(height: 6),
+                            const SizedBox(height: 6),
                             const Text(
                               "One more step, Add your password.👇",
                               style:

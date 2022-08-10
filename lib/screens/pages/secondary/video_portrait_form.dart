@@ -38,7 +38,7 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
   void initState() {
     super.initState();
 
-    videoUrl = widget.animation.videoUrl;
+    videoUrl = widget.animation.video;
 
     videoPlayerController = VideoPlayerController.network(videoUrl!)
       ..initialize().then((value) => setState(() {}));

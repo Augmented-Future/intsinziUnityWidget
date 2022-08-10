@@ -32,13 +32,7 @@ class AuthService extends GetxController {
       final response =
           await http.post(url, body: {"email": email, "password": password});
       if (response.statusCode == 200) {
-        return UserAccount(
-          id: 5,
-          email: email,
-          firstName: "firstName",
-          roleId: 2,
-          studentId: 5,
-        );
+        return UserAccount.fromJson(jsonDecode(response.body)['user']);
       } else {
         final message = jsonDecode(response.body)['message'];
         return _error(response.statusCode, message);

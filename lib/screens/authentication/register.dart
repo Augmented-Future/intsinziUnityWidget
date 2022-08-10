@@ -82,12 +82,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               'assets/icons/gmail.svg',
                               height: 30,
                             ),
-                            const Expanded(
-                              child: Text(
-                                "Register with Google",
-                                style:
-                                    TextStyle(color: blackColor, fontSize: 18),
-                              ),
+                            const Text(
+                              "Register with Google",
+                              style: TextStyle(color: blackColor, fontSize: 18),
                             ),
                             Container()
                           ],

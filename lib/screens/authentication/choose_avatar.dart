@@ -124,14 +124,12 @@ class _ChooseAvatarScreenState extends State<ChooseAvatarScreen> {
                                   setState(() => selectedIndexAvatar = index),
                               child: Column(
                                 children: [
-                                  const CircleAvatar(
+                                  CircleAvatar(
                                     radius: 45,
                                     backgroundColor: brandYellowColor,
-                                    // backgroundImage
-                                    //     NetworkImage(avatars![index].url,
-                                    //     ),
                                     backgroundImage: NetworkImage(
-                                        'https://cdn.pixabay.com/photo/2022/07/28/23/42/rainbow-7350780_1280.jpg'),
+                                      avatars![index].url,
+                                    ),
                                   ),
                                   Text(
                                     avatars![index].name,
@@ -154,9 +152,7 @@ class _ChooseAvatarScreenState extends State<ChooseAvatarScreen> {
                 onTap: () => Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => SignupComplete(
-                        user: widget.userInfo
-                      ),
+                      builder: (_) => SignupComplete(user: widget.userInfo),
                     ),
                     (route) => false),
                 child: Container(

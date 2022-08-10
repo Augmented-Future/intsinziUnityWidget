@@ -93,13 +93,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    // ElevatedButton(
-                    //   onPressed: () async {
-                    //     final prefs = await SharedPreferences.getInstance();
-                    //     prefs.setBool('signedIn', true);
-                    //   },
-                    //   child: Text("Fake Set Auth"),
-                    // ),
                     Obx(() {
                       if (signInWithGoogleController.googleAccount.value ==
                           null) {
@@ -201,12 +194,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           );
                         } else {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const IndexPage(index: 0),
-                            ),
-                          );
+                          List<String> userData = [
+                            result.id.toString(),
+                            result.gradeId.toString(),
+                            result.email,
+                            result.firstName,
+                            result.lastName,
+                            result.avatarUrl
+                          ];
+                          final prefs = await SharedPreferences.getInstance();
+                          await prefs.setStringList("user", userData);
+                          if (prefs.getStringList("user") != null &&
+                              prefs.getStringList("user") != [] &&
+                              await prefs.setBool("signedIn", true)) {
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const IndexPage(index: 0),
+                              ),
+                              (route) => false,
+                            );
+                          }
                         }
                       },
                       child: Ink(

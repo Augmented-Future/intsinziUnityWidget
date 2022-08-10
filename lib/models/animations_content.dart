@@ -1,45 +1,45 @@
 class AnimationsContent {
-  int id;
-  String featuredImage;
+  String id;
+  String image;
+  String video;
   String title;
-  String curriculum;
-  String grade;
-  String course;
-  String unit;
-  String videoUrl;
+  String curriculumId;
+  String gradeId;
+  String courseId;
+  String chapterId;
   String slug;
-  String contentCreator;
-  String type;
+  String creatorId;
+  String notes;
   DateTime createdAt;
   DateTime updatedAt;
   AnimationsContent({
     required this.id,
-    required this.featuredImage,
-    required this.contentCreator,
-    required this.course,
-    required this.curriculum,
-    required this.grade,
-    required this.slug,
+    required this.image,
+    required this.video,
     required this.title,
-    required this.unit,
-    required this.videoUrl,
+    required this.curriculumId,
+    required this.gradeId,
+    required this.courseId,
+    required this.chapterId,
+    required this.slug,
+    required this.creatorId,
+    required this.notes,
     required this.createdAt,
-    required this.type,
     required this.updatedAt,
   });
   static AnimationsContent fromJson(Map<String, dynamic> json) {
     return AnimationsContent(
       id: json["id"],
-      featuredImage: json["featuredImage"],
+      image: json["image"],
+      video: json["video"],
       title: json["title"],
-      curriculum: json["curriculum"],
-      grade: json["grade"],
-      course: json["course"],
-      unit: json["unit"],
-      videoUrl: json["webUrl"],
+      curriculumId: json["curriculumId"],
+      gradeId: json["gradeId"],
+      courseId: json["courseId"],
+      chapterId: json["chapterId"],
       slug: json["slug"],
-      contentCreator: json["contentCreator"],
-      type: json["type"],
+      creatorId: json["creatorId"],
+      notes: json["notes"],
       createdAt: DateTime.parse(json["createdAt"]),
       updatedAt: DateTime.parse(json["updatedAt"]),
     );

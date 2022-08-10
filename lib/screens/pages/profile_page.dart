@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
@@ -9,8 +10,8 @@ import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
+  const ProfilePage({Key? key, required this.user}) : super(key: key);
+  final UserAccount? user;
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -51,16 +52,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
               ),
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 50,
                 backgroundColor: primaryColor,
-                backgroundImage: AssetImage('assets/images/Avatar.jpeg'),
+                backgroundImage: NetworkImage("${widget.user?.avatarUrl}"),
               ),
               const SizedBox(height: 20),
               ListTile(
                 leading: SvgPicture.asset('assets/icons/user.svg'),
                 title: const Text('Name'),
-                subtitle: const Text('Kundwa Ange Chelsea'),
+                subtitle:
+                    Text("${widget.user?.firstName} ${widget.user?.lastName}"),
                 trailing: SvgPicture.asset('assets/icons/edit.svg'),
               ),
               ListTile(
@@ -72,13 +74,13 @@ class _ProfilePageState extends State<ProfilePage> {
               ListTile(
                 leading: SvgPicture.asset('assets/icons/inbox.svg'),
                 title: const Text('E-mail'),
-                subtitle: const Text('info@augmented-future.com'),
+                subtitle: Text('${widget.user?.email}'),
                 trailing: SvgPicture.asset('assets/icons/edit.svg'),
               ),
               ListTile(
                 leading: SvgPicture.asset('assets/icons/class.svg'),
                 title: const Text('Class'),
-                subtitle: const Text('Primary 4'),
+                subtitle: Text("Primary ${widget.user?.gradeId}"),
                 trailing: SvgPicture.asset('assets/icons/edit.svg'),
               ),
               ListTile(

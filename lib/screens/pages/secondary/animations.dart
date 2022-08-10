@@ -99,7 +99,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                "https://cdn.pixabay.com/photo/2022/07/28/23/42/rainbow-7350780_1280.jpg",
+                "${_animationsList?[index].image}",
                 height: 120,
                 fit: BoxFit.cover,
               ),
@@ -126,7 +126,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            '${_animationsList?[index].unit}: ${_animationsList?[index].title}',
+            'Unit ${_animationsList?[index].chapterId}: ${_animationsList?[index].title}',
             style: const TextStyle(color: blackColor, fontSize: 16),
           ),
         ),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/models/grade.dart';
+import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:globaltrailblazersapp/screens/pages/books_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/components/painters.dart';
 import 'package:globaltrailblazersapp/screens/pages/games_zone_page.dart';
@@ -11,6 +13,9 @@ import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
 import 'package:globaltrailblazersapp/screens/pages/profile_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/secondary/animations.dart';
 import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
+import 'package:globaltrailblazersapp/services/auth_service.dart';
+import 'package:globaltrailblazersapp/services/database_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class IndexPage extends StatefulWidget {
   final int index;
@@ -21,8 +26,9 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
-  String? _selectedCategory;
+  Grade? _selectedGrade;
   int? currentIndex;
+  UserAccount? _userAccount;
 
   final List _pages = [
     const HomePage(), //0
@@ -30,18 +36,56 @@ class _IndexPageState extends State<IndexPage> {
     const BooksZonePage(), //2
     const GamesZonePage(), //3
   ];
-  var categories = [
-    "Primary 4",
-    "Primary 5",
-    "Primary 6",
-    "Cormics",
-    "Mathematics",
-  ];
+  List<Grade>? grades;
+  void _setUserData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      List<String>? userString = prefs.getStringList("user");
+      dynamic grade =
+          await DatabaseService.fetchOneGrade(int.parse(userString![1]));
+      setState(() {
+        _userAccount = UserAccount(
+          id: int.parse(userString[0]),
+          email: userString[2],
+          firstName: userString[3],
+          lastName: userString[4],
+          avatarUrl: userString[5],
+          gradeId: int.parse(userString[1]),
+        );
+        if (grade != null) {
+          _selectedGrade = grade;
+        } else {
+          _selectedGrade = Grade(
+            id: "null",
+            name: "No category",
+            curriculumnId: "null",
+          );
+        }
+      });
+    } catch (e) {
+      print("Something went wrong $e");
+    }
+  }
+
+  void _getAllGrades() async {
+    dynamic result = await DatabaseService.fetchAllGrades();
+    if (result.runtimeType != ErrorException) {
+      setState(() {
+        grades = result;
+      });
+    } else {}
+  }
 
   @override
   void initState() {
     currentIndex = widget.index;
-    _selectedCategory = "Primary 4";
+    _selectedGrade = Grade(
+      id: "null",
+      name: "Loading..",
+      curriculumnId: "null",
+    );
+    _setUserData();
+    _getAllGrades();
     super.initState();
   }
 
@@ -64,58 +108,61 @@ class _IndexPageState extends State<IndexPage> {
             );
           }),
           const Spacer(),
-          InkWell(
-            onTap: () => showDialog(
-              context: context,
-              builder: (_) => Dialog(
-                backgroundColor: whiteColor,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+          grades == null
+              ? Container()
+              : InkWell(
+                  onTap: () => showDialog(
+                    context: context,
+                    builder: (_) => Dialog(
+                      backgroundColor: whiteColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: SizedBox(
+                        height: 280,
+                        child: ListView.builder(
+                            itemCount: grades?.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    title: Center(
+                                        child: Text(
+                                      grades![index].name,
+                                      style:
+                                          const TextStyle(color: primaryColor),
+                                    )),
+                                    onTap: () {
+                                      setState(() =>
+                                          _selectedGrade = grades![index]);
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  const Divider(
+                                    height: 0.0,
+                                  )
+                                ],
+                              );
+                            }),
+                      ),
+                    ),
+                  ),
+                  splashColor: whiteColor.withOpacity(0.5),
+                  highlightColor: brandYellowColor.withOpacity(0.5),
+                  child: Ink(
+                    child: Chip(
+                      label: Text(
+                        _selectedGrade!.name,
+                        style: const TextStyle(color: primaryColor),
+                      ),
+                      deleteIcon: const Icon(Icons.arrow_drop_down),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(3)),
+                      onDeleted: () {},
+                      backgroundColor: const Color(0xFFEEDA36),
+                    ),
+                  ),
                 ),
-                child: SizedBox(
-                  height: 280,
-                  child: ListView.builder(
-                      itemCount: categories.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            ListTile(
-                              title: Center(
-                                  child: Text(
-                                categories[index],
-                                style: const TextStyle(color: primaryColor),
-                              )),
-                              onTap: () {
-                                setState(() =>
-                                    _selectedCategory = categories[index]);
-                                Navigator.pop(context);
-                              },
-                            ),
-                            const Divider(
-                              height: 0.0,
-                            )
-                          ],
-                        );
-                      }),
-                ),
-              ),
-            ),
-            splashColor: whiteColor.withOpacity(0.5),
-            highlightColor: brandYellowColor.withOpacity(0.5),
-            child: Ink(
-              child: Chip(
-                label: Text(
-                  _selectedCategory!,
-                  style: const TextStyle(color: primaryColor),
-                ),
-                deleteIcon: const Icon(Icons.arrow_drop_down),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(3)),
-                onDeleted: () {},
-                backgroundColor: const Color(0xFFEEDA36),
-              ),
-            ),
-          ),
           const SizedBox(width: 20),
           Badge(
             badgeContent: const Text(
@@ -127,9 +174,13 @@ class _IndexPageState extends State<IndexPage> {
             position: BadgePosition.topEnd(),
           ),
           const SizedBox(width: 20),
-          const CircleAvatar(
-            backgroundColor: primaryColor,
-            backgroundImage: AssetImage('assets/images/Avatar.jpeg'),
+          CircleAvatar(
+            backgroundColor: brandYellowColor,
+            backgroundImage: _userAccount?.avatarUrl != null
+                ? NetworkImage(_userAccount?.avatarUrl ?? "")
+                : const NetworkImage(
+                    "https://t4.ftcdn.net/jpg/02/29/75/83/240_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
+                  ),
             radius: 25,
           ),
         ]),
@@ -138,7 +189,7 @@ class _IndexPageState extends State<IndexPage> {
       ),
       drawer: SizedBox(
         width: screenWidth(context) * 0.95,
-        child: const NavigationDrawerWidget(),
+        child: NavigationDrawerWidget(user: _userAccount),
       ),
       body: _pages[currentIndex!],
       backgroundColor: whiteColor,
@@ -282,8 +333,9 @@ class _IndexPageState extends State<IndexPage> {
 }
 
 class NavigationDrawerWidget extends StatefulWidget {
-  const NavigationDrawerWidget({Key? key}) : super(key: key);
-
+  const NavigationDrawerWidget({Key? key, required this.user})
+      : super(key: key);
+  final UserAccount? user;
   @override
   State<NavigationDrawerWidget> createState() => _NavigationDrawerWidgetState();
 }
@@ -313,26 +365,29 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(),
-                    const CircleAvatar(
+                    CircleAvatar(
                       backgroundColor: primaryColor,
-                      backgroundImage: AssetImage('assets/images/Avatar.jpeg'),
+                      backgroundImage:
+                          NetworkImage("${widget.user?.avatarUrl}"),
                       radius: 30,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Umukundwa Doriane",
-                          style:
-                              TextStyle(color: Color(0xFFEA580C), fontSize: 16),
+                        Text(
+                          "${widget.user?.firstName} ${widget.user?.lastName}",
+                          style: const TextStyle(
+                              color: Color(0xFFEA580C), fontSize: 16),
                         ),
                         const SizedBox(height: 3),
                         InkWell(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => const ProfilePage()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => ProfilePage(user: widget.user),
+                              ),
+                            );
                           },
                           child: Ink(
                             child: const Text(

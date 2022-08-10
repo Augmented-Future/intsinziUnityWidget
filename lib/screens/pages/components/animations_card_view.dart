@@ -125,9 +125,9 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                                   ],
                                 ),
                                 borderRadius: BorderRadius.circular(10),
-                                image: const DecorationImage(
+                                image: DecorationImage(
                                     image: NetworkImage(
-                                        "https://cdn.pixabay.com/photo/2022/07/28/23/42/rainbow-7350780_1280.jpg"),
+                                        animationList![index].image),
                                     fit: BoxFit.contain),
                               ),
                             ),
@@ -166,7 +166,7 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                                 ),
                                 const SizedBox(height: 3),
                                 Text(
-                                  " ${animationList?[index].unit}, ${animationList?[index].course}",
+                                  " Unit ${animationList?[index].chapterId}, Course ${animationList?[index].courseId}",
                                   style: const TextStyle(color: darkPink),
                                 ),
                                 const Spacer(),
@@ -184,7 +184,7 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                                     SvgPicture.asset(
                                         'assets/icons/user_outlined.svg'),
                                     const SizedBox(width: 5),
-                                    Text(animationList![index].contentCreator),
+                                    Text(animationList![index].creatorId),
                                   ],
                                 ),
                               ],

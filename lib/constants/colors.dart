@@ -13,7 +13,7 @@ const grayColor = Color(0xff6D6D6D);
 const softGray = Color(0xffF5F5F5);
 const grayColor200 = Color(0xffB8B8B8);
 const secondaryBlack = Color(0xff263238);
+const softBlack = Color(0xFF4B5563);
 //Yellows
 const brandYellowColor = Color(0xffFDE047);
 const coolYellow = Color(0xFFEEDA36);
-

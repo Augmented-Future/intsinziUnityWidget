@@ -82,11 +82,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
                         filled: true,
                         fillColor: softGray,
-                        focusedBorder: OutlineInputBorder(
+                        contentPadding: const EdgeInsets.all(0.0),
+                        border: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        enabledBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(8),
                         ),

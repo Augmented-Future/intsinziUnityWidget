@@ -68,9 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        signInWithGoogleController.loginWithGoogleCredentials();
-                      },
+                      onTap: () {},
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 12),
@@ -93,19 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    Obx(() {
-                      if (signInWithGoogleController.googleAccount.value ==
-                          null) {
-                        return Container();
-                      } else {
-                        return Text(
-                          signInWithGoogleController
-                                  .googleAccount.value?.email ??
-                              "",
-                          style: const TextStyle(color: whiteColor),
-                        );
-                      }
-                    }),
                     const SizedBox(height: 15),
                     Container(
                       padding: const EdgeInsets.only(bottom: 8),
@@ -128,11 +113,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
                         filled: true,
                         fillColor: softGray,
-                        focusedBorder: OutlineInputBorder(
+                        contentPadding: const EdgeInsets.all(0.0),
+                        border: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        enabledBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -142,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     TextField(
                       controller: _password,
                       autofocus: false,
@@ -154,11 +140,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
                         filled: true,
                         fillColor: softGray,
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white),
+                        contentPadding: const EdgeInsets.all(0.0),
+                        border: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                            color: Colors.white,
+                          ),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        enabledBorder: UnderlineInputBorder(
+                        focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(8),
                         ),

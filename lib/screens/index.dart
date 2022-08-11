@@ -9,9 +9,10 @@ import 'package:globaltrailblazersapp/screens/pages/books_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/components/painters.dart';
 import 'package:globaltrailblazersapp/screens/pages/games_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/library_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
 import 'package:globaltrailblazersapp/screens/pages/profile_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/secondary/animations.dart';
+import 'package:globaltrailblazersapp/screens/pages/animations_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
@@ -98,12 +99,18 @@ class _IndexPageState extends State<IndexPage> {
           Builder(builder: (context) {
             return InkWell(
               onTap: () {
-                Scaffold.of(context).openDrawer();
+                if (_userAccount != null) {
+                  Scaffold.of(context).openDrawer();
+                }
               },
               child: Ink(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: SvgPicture.asset('assets/icons/menu.svg'),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 15,
+                  vertical: 15,
+                ),
+                child: SvgPicture.asset(
+                  'assets/icons/menu.svg',
+                ),
               ),
             );
           }),
@@ -431,6 +438,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Library",
+                direction: const LibraryZonePage(),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: LibraryCustomPainter(),

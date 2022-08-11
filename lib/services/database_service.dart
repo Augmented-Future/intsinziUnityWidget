@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:globaltrailblazersapp/constants/url.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/models/avatar.dart';
+import 'package:globaltrailblazersapp/models/book.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:http/http.dart' as http;
@@ -75,6 +76,24 @@ class DatabaseService {
       return Grade.fromJson(decoded['data']);
     } catch (e) {
       return null;
+    }
+  }
+
+  static Future fetchAllBooks() async {
+    try {
+      Uri url = Uri.parse(databaseUrl + '/books');
+      final response = await http.get(url);
+      final decoded = jsonDecode(response.body);
+      List<Book> books = [];
+      if (response.statusCode == 200) {
+        books = dummyBooks;
+        return books;
+      } else {
+        return _error(response.statusCode, decoded['message']);
+      }
+    } catch (e) {
+      print("Something went wrong! $e");
+      return _error(500, "Something went wrong, $e");
     }
   }
 

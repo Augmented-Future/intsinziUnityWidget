@@ -118,12 +118,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     const TextStyle(color: Color(0xFFbdc6cf)),
                                 filled: true,
                                 fillColor: softGray,
+                                contentPadding: const EdgeInsets.all(0.0),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide:
                                       const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                enabledBorder: UnderlineInputBorder(
+                                border: OutlineInputBorder(
                                   borderSide:
                                       const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(8),
@@ -135,7 +136,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 15),
                             TextField(
                               controller: _email,
                               cursorColor: primaryColor,
@@ -146,12 +147,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     const TextStyle(color: Color(0xFFbdc6cf)),
                                 filled: true,
                                 fillColor: softGray,
+                                contentPadding: const EdgeInsets.all(0.0),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide:
                                       const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                enabledBorder: UnderlineInputBorder(
+                                border: OutlineInputBorder(
                                   borderSide:
                                       const BorderSide(color: Colors.white),
                                   borderRadius: BorderRadius.circular(8),
@@ -170,7 +172,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                             Container(
                               width: screenWidth(context),
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   color: softGray,
                                   borderRadius: BorderRadius.circular(8)),
@@ -190,10 +192,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ],
                               ),
                             ),
-                            const SizedBox(height: 10),
+                            const SizedBox(height: 15),
                             Container(
                               width: screenWidth(context),
-                              padding: const EdgeInsets.all(12),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   color: softGray,
                                   borderRadius: BorderRadius.circular(8)),
@@ -220,7 +222,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         );
                       }
                     }),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     TextField(
                       controller: _password,
                       obscureText: true,
@@ -231,11 +233,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         hintStyle: const TextStyle(color: Color(0xFFbdc6cf)),
                         filled: true,
                         fillColor: softGray,
+                        contentPadding: const EdgeInsets.all(0.0),
                         focusedBorder: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        enabledBorder: UnderlineInputBorder(
+                        border: OutlineInputBorder(
                           borderSide: const BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(8),
                         ),

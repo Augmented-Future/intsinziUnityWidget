@@ -5,11 +5,10 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
-import 'package:globaltrailblazersapp/screens/pages/books_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/components/painters.dart';
 import 'package:globaltrailblazersapp/screens/pages/games_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/library_zone_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/library/library_home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
 import 'package:globaltrailblazersapp/screens/pages/profile_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations_page.dart';
@@ -34,7 +33,7 @@ class _IndexPageState extends State<IndexPage> {
   final List _pages = [
     const HomePage(), //0
     const TvZonePage(), //1
-    const BooksZonePage(), //2
+    const LibraryHomePage(), //2
     const GamesZonePage(), //3
   ];
   List<Grade>? grades;
@@ -372,17 +371,23 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(),
-                    CircleAvatar(
-                      backgroundColor: primaryColor,
-                      backgroundImage:
-                          NetworkImage("${widget.user?.avatarUrl}"),
-                      radius: 30,
-                    ),
+                    if (widget.user?.avatarUrl != null)
+                      CircleAvatar(
+                        backgroundColor: primaryColor,
+                        backgroundImage: NetworkImage(widget.user!.avatarUrl),
+                        radius: 30,
+                      ),
+                    if (widget.user?.avatarUrl == null)
+                      const CircleAvatar(
+                        backgroundColor: brandYellowColor,
+                        radius: 30,
+                      ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${widget.user?.firstName} ${widget.user?.lastName}",
+                          "${widget.user?.firstName} ${widget.user?.lastName}"
+                              .toUpperCase(),
                           style: const TextStyle(
                               color: Color(0xFFEA580C), fontSize: 16),
                         ),
@@ -438,7 +443,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Library",
-                direction: const LibraryZonePage(),
+                direction: const IndexPage(index: 2),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: LibraryCustomPainter(),

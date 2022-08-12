@@ -92,7 +92,7 @@ class DatabaseService {
         return _error(response.statusCode, decoded['message']);
       }
     } catch (e) {
-      print("Something went wrong! $e");
+      //print("Something went wrong! $e");
       return _error(500, "Something went wrong, $e");
     }
   }

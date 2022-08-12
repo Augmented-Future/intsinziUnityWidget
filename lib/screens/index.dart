@@ -63,7 +63,7 @@ class _IndexPageState extends State<IndexPage> {
         }
       });
     } catch (e) {
-      print("Something went wrong $e");
+     // print("Something went wrong $e");
     }
   }
 

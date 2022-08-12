@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_pdfview",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_pdfview-1.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.1.1+1",
       "packageUri": "lib/",
@@ -284,8 +290,32 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "path_provider",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "path_provider_android",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.19",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "path_provider_ios",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "path_provider_linux",
       "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_macos",
+      "rootUri": "file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -542,7 +572,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-08-09T21:58:28.833942Z",
+  "generated": "2022-08-12T21:31:25.331057Z",
   "generator": "pub",
   "generatorVersion": "2.17.0"
 }

@@ -1,14 +1,17 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/book.dart';
-import 'package:globaltrailblazersapp/screens/pages/payments/payment_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/library/pdf_view_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
+import 'package:globaltrailblazersapp/services/pdf_service.dart';
 
 class DigitalBooksZone extends StatefulWidget {
   const DigitalBooksZone({Key? key}) : super(key: key);
@@ -88,7 +91,6 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
               ),
             ),
           ),
-          
           SliverList(
             delegate: SliverChildListDelegate(
               [
@@ -166,10 +168,10 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
                 children: [
                   Row(
                     children: [
-                      Text("The ABCS of Rwanda"),
-                      SizedBox(width: 20),
+                      const Text("The ABCS of Rwanda"),
+                      const SizedBox(width: 20),
                       SvgPicture.asset("assets/icons/aug.svg"),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       SvgPicture.asset("assets/icons/sound.svg"),
                     ],
                   ),
@@ -177,8 +179,13 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
                 ],
               ),
               ElevatedButton.icon(
-                onPressed: () {},
-                label: const Text(
+                onPressed: () async {
+                  const url =
+                      "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf";
+                  final file = await PDFService.loadNetwork(url);
+                  openPDF(context, file);
+                },
+                label:const Text(
                   "Read",
                   style: TextStyle(color: primaryColor),
                 ),
@@ -197,4 +204,7 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
       ),
     );
   }
+
+  void openPDF(BuildContext context, File file) => Navigator.of(context)
+      .push(MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
 }

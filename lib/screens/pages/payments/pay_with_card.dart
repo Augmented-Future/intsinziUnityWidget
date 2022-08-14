@@ -11,6 +11,7 @@ class PayWithCardWidget extends StatelessWidget {
   final TextEditingController _expdateController = TextEditingController();
   final TextEditingController _productController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _cardNumberController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -24,6 +25,10 @@ class PayWithCardWidget extends StatelessWidget {
           PaymentTextField(
             controller: _nameController,
             label: "Names on card",
+          ),
+          PaymentTextField(
+            controller: _cardNumberController,
+            label: "Card number",
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

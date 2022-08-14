@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/index.dart';
+import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/games/games_zone_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/index.dart';
+import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
 
 class BottomNavigationBarWidget extends StatelessWidget {
   const BottomNavigationBarWidget({
@@ -23,7 +27,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (_) => const IndexPage(index: 0),
+                builder: (_) => const IndexPage(
+                  page: HomePage(),
+                ),
               ),
             ),
             child: Padding(
@@ -44,7 +50,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (_) => const IndexPage(index: 1),
+                builder: (_) => const IndexPage(
+                  page: TvZonePage(),
+                ),
               ),
             ),
             child: Padding(
@@ -110,7 +118,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (_) => const IndexPage(index: 2),
+                builder: (_) => const IndexPage(
+                  page: LibraryHomePage(),
+                ),
               ),
             ),
             child: Padding(
@@ -130,7 +140,9 @@ class BottomNavigationBarWidget extends StatelessWidget {
             onTap: () => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (_) => const IndexPage(index: 3),
+                builder: (_) => const IndexPage(
+                  page: GamesZonePage(),
+                ),
               ),
             ),
             child: Padding(

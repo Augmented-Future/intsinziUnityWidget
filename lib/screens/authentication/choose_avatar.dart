@@ -35,10 +35,12 @@ class _ChooseAvatarScreenState extends State<ChooseAvatarScreen> {
         ),
       );
     } else {
-      setState(() {
-        avatars = result;
-        _avatarLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          avatars = result;
+          _avatarLoading = false;
+        });
+      }
     }
   }
 

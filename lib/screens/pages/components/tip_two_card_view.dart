@@ -11,11 +11,17 @@ class TipTwoCardPageView extends StatefulWidget {
 class _TipTwoCardPageViewState extends State<TipTwoCardPageView> {
   final List<Item> _items = [
     Item(
-        'Learn with me the touristic sites of Rwanda in The ABCs of Rwanda book',
-        color100),
-    Item('Number four is the only one with the same amount of letters.',
-        brandYellowColor),
-    Item('No word in the dictionary rhyme with the word orange.', Colors.green),
+      'Learn with me the touristic sites of Rwanda in The ABCs of Rwanda book',
+      color100,
+    ),
+    Item(
+      'Number four is the only one with the same amount of letters.',
+      brandYellowColor,
+    ),
+    Item(
+      'No word in the dictionary rhyme with the word orange.',
+      Colors.green,
+    ),
   ];
   final PageController _pageController =
       PageController(viewportFraction: 0.8, initialPage: 0, keepPage: true);

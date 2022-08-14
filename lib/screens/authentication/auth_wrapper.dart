@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:globaltrailblazersapp/screens/index.dart';
+import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthWrapper extends StatefulWidget {
@@ -29,7 +30,9 @@ class _AuthWrapperState extends State<AuthWrapper> {
   @override
   Widget build(BuildContext context) {
     return isSignedIn ?? false
-        ? const IndexPage(index: 0)
+        ? const IndexPage(
+            page: HomePage(),
+          )
         : const LoginScreen();
   }
 }

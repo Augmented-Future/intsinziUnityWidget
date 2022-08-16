@@ -50,7 +50,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   @override
   void initState() {
     super.initState();
-    //getAnimations();
+    getAnimations();
   }
 
   @override

@@ -50,7 +50,7 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
   @override
   void initState() {
     super.initState();
-    //getAnimations();
+    getAnimations();
   }
 
   @override

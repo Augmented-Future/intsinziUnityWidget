@@ -17,7 +17,7 @@ class DatabaseService {
       final decoded = jsonDecode(response.body);
       List<AnimationsContent> remoteAnimations = [];
       if (response.statusCode == 200) {
-        for (var i = 0; i < decoded['data'].length; i++) {
+        for (var i = 0; i < decoded['data']['rows'].length; i++) {
           remoteAnimations
               .add(AnimationsContent.fromJson(decoded['data']["rows"][i]));
         }

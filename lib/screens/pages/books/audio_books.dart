@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 
 class AudioBooksZone extends StatefulWidget {
   const AudioBooksZone({Key? key}) : super(key: key);
@@ -16,14 +15,7 @@ class _AudioBooksZoneState extends State<AudioBooksZone> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const BackButtonWidget(),
-        backgroundColor: whiteColor,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        toolbarHeight: 80,
-        centerTitle: false,
-      ),
+      appBar: BackAppBar.buildAppbar(),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -70,7 +62,7 @@ class _AudioBooksZoneState extends State<AudioBooksZone> {
             delegate: SliverChildListDelegate(
               [
                 const SizedBox(height: 12),
-                const FilterCategoryWidget(),
+                //FilterCategoryWidget(),
                 const SizedBox(height: 12),
               ],
             ),

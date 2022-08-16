@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/shop_home_page.dart';
 
 import '../../../constants/colors.dart';
 import '../../../models/user.dart';
@@ -219,6 +220,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Shop",
+                direction: const IndexPage(page: ShoppingHomePage()),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: PastPapersCustomPainter(

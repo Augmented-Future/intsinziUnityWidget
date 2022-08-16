@@ -4,7 +4,7 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/forgot_pwd.dart';
 import 'package:globaltrailblazersapp/screens/authentication/register.dart';
-import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:loading_indicator/loading_indicator.dart';

@@ -18,5 +18,5 @@ class UserAccount {
       lastName: "Ndayambaje",
       avatarUrl:
           'https://cdn.pixabay.com/photo/2016/06/06/17/05/woman-1439909_1280.jpg',
-      gradeId: 2);
+      gradeId: 1);
 }

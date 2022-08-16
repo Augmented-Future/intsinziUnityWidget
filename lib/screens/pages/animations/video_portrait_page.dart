@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
-import 'package:globaltrailblazersapp/screens/pages/components/tip_two_card_view.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
+import 'package:globaltrailblazersapp/screens/pages/home/tip_two_card_view.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 
 import '../widgets/fun_facts.dart';
@@ -62,14 +62,7 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const BackButtonWidget(),
-        backgroundColor: whiteColor,
-        elevation: 0.0,
-        automaticallyImplyLeading: false,
-        centerTitle: false,
-        toolbarHeight: 70,
-      ),
+      appBar: BackAppBar.buildAppbar(),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

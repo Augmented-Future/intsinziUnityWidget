@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/games_zone_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
 import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
 

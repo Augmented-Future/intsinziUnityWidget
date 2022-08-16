@@ -4,7 +4,7 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,14 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const BackButtonWidget(),
-        backgroundColor: whiteColor,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        toolbarHeight: 80,
-        centerTitle: false,
-      ),
+      appBar: BackAppBar.buildAppbar(),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
@@ -152,4 +145,6 @@ class _ProfilePageState extends State<ProfilePage> {
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
+
+
 }

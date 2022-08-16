@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
 
 class Page404 extends StatelessWidget {

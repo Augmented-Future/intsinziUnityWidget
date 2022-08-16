@@ -5,9 +5,9 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/pay_with_card.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/payment_controller.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 
+import '../widgets/back_app_bar.dart';
 import 'pay_with_momo.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -23,14 +23,7 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const BackButtonWidget(),
-        backgroundColor: whiteColor,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        toolbarHeight: 80,
-        centerTitle: false,
-      ),
+      appBar: BackAppBar.buildAppbar(),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(

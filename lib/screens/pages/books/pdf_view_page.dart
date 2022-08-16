@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
+
+import '../widgets/back_app_bar.dart';
 
 class PDFViewerPage extends StatefulWidget {
   const PDFViewerPage({Key? key, required this.file}) : super(key: key);
@@ -24,14 +25,7 @@ class _PDFViewerPageState extends State<PDFViewerPage> {
     //final name = basename(widget.file.path);
     final text = '${indexPage + 1} of $pages';
     return Scaffold(
-      appBar: AppBar(
-        title: const BackButtonWidget(),
-        backgroundColor: whiteColor,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        toolbarHeight: 80,
-        centerTitle: false,
-      ),
+      appBar: BackAppBar.buildAppbar(),
       backgroundColor: whiteColor,
       body: Column(
         children: [

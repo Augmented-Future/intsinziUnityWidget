@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AuthPageError extends StatelessWidget {
@@ -14,14 +14,7 @@ class AuthPageError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const BackButtonWidget(),
-        backgroundColor: whiteColor,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        toolbarHeight: 80,
-        centerTitle: false,
-      ),
+      appBar: BackAppBar.buildAppbar(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

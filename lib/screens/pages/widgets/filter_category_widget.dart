@@ -2,13 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/models/filter_category.dart';
 import 'package:shimmer/shimmer.dart';
 
-class FilterCategoryWidget extends StatelessWidget {
-  const FilterCategoryWidget({
-    Key? key,
-  }) : super(key: key);
+class FilterCategoryWidget extends StatefulWidget {
+  final bool? shopFilter;
+  final int contentId, gradeId;
+  final int? typeId, courseId;
 
+  const FilterCategoryWidget(
+      {Key? key,
+      this.shopFilter,
+      this.typeId,
+      this.courseId,
+      required this.contentId,
+      required this.gradeId})
+      : super(key: key);
+
+  @override
+  State<FilterCategoryWidget> createState() => _FilterCategoryWidgetState();
+}
+
+class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -31,33 +46,55 @@ class FilterCategoryWidget extends StatelessWidget {
               ],
             ),
             Chip(
-              label: const Text("Cormics"),
+              label: Text(getContent(widget.contentId).name),
               deleteIcon: const Icon(Icons.arrow_drop_down),
               onDeleted: () {},
               backgroundColor: const Color(0xFFFBBF24),
             )
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                SvgPicture.asset(
-                  "assets/icons/la_chalkboard-teacher.svg",
-                  width: 15.0,
-                ),
-                const Text(" Course")
-              ],
-            ),
-            Chip(
-              label: const Text("Math"),
-              deleteIcon: const Icon(Icons.arrow_drop_down),
-              onDeleted: () {},
-              backgroundColor: const Color(0xFFFBBF24),
-            )
-          ],
-        ),
+        if (widget.shopFilter == null || widget.shopFilter == false)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/la_chalkboard-teacher.svg",
+                    width: 15.0,
+                  ),
+                  const Text(" Course")
+                ],
+              ),
+              Chip(
+                label: Text(getCourse(widget.courseId ?? 0).courseCode),
+                deleteIcon: const Icon(Icons.arrow_drop_down),
+                onDeleted: () {},
+                backgroundColor: const Color(0xFFFBBF24),
+              )
+            ],
+          ),
+        if (widget.shopFilter == true)
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/icons/la_chalkboard-teacher.svg",
+                    width: 15.0,
+                  ),
+                  const Text(" Type")
+                ],
+              ),
+              Chip(
+                label: Text(getProduct(widget.typeId ?? 0).name),
+                deleteIcon: const Icon(Icons.arrow_drop_down),
+                onDeleted: () {},
+                backgroundColor: const Color(0xFFFBBF24),
+              )
+            ],
+          ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -71,7 +108,7 @@ class FilterCategoryWidget extends StatelessWidget {
               ],
             ),
             Chip(
-              label: const Text("Primary 4"),
+              label: Text(getGrade(widget.gradeId).name),
               deleteIcon: const Icon(Icons.arrow_drop_down),
               onDeleted: () {},
               backgroundColor: const Color(0xFFFBBF24),

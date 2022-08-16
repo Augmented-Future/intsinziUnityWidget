@@ -17,3 +17,4 @@ const softBlack = Color(0xFF4B5563);
 //Yellows
 const brandYellowColor = Color(0xffFDE047);
 const coolYellow = Color(0xFFEEDA36);
+const filterYellow = Color(0xFFFFC727);

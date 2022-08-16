@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

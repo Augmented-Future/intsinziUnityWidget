@@ -7,7 +7,7 @@ import 'package:globaltrailblazersapp/models/grade.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/games_zone_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';

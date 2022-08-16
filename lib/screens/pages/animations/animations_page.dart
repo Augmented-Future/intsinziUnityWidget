@@ -3,12 +3,13 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations/video_portrait_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../widgets/back_app_bar.dart';
 
 class AnimationsPageScreen extends StatefulWidget {
   const AnimationsPageScreen({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   @override
   void initState() {
     super.initState();
-    getAnimations();
+    //getAnimations();
   }
 
   @override
@@ -61,10 +62,8 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             delegate: CustomSliverAppBarDelegate(expandedHeight: 300),
             pinned: true,
           ),
-          SliverToBoxAdapter(
-            child: isLoading
-                ? const CategoryShimmerLoading()
-                : const FilterCategoryWidget(),
+          const SliverToBoxAdapter(
+            child: FilterCategoryWidget(gradeId: 1, contentId: 1, courseId: 1),
           ),
           buildAnimationWidget(),
         ],
@@ -196,13 +195,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
 
   Widget buildAppBar(double shrinkOffSet) => Opacity(
         opacity: appear(shrinkOffSet),
-        child: AppBar(
-          title: const BackButtonWidget(),
-          centerTitle: false,
-          elevation: 0.0,
-          backgroundColor: whiteColor,
-          automaticallyImplyLeading: false,
-        ),
+        child: BackAppBar.buildAppbar(),
       );
 
   Widget buildBackground(double shrinkOffset) => Opacity(

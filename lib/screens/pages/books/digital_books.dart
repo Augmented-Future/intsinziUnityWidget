@@ -6,12 +6,13 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/book.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/pdf_view_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/back_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 import 'package:globaltrailblazersapp/services/pdf_service.dart';
+
+import '../widgets/back_app_bar.dart';
 
 class DigitalBooksZone extends StatefulWidget {
   const DigitalBooksZone({Key? key}) : super(key: key);
@@ -39,14 +40,7 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const BackButtonWidget(),
-        backgroundColor: whiteColor,
-        automaticallyImplyLeading: false,
-        elevation: 0.0,
-        toolbarHeight: 80,
-        centerTitle: false,
-      ),
+      appBar: BackAppBar.buildAppbar(),
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -93,7 +87,11 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
             delegate: SliverChildListDelegate(
               [
                 const SizedBox(height: 12),
-                const FilterCategoryWidget(),
+                const FilterCategoryWidget(
+                  gradeId: 1,
+                  contentId: 1,
+                  courseId: 1,
+                ),
                 const SizedBox(height: 12),
                 _books == null
                     ? const Center(

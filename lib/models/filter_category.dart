@@ -1,7 +1,19 @@
-class Content {
-  int id;
-  String name;
-  Content({required this.id, required this.name});
+import 'package:flutter/material.dart';
+import 'package:globaltrailblazersapp/screens/pages/animations/animations_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/books/audio_books.dart';
+import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
+import 'package:globaltrailblazersapp/screens/pages/index.dart';
+import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_page.dart';
+
+import '../screens/pages/books/digital_books.dart';
+
+class AppPage {
+  int pageId;
+  String content;
+  Widget page;
+  AppPage({required this.pageId, required this.content, required this.page});
 }
 
 class Course {
@@ -23,11 +35,40 @@ class Grade {
   Grade({required this.id, required this.name});
 }
 
-//Contents
-List<Content> contents = [
-  Content(id: 1, name: "Animations"),
-  Content(id: 2, name: "Cormics"),
-  Content(id: 3, name: "Books"),
+//Pages
+List<AppPage> appPages = [
+  AppPage(
+    pageId: 0,
+    content: "Animations",
+    page: const AnimationsPageScreen(),
+  ),
+  AppPage(
+    pageId: 1,
+    content: "Shopping",
+    page: const ShoppingPage(),
+  ),
+  AppPage(
+    pageId: 2,
+    content: "Library",
+    page: const IndexPage(page: LibraryHomePage()),
+  ),
+  AppPage(
+    pageId: 3,
+    content: "Board Game",
+    page: const IndexPage(page: BoardGame()),
+  ),
+  AppPage(
+    pageId: 3,
+    content: "Board Game",
+    page: const IndexPage(page: BoardGame()),
+  ),
+  AppPage(
+    pageId: 4,
+    content: "Game Page",
+    page: const IndexPage(page: BoardGame()),
+  ),
+  AppPage(pageId: 5, content: "Audio Books", page: const AudioBooksZone()),
+  AppPage(pageId: 6, content: "Digital Books", page: const DigitalBooksZone()),
 ];
 
 //Courses
@@ -51,11 +92,15 @@ List<ProductType> productTypes = [
   ProductType(id: 3, name: "Both"),
 ];
 
-Content getContent(int id) {
+AppPage getContent(int id) {
   try {
-    return contents.firstWhere((product) => (product.id == id));
+    return appPages.firstWhere((page) => (page.pageId == id));
   } catch (e) {
-    return Content(id: id, name: "No select");
+    return AppPage(
+      pageId: id,
+      content: "No Select",
+      page: const Page404(message: "Page not found", error: "404"),
+    );
   }
 }
 

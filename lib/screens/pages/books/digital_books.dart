@@ -89,7 +89,7 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
                 const SizedBox(height: 12),
                 const FilterCategoryWidget(
                   gradeId: 1,
-                  contentId: 1,
+                  pageId: 6,
                   courseId: 1,
                 ),
                 const SizedBox(height: 12),

@@ -3,6 +3,7 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 
 class AudioBooksZone extends StatefulWidget {
   const AudioBooksZone({Key? key}) : super(key: key);
@@ -62,7 +63,7 @@ class _AudioBooksZoneState extends State<AudioBooksZone> {
             delegate: SliverChildListDelegate(
               [
                 const SizedBox(height: 12),
-                //FilterCategoryWidget(),
+                const FilterCategoryWidget(pageId: 5, gradeId: 2),
                 const SizedBox(height: 12),
               ],
             ),

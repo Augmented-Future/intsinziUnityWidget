@@ -63,7 +63,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             pinned: true,
           ),
           const SliverToBoxAdapter(
-            child: FilterCategoryWidget(gradeId: 1, contentId: 1, courseId: 1),
+            child: FilterCategoryWidget(gradeId: 1, pageId: 0, courseId: 1),
           ),
           buildAnimationWidget(),
         ],

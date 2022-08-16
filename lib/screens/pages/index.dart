@@ -149,16 +149,23 @@ class _IndexPageState extends State<IndexPage> {
                   splashColor: whiteColor.withOpacity(0.5),
                   highlightColor: brandYellowColor.withOpacity(0.5),
                   child: Ink(
-                    child: Chip(
-                      label: Text(
-                        _selectedGrade!.name,
-                        style: const TextStyle(color: primaryColor),
-                      ),
-                      deleteIcon: const Icon(Icons.arrow_drop_down),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(3)),
-                      onDeleted: () {},
-                      backgroundColor: const Color(0xFFEEDA36),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                    decoration: BoxDecoration(
+                        color: brandYellowColor,
+                        borderRadius: BorderRadius.circular(7)),
+                    child: Row(
+                      children: [
+                        Text(
+                          _selectedGrade!.name,
+                          style: const TextStyle(
+                              color: primaryColor, fontSize: 14),
+                        ),
+                        const Icon(
+                          Icons.arrow_drop_down,
+                          color: primaryColor,
+                        ),
+                      ],
                     ),
                   ),
                 ),

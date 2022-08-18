@@ -174,15 +174,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                 _email.text, _password.text);
 
                         if (result.runtimeType == ErrorException) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => AuthPageError(
-                                statusCode: result.statusCode,
-                                message: result.errorMessage,
+                          if (mounted) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => AuthPageError(
+                                  statusCode: result.statusCode,
+                                  message: result.errorMessage,
+                                ),
                               ),
-                            ),
-                          );
+                            );
+                          }
                         } else {
                           List<String> userData = [
                             result.id.toString(),

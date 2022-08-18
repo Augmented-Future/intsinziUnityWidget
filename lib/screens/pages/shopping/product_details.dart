@@ -16,9 +16,12 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BackAppBar.buildAppbar(),
-      body: Center(
-        child: Text(
-            "Product Details,\nName: ${widget.product.name},\nRange: ${widget.product.ages}"),
+      body: const CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Text("Nothing fancy,"),
+          )
+        ],
       ),
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );

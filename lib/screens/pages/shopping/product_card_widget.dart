@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/product_details.dart';
 
 import '../../../constants/colors.dart';
 import '../../../models/product.dart';
@@ -18,6 +21,7 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   bool showModal = false;
+  final cartController = Get.find<CartController>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +47,32 @@ class _ProductCardState extends State<ProductCard> {
                 alignment: Alignment.bottomRight,
                 children: [
                   GestureDetector(
-                    onDoubleTap: () => setState(() => showModal = true),
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ProductDetails(product: widget.product),
+                      ),
+                    ),
                     child: Container(
                       height: widget._size * 0.65,
                       decoration: BoxDecoration(
                         color: const Color(0xFFF8F8F8),
                         image: DecorationImage(
                             image: NetworkImage(
-                              widget.product.imgUrl,
+                              widget.product.productImage1,
                             ),
                             fit: BoxFit.cover),
                       ),
                     ),
                   ),
-                  Container(
-                    color: whiteColor,
-                    margin: const EdgeInsets.only(right: 3),
-                    padding: const EdgeInsets.all(8),
-                    child: SvgPicture.asset('assets/icons/plus.svg'),
+                  GestureDetector(
+                    onTap: () => setState(() => showModal = true),
+                    child: Container(
+                      color: whiteColor,
+                      margin: const EdgeInsets.only(right: 3),
+                      padding: const EdgeInsets.all(8),
+                      child: SvgPicture.asset('assets/icons/plus.svg'),
+                    ),
                   ),
                 ],
               ),
@@ -78,7 +90,7 @@ class _ProductCardState extends State<ProductCard> {
                           child: Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
-                              widget.product.description,
+                              widget.product.product,
                               style: const TextStyle(
                                 color: whiteColor,
                               ),
@@ -110,10 +122,15 @@ class _ProductCardState extends State<ProductCard> {
                         style: const TextStyle(
                             color: primaryColor, fontWeight: FontWeight.w500),
                       ),
-                      const Text(
-                        "Add to cart",
-                        style: TextStyle(
-                          color: grayColor200,
+                      InkWell(
+                        onTap: () => cartController.addToCart(widget.product),
+                        child: Ink(
+                          child: const Text(
+                            "Add to cart",
+                            style: TextStyle(
+                              color: grayColor200,
+                            ),
+                          ),
                         ),
                       )
                     ],

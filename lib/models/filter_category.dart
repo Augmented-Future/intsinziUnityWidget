@@ -58,11 +58,6 @@ List<AppPage> appPages = [
     page: const IndexPage(page: BoardGame()),
   ),
   AppPage(
-    pageId: 3,
-    content: "Board Game",
-    page: const IndexPage(page: BoardGame()),
-  ),
-  AppPage(
     pageId: 4,
     content: "Game Page",
     page: const IndexPage(page: BoardGame()),
@@ -73,23 +68,31 @@ List<AppPage> appPages = [
 
 //Courses
 List<Course> courses = [
-  Course(id: 1, name: "Math", courseCode: "MAT116"),
-  Course(id: 2, name: "Phy116", courseCode: "Phy116"),
-  Course(id: 3, name: "Eng", courseCode: "Eng20"),
+  Course(id: 1, name: "Mathematics", courseCode: "MAT116"),
+  Course(id: 2, name: "English", courseCode: "Phy116"),
+  Course(id: 3, name: "Social Studies", courseCode: "SSC89"),
+  Course(id: 4, name: "Kinyarwanda", courseCode: "Kiny201"),
+  Course(id: 5, name: "Science", courseCode: "EST200"),
 ];
 
 //Grades
 List<Grade> grades = [
-  Grade(id: 1, name: "Primary 3"),
-  Grade(id: 2, name: "Primary 4"),
-  Grade(id: 3, name: "Primary 5"),
+  Grade(id: 1, name: "Nursary 1"),
+  Grade(id: 2, name: "Nursary 2"),
+  Grade(id: 3, name: "Nursary 3"),
+  Grade(id: 4, name: "Primary 1"),
+  Grade(id: 5, name: "Primary 2"),
+  Grade(id: 6, name: "Primary 3"),
+  Grade(id: 7, name: "Primary 4"),
+  Grade(id: 8, name: "Primary 5"),
+  Grade(id: 9, name: "Primary 6"),
 ];
 
 //Product types
 List<ProductType> productTypes = [
-  ProductType(id: 1, name: "Printing"),
+  ProductType(id: 1, name: "Print"),
   ProductType(id: 2, name: "Deliver"),
-  ProductType(id: 3, name: "Both"),
+  ProductType(id: 3, name: "Print/Deliver"),
 ];
 
 AppPage getContent(int id) {
@@ -104,19 +107,19 @@ AppPage getContent(int id) {
   }
 }
 
-Course getCourse(int id) {
+Course getCourse(int? id) {
   try {
     return courses.where((course) => (course.id == id)).toList().first;
   } catch (e) {
-    return Course(id: id, name: "No select", courseCode: "No select");
+    return Course(id: id ?? 4, name: "No select", courseCode: "No select");
   }
 }
 
-ProductType getProduct(int id) {
+ProductType getProductType(int? id) {
   try {
     return productTypes.where((product) => (product.id == id)).toList().first;
   } catch (e) {
-    return ProductType(id: id, name: "No select");
+    return ProductType(id: id ?? 1, name: "No select");
   }
 }
 

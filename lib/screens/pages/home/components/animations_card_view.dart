@@ -10,6 +10,8 @@ import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../widgets/custom_card_widget.dart';
+
 class AnimationsCardView extends StatefulWidget {
   const AnimationsCardView({Key? key}) : super(key: key);
 
@@ -114,49 +116,11 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                     margin: const EdgeInsets.all(12),
                     child: Row(
                       children: [
-                        Stack(
-                          alignment: Alignment.bottomCenter,
-                          children: [
-                            Container(
-                              width: ((screenWidth(context) * 0.6) / 2) + 20,
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    Color(0xFFD97706),
-                                    Color(0xFFFBBF24),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: NetworkImage(
-                                    animationList?[index].image ??
-                                        "https://cdn.searchenginejournal.com/wp-content/uploads/2019/03/shutterstock_1338315902-1520x800.png",
-                                  ),
-                                  fit: BoxFit.contain,
-                                ),
-                              ),
-                            ),
-                            ElevatedButton.icon(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => VideoPortraitForm(
-                                      animation: animationList![index],
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: const Icon(Icons.play_arrow),
-                              label: const Text("Play"),
-                              style: ElevatedButton.styleFrom(
-                                primary: const Color(0xFF10B981),
-                                elevation: 0.0,
-                              ),
-                            ),
-                          ],
+                        CustomCardWidget(
+                          cardSize: 160,
+                          direction: VideoPortraitForm(
+                              animation: animationList![index]),
+                          img: animationList![index].image,
                         ),
                         Expanded(
                           child: Padding(

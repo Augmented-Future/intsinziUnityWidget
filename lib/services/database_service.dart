@@ -5,6 +5,7 @@ import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/models/avatar.dart';
 import 'package:globaltrailblazersapp/models/book.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
+import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:http/http.dart' as http;
 
@@ -93,6 +94,25 @@ class DatabaseService {
       }
     } catch (e) {
       //print("Something went wrong! $e");
+      return _error(500, "Something went wrong, $e");
+    }
+  }
+
+  static Future fetchAllProducts() async {
+    try {
+      Uri url = Uri.parse(databaseUrl + '/products');
+      final response = await http.get(url);
+      final decoded = jsonDecode(response.body);
+      List<Product> products = [];
+      if (response.statusCode == 200) {
+        for (var product in decoded['data']) {
+          products.add(Product.fromJson(product));
+        }
+        return products;
+      } else {
+        return _error(response.statusCode, decoded['message']);
+      }
+    } catch (e) {
       return _error(500, "Something went wrong, $e");
     }
   }

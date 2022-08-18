@@ -1,6 +1,7 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
@@ -13,6 +14,7 @@ import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../controllers/cart_controller.dart';
 import 'components/navigation_drawer.dart';
 
 class IndexPage extends StatefulWidget {
@@ -24,6 +26,7 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
+    final cartController = Get.put(CartController());
   Grade? _selectedGrade;
   UserAccount? _userAccount;
   Widget? _page;

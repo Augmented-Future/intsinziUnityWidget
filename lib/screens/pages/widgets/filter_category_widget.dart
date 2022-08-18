@@ -71,7 +71,7 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                     const Text(" Course")
                   ],
                 ),
-                ChipButtonFilter(text: "English", onPressed: () {}),
+                ChipButtonFilter(text: getCourse(widget.courseId).name, onPressed: () {}),
               ],
             ),
           if (widget.shopFilter == true)
@@ -88,7 +88,7 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                   ],
                 ),
                 ChipButtonFilter(
-                  text: "Printable",
+                  text: getProductType(widget.typeId).name,
                   onPressed: () {},
                 ),
               ],
@@ -106,7 +106,7 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                 ],
               ),
               ChipButtonFilter(
-                text: "Primary 4",
+                text: getGrade(widget.gradeId).name,
                 onPressed: () {},
               ),
             ],

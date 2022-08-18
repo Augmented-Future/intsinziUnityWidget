@@ -7,9 +7,10 @@ import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
-import 'package:shimmer/shimmer.dart';
 
+import '../components/animation_shimmer_card.dart';
 import '../widgets/back_app_bar.dart';
+import '../widgets/custom_card_widget.dart';
 
 class AnimationsPageScreen extends StatefulWidget {
   const AnimationsPageScreen({Key? key}) : super(key: key);
@@ -63,7 +64,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             pinned: true,
           ),
           const SliverToBoxAdapter(
-            child: FilterCategoryWidget(gradeId: 1, pageId: 0, courseId: 1),
+            child: FilterCategoryWidget(gradeId: 7, pageId: 0, courseId: 3),
           ),
           buildAnimationWidget(),
         ],
@@ -95,78 +96,16 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
       List<AnimationsContent>? _animationsList) {
     return Column(
       children: [
-        Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                "${_animationsList?[index].image}",
-                height: 120,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.fromLTRB(12, 0, 0, 4),
-              child: ElevatedButton.icon(
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => VideoPortraitForm(
-                      animation: _animationsList![index],
-                    ),
-                  ),
-                ),
-                icon: const Icon(Icons.play_arrow),
-                label: const Text("Play"),
-                style: ElevatedButton.styleFrom(
-                    primary: const Color(0xFF10B981), elevation: 0.0),
-              ),
-            ),
-          ],
+        CustomCardWidget(
+          cardSize: 180,
+          direction: VideoPortraitForm(animation: animationList![index]),
+          img: animationList![index].image,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
             'Unit ${_animationsList?[index].chapterId}: ${_animationsList?[index].title}',
             style: const TextStyle(color: blackColor, fontSize: 16),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class MyCustomShimmerAnimationsWidget extends StatelessWidget {
-  const MyCustomShimmerAnimationsWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Shimmer.fromColors(
-          baseColor: Colors.grey[200]!,
-          highlightColor: Colors.grey[100]!,
-          child: Container(
-            width: 200,
-            height: 120,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: whiteColor,
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
-        Shimmer.fromColors(
-          baseColor: Colors.grey[200]!,
-          highlightColor: Colors.grey[100]!,
-          child: Container(
-            width: 200,
-            height: 33,
-            decoration: BoxDecoration(
-                color: whiteColor, borderRadius: BorderRadius.circular(8)),
           ),
         ),
       ],

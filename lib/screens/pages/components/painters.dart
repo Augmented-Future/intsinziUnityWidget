@@ -668,3 +668,77 @@ class PastPapersCustomPainter extends CustomPainter {
     return true;
   }
 }
+
+class InsideCardShapePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path_0 = Path();
+    path_0.moveTo(size.width * 0.4990094, size.height * 0.0001181308);
+    path_0.cubicTo(
+        size.width * 0.6147895,
+        size.height * 0.001741308,
+        size.width * 0.7302281,
+        size.height * 0.02378760,
+        size.width * 0.8191754,
+        size.height * 0.1053760);
+    path_0.cubicTo(
+        size.width * 0.9167836,
+        size.height * 0.1949087,
+        size.width * 0.9991520,
+        size.height * 0.3179106,
+        size.width * 0.9979123,
+        size.height * 0.4577481);
+    path_0.cubicTo(
+        size.width * 0.9966842,
+        size.height * 0.5967154,
+        size.width * 0.9032164,
+        size.height * 0.7060837,
+        size.width * 0.8130117,
+        size.height * 0.8033337);
+    path_0.cubicTo(
+        size.width * 0.7240585,
+        size.height * 0.8992337,
+        size.width * 0.6234444,
+        size.height * 0.9906731,
+        size.width * 0.4990094,
+        size.height * 0.9956250);
+    path_0.cubicTo(
+        size.width * 0.3709257,
+        size.height * 1.000731,
+        size.width * 0.2529971,
+        size.height * 0.9279837,
+        size.width * 0.1614327,
+        size.height * 0.8292808);
+    path_0.cubicTo(
+        size.width * 0.06880175,
+        size.height * 0.7294279,
+        size.width * -0.001747731,
+        size.height * 0.6004375,
+        size.width * 0.00003297374,
+        size.height * 0.4577481);
+    path_0.cubicTo(
+        size.width * 0.001794140,
+        size.height * 0.3166250,
+        size.width * 0.07206491,
+        size.height * 0.1866356,
+        size.width * 0.1705801,
+        size.height * 0.09628269);
+    path_0.cubicTo(
+        size.width * 0.2610520,
+        size.height * 0.01330808,
+        size.width * 0.3812520,
+        size.height * -0.001532769,
+        size.width * 0.4990094,
+        size.height * 0.0001181308);
+    path_0.close();
+
+    Paint paint0Fill = Paint()..style = PaintingStyle.fill;
+    paint0Fill.color = const Color(0xffD97706).withOpacity(0.95);
+    canvas.drawPath(path_0, paint0Fill);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
+  }
+}

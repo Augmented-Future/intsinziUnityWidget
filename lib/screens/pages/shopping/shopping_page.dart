@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/product_card_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/view_cart.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
+import 'package:globaltrailblazersapp/services/auth_service.dart';
+import 'package:globaltrailblazersapp/services/database_service.dart';
+
+import '../components/animation_shimmer_card.dart';
 
 class ShoppingPage extends StatefulWidget {
   const ShoppingPage({Key? key}) : super(key: key);
@@ -16,6 +24,36 @@ class ShoppingPage extends StatefulWidget {
 }
 
 class _ShoppingPageState extends State<ShoppingPage> {
+  List<Product>? _productsList;
+  bool isLoading = true;
+  final cartController = Get.find<CartController>();
+  void getProducts() async {
+    dynamic result = await DatabaseService.fetchAllProducts();
+    if (result.runtimeType == ErrorException) {
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const Page404(message: "Error", error: "Error"),
+          ),
+        );
+      }
+    } else {
+      if (mounted) {
+        setState(() {
+          _productsList = result;
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    getProducts();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +76,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 const SizedBox(height: 20),
                 const FilterCategoryWidget(
                   shopFilter: true,
-                  gradeId: 2,
+                  gradeId: 7,
                   pageId: 1,
                   typeId: 2,
                 ),
@@ -49,12 +87,14 @@ class _ShoppingPageState extends State<ShoppingPage> {
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return ProductCard(
-                  size: 200,
-                  product: productsList[index],
-                );
+                return isLoading
+                    ? const MyCustomShimmerAnimationsWidget()
+                    : ProductCard(
+                        size: 200,
+                        product: _productsList![index],
+                      );
               },
-              childCount: productsList.length,
+              childCount: isLoading ? 4 : _productsList!.length,
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -65,31 +105,36 @@ class _ShoppingPageState extends State<ShoppingPage> {
         ],
       ),
       backgroundColor: whiteColor,
-      floatingActionButton: buildCartButton(),
+      floatingActionButton: buildCartButton(cartController),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
 
-  Widget buildCartButton() {
-    return Container(
-      height: 60,
-      width: 60,
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: whiteColor,
-        borderRadius: BorderRadius.circular(50),
-        border: Border.all(color: primaryColor, width: 2.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            "0",
-            style: TextStyle(fontSize: 15, color: primaryColor),
-          ),
-          SvgPicture.asset('assets/icons/cart.svg'),
-        ],
+  Widget buildCartButton(CartController cartController) {
+    return GestureDetector(
+      onTap: () => Get.to(() => const CartViewPage()),
+      child: Container(
+        height: 60,
+        width: 60,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: whiteColor,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(color: primaryColor, width: 2.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Obx(() {
+              return Text(
+                "${cartController.cartProducts.length}",
+                style: const TextStyle(fontSize: 15, color: primaryColor),
+              );
+            }),
+            SvgPicture.asset('assets/icons/cart.svg'),
+          ],
+        ),
       ),
     );
   }

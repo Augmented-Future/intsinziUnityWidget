@@ -90,7 +90,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 return isLoading
                     ? const MyCustomShimmerAnimationsWidget()
                     : ProductCard(
-                        size: 200,
+                        size: 190,
                         product: _productsList![index],
                       );
               },
@@ -98,8 +98,6 @@ class _ShoppingPageState extends State<ShoppingPage> {
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              mainAxisSpacing: 5,
-              crossAxisSpacing: 5,
             ),
           )
         ],

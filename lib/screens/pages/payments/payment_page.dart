@@ -65,6 +65,7 @@ class _PaymentPageState extends State<PaymentPage> {
                       ),
                       Container(
                         padding: const EdgeInsets.all(12),
+                        height: (screenHeight(context) / 4.5) * 0.7,
                         decoration: const BoxDecoration(
                           color: coolYellow,
                           borderRadius: BorderRadius.all(

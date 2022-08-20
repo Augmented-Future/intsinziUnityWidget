@@ -10,7 +10,6 @@ class BackAppBar {
       backgroundColor: whiteColor,
       automaticallyImplyLeading: false,
       elevation: 0.0,
-      toolbarHeight: 80,
       centerTitle: false,
     );
   }

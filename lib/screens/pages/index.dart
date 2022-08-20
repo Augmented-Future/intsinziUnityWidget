@@ -26,7 +26,7 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
-    final cartController = Get.put(CartController());
+  final cartController = Get.put(CartController());
   Grade? _selectedGrade;
   UserAccount? _userAccount;
   Widget? _page;
@@ -203,7 +203,7 @@ class _IndexPageState extends State<IndexPage> {
       body: SingleChildScrollView(child: _page),
       backgroundColor: whiteColor,
       bottomNavigationBar: Container(
-        height: 100,
+        height: 80,
         decoration: const BoxDecoration(
             color: brandYellowColor,
             borderRadius: BorderRadius.vertical(top: Radius.circular(35))),
@@ -251,7 +251,6 @@ class _IndexPageState extends State<IndexPage> {
                           ? whiteColor
                           : primaryColor,
                     ),
-                    const SizedBox(height: 3),
                     Text(
                       "TV",
                       style: TextStyle(

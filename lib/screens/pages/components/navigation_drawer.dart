@@ -255,7 +255,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   ),
                 ),
               ),
-              const SizedBox(height: 60),
+              const SizedBox(height: 100),
             ],
           ),
           Container(

@@ -49,6 +49,7 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
       videoPlayerController: videoPlayerController,
       customVideoPlayerSettings: const CustomVideoPlayerSettings(
         exitFullscreenOnEnd: true,
+        playOnlyOnce: false,
       ),
     );
   }

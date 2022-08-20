@@ -5,6 +5,7 @@ class Product {
   dynamic productImage3;
   String productVideo;
   String product;
+  String description;
   String name;
   String slug;
   int price;
@@ -23,6 +24,7 @@ class Product {
       required this.productImage3,
       required this.productVideo,
       required this.product,
+      required this.description,
       required this.name,
       required this.slug,
       required this.price,
@@ -42,6 +44,7 @@ class Product {
         productVideo: json["product_video"],
         product: json["product"],
         name: json["name"],
+        description: "Product description is now described as well,",
         slug: json["slug"],
         price: json["price"],
         priceToPrint: json["price_to_print"],
@@ -66,6 +69,7 @@ List<Product> productsList = [
       name: "Aimelive Pro",
       slug: "slug",
       price: 200,
+      description: "Product description - Lorem ipsum text goes here.",
       priceToPrint: 500,
       priceToDeliver: 1000,
       ages: "9-17",
@@ -83,6 +87,7 @@ List<Product> productsList = [
       product: "Good man",
       name: "name",
       slug: "slug",
+      description: "Product description - Lorem ipsum text goes here.",
       price: 200,
       priceToPrint: 500,
       priceToDeliver: 1000,

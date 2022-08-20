@@ -64,7 +64,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             pinned: true,
           ),
           const SliverToBoxAdapter(
-            child: FilterCategoryWidget(gradeId: 7, pageId: 0, courseId: 3),
+            child: FilterCategoryWidget(gradeId: 7, pageId: 0, courseId: 5),
           ),
           buildAnimationWidget(),
         ],
@@ -101,11 +101,14 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
           direction: VideoPortraitForm(animation: animationList![index]),
           img: animationList![index].image,
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'Unit ${_animationsList?[index].chapterId}: ${_animationsList?[index].title}',
-            style: const TextStyle(color: blackColor, fontSize: 16),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Unit ${_animationsList?[index].chapterId}: ${_animationsList?[index].title}',
+              overflow: TextOverflow.visible,
+              style: const TextStyle(color: blackColor, fontSize: 16),
+            ),
           ),
         ),
       ],

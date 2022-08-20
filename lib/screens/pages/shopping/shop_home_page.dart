@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/components/fun_facts_view.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_page.dart';
@@ -27,7 +28,8 @@ class _ShoppingHomePageState extends State<ShoppingHomePage> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset('assets/images/boy.jpg'),
+              Image.asset('assets/images/boy.jpg',
+                  width: screenWidth(context) * 0.5),
               Expanded(
                 child: Column(
                   children: [
@@ -45,7 +47,7 @@ class _ShoppingHomePageState extends State<ShoppingHomePage> {
                         SvgPicture.asset('assets/images/double_ring.svg')
                       ],
                     ),
-                    const SizedBox(height: 50),
+                    SizedBox(height: screenWidth(context) * 0.1 - 10),
                     Container(
                       margin: const EdgeInsets.all(5),
                       child: ElevatedButton(

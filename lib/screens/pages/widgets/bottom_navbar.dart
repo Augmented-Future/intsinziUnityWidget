@@ -15,7 +15,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 80,
       decoration: const BoxDecoration(
           color: brandYellowColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(35))),
@@ -60,7 +60,6 @@ class BottomNavigationBarWidget extends StatelessWidget {
               child: Column(
                 children: const [
                   Icon(Icons.play_circle_fill, size: 24, color: primaryColor),
-                  SizedBox(height: 3),
                   Text(
                     "TV",
                     style: TextStyle(fontSize: 14, color: primaryColor),

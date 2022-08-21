@@ -50,7 +50,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -141,7 +141,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 ),
                               ),
                               const Text(
-                                  "Get goods delivered at\nyour doorsteps")
+                                  "Get goods delivered\nat your doorsteps")
                             ],
                           )
                         ],
@@ -270,7 +270,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   const ShareWidget(),
                   const SizedBox(height: 20),
                   const Text("Recommended Products"),
-                  ProductListView(products: productsList)
+                  ProductListView(products: productsList),
                 ],
               ),
             ),

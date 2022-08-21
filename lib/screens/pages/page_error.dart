@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
 import 'package:lottie/lottie.dart';
@@ -27,37 +28,42 @@ class PageError extends StatelessWidget {
         elevation: 0.0,
         backgroundColor: primaryColor,
         automaticallyImplyLeading: false,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(18.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: Lottie.network(
-                  "https://assets7.lottiefiles.com/packages/lf20_j3gumpgp.json"),
-            ),
-            Text(
-              errorDescription,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 80),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text(
-                "Go Back",
-                style: TextStyle(fontSize: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: screenHeight(context) / 2.5,
+                width: screenWidth(context) - 50,
+                child: Lottie.network(
+                    "https://assets7.lottiefiles.com/packages/lf20_j3gumpgp.json"),
               ),
-              style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
-                  elevation: 0.0,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30))),
-            ),
-          ],
+              const SizedBox(height: 50),
+              Text(
+                errorDescription,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 18),
+              ),
+              const SizedBox(height: 50),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  "Go Back",
+                  style: TextStyle(fontSize: 16),
+                ),
+                style: ElevatedButton.styleFrom(
+                    primary: primaryColor,
+                    elevation: 0.0,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30))),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

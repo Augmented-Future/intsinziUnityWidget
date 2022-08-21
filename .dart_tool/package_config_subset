@@ -6,6 +6,10 @@ appinio_video_player
 2.12
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/appinio_video_player-1.1.1/
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/appinio_video_player-1.1.1/lib/
+archive
+2.12
+file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.1/
+file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.3.1/lib/
 async
 2.12
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.2/
@@ -38,6 +42,10 @@ collection
 2.12
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.16.0/
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.16.0/lib/
+crypto
+2.14
+file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.2/
+file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-3.0.2/lib/
 csslib
 2.12
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/csslib-0.17.2/
@@ -162,6 +170,10 @@ loading_indicator
 2.12
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/loading_indicator-3.1.0/
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/loading_indicator-3.1.0/lib/
+lottie
+2.12
+file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/lottie-1.4.1/
+file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/lottie-1.4.1/lib/
 matcher
 2.12
 file:///Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/

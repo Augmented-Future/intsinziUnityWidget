@@ -1,16 +1,14 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/book.dart';
-import 'package:globaltrailblazersapp/screens/pages/books/pdf_view_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/books/read_book_pdf_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
-import 'package:globaltrailblazersapp/services/pdf_service.dart';
 
 import '../widgets/back_app_bar.dart';
 
@@ -102,17 +100,8 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
                       )
                     : Column(
                         children:
-                            _books!.map((book) => bookCard(book)).toList(),
+                            _books!.map((bookA) => bookCard(bookA)).toList(),
                       ),
-                // ElevatedButton(
-                //   onPressed: () => Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (_) => const PaymentPage(),
-                //     ),
-                //   ),
-                //   child: const Text("Pay"),
-                // ),
               ],
             ),
           ),
@@ -136,18 +125,18 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset(
-                  'assets/images/laptop_library.png',
+                Image.network(
+                  book.cover,
                   width: 200,
                   height: 120,
                   fit: BoxFit.fill,
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.all(6.5),
+                    padding: const EdgeInsets.all(6.5),
                     child: Text(
-                      "It is a long established fact that a reader will be distracted by the readable content of a page when is loading cool",
-                      style: TextStyle(color: whiteColor, fontSize: 16.0),
+                      book.description,
+                      style: const TextStyle(color: whiteColor, fontSize: 16.0),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 5,
                     ),
@@ -164,27 +153,20 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
                 children: [
                   Row(
                     children: [
-                      const Text("The ABCS of Rwanda"),
+                      Text(book.title),
                       const SizedBox(width: 20),
                       SvgPicture.asset("assets/icons/aug.svg"),
                       const SizedBox(width: 10),
                       SvgPicture.asset("assets/icons/sound.svg"),
                     ],
                   ),
-                  const Text("Author: ImagineWePub."),
+                  Text("Author: ${book.author}"),
                 ],
               ),
               ElevatedButton.icon(
-                onPressed: () async {
-                  const url =
-                      "https://www.adobe.com/support/products/enterprise/knowledgecenter/media/c4611_sample_explain.pdf";
-                  final file = await PDFService.loadNetwork(url);
-                  openPDF(context, file);
-                },
-                label: const Text(
-                  "Read",
-                  style: TextStyle(color: primaryColor),
-                ),
+                onPressed: () => Get.to(() => ReadBookPdfPage(book: book)),
+                label:
+                    const Text("Read", style: TextStyle(color: primaryColor)),
                 icon: SvgPicture.asset('assets/icons/open_book.svg'),
                 style: ElevatedButton.styleFrom(
                   primary: const Color(0xFFFBBF24),
@@ -200,7 +182,4 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
       ),
     );
   }
-
-  void openPDF(BuildContext context, File file) => Navigator.of(context)
-      .push(MaterialPageRoute(builder: (context) => PDFViewerPage(file: file)));
 }

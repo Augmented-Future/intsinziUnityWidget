@@ -8,7 +8,7 @@ import '../../../models/user.dart';
 import '../animations/animations_page.dart';
 import '../books/library_home_page.dart';
 import '../index.dart';
-import '../page_404.dart';
+import '../page_error.dart';
 import '../profile_page.dart';
 import 'painters.dart';
 
@@ -313,11 +313,11 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => const Page404(
-                  message: "Page Not Found!",
-                  error: "Error 404",
-                ),
-              ),
+                  builder: (_) => const PageError(
+                      errorDescription:
+                          "The webpage you are looking for is still under maintance, please visit others for now.",
+                      errorMessage: "Page not found",
+                      statusCode: 404)),
             );
           }
         },

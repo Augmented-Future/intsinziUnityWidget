@@ -4,7 +4,7 @@ import 'package:globaltrailblazersapp/screens/pages/books/audio_books.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
-import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
+import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_page.dart';
 
 import '../screens/pages/books/digital_books.dart';
@@ -102,7 +102,12 @@ AppPage getContent(int id) {
     return AppPage(
       pageId: id,
       content: "No Select",
-      page: const Page404(message: "Page not found", error: "404"),
+      page: const PageError(
+        errorDescription:
+            "The content you are looking for is not available for now, please look for others for better experience on our App.",
+        errorMessage: "Content not found",
+        statusCode: 404,
+      ),
     );
   }
 }

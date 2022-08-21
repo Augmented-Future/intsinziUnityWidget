@@ -5,7 +5,7 @@ import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
-import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
+import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/product_card_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/view_cart.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
@@ -31,10 +31,19 @@ class _ShoppingPageState extends State<ShoppingPage> {
     dynamic result = await DatabaseService.fetchAllProducts();
     if (result.runtimeType == ErrorException) {
       if (mounted) {
+        ErrorException error = result;
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => const Page404(message: "Error", error: "Error"),
+            builder: (_) => PageError(
+              errorDescription: error.errorMessage,
+              errorMessage: "Failed to get products",
+              statusCode: error.statusCode,
+              suggestions: const [
+                "Try again later",
+                "Check your internet connection!"
+              ],
+            ),
           ),
         );
       }

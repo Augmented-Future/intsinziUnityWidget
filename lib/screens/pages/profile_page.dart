@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:globaltrailblazersapp/screens/pages/page_404.dart';
+import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
@@ -118,9 +118,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const Page404(
-                          message: "Failed to Login",
-                          error: "Something went wrong",
+                        builder: (_) => const PageError(
+                          errorDescription:
+                              "Failed to logout, please try again later",
+                          errorMessage: "Logout failed",
+                          statusCode: 500,
                         ),
                       ),
                     );
@@ -145,6 +147,4 @@ class _ProfilePageState extends State<ProfilePage> {
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
-
-
 }

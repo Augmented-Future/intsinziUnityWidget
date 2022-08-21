@@ -5,11 +5,16 @@ import '../../../../constants/colors.dart';
 
 class PaymentTextField extends StatelessWidget {
   const PaymentTextField(
-      {Key? key, required this.controller, required this.label, this.short})
+      {Key? key,
+      required this.controller,
+      required this.label,
+      this.short,
+      this.initialText})
       : super(key: key);
   final TextEditingController controller;
   final String label;
   final bool? short;
+  final String? initialText;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class PaymentTextField extends StatelessWidget {
               ),
               fillColor: whiteColor,
               filled: true,
-              contentPadding:const EdgeInsets.all(18),
+              contentPadding: const EdgeInsets.all(18),
               enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: softBlack,

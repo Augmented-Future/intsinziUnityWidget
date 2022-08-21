@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/audio_books.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/digital_books.dart';
-import 'package:globaltrailblazersapp/screens/pages/payments/payment_page.dart';
 
 class LibraryHomePage extends StatefulWidget {
   const LibraryHomePage({Key? key}) : super(key: key);
@@ -130,10 +129,6 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
               ),
             ),
           ],
-        ),
-        ElevatedButton(
-          onPressed: () => Get.to(() => const PaymentPage()),
-          child: const Text("Go to payment"),
         ),
       ],
     );

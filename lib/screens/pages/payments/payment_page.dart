@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/pay_with_card.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/payment_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
@@ -11,8 +12,8 @@ import '../widgets/back_app_bar.dart';
 import 'pay_with_momo.dart';
 
 class PaymentPage extends StatefulWidget {
-  const PaymentPage({Key? key}) : super(key: key);
-
+  const PaymentPage({Key? key, required this.productPay}) : super(key: key);
+  final ProductPay productPay;
   @override
   State<PaymentPage> createState() => _PaymentPageState();
 }
@@ -165,9 +166,9 @@ class _PaymentPageState extends State<PaymentPage> {
                   ),
                   Obx(() {
                     if (_paymentController.payWithCard.isFalse) {
-                      return PayWithMomoWidget();
+                      return PayWithMomoWidget(productpay: widget.productPay);
                     } else {
-                      return PayWithCardWidget();
+                      return PayWithCardWidget(productpay: widget.productPay);
                     }
                   })
                 ],

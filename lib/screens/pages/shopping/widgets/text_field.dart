@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 
 import '../../../../constants/colors.dart';
 
 class TextWidgetProduct extends StatefulWidget {
   const TextWidgetProduct(
-      {Key? key,
-      required this.controller,
-      required this.textInputType,
-      required this.text})
+      {Key? key, required this.textInputType, required this.text})
       : super(key: key);
-  final TextEditingController controller;
   final TextInputType textInputType;
   final String text;
   @override
@@ -17,24 +15,25 @@ class TextWidgetProduct extends StatefulWidget {
 }
 
 class _TextWidgetProductState extends State<TextWidgetProduct> {
+  final _deliveryController = Get.find<DeliveryController>();
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       child: Row(
         children: [
           const Icon(
             Icons.location_on,
             color: primaryColor,
-            size: 38,
+            size: 45,
           ),
+          const SizedBox(width: 15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("  ${widget.text}"),
                 TextFormField(
-                  controller: widget.controller,
                   cursorColor: softBlack,
                   keyboardType: widget.textInputType,
                   decoration: const InputDecoration(
@@ -47,6 +46,14 @@ class _TextWidgetProductState extends State<TextWidgetProduct> {
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 0.0, horizontal: 10),
                   ),
+                  onChanged: (value) {
+                    if (widget.textInputType == TextInputType.phone) {
+                      _deliveryController
+                          .changeCellPhone(value.removeAllWhitespace);
+                    } else {
+                      _deliveryController.changeLocation(value);
+                    }
+                  },
                 ),
               ],
             ),

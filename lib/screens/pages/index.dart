@@ -219,7 +219,7 @@ class _IndexPageState extends State<IndexPage> {
                   children: [
                     Icon(
                       Icons.home,
-                      size: 24,
+                      size: 20,
                       color: _page.toString() == const HomePage().toString()
                           ? whiteColor
                           : primaryColor,
@@ -227,7 +227,7 @@ class _IndexPageState extends State<IndexPage> {
                     Text(
                       "Home",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         color: _page.toString() == const HomePage().toString()
                             ? whiteColor
                             : primaryColor,
@@ -246,7 +246,7 @@ class _IndexPageState extends State<IndexPage> {
                   children: [
                     Icon(
                       Icons.play_circle_fill,
-                      size: 24,
+                      size: 20,
                       color: _page.toString() == const TvZonePage().toString()
                           ? whiteColor
                           : primaryColor,
@@ -254,7 +254,7 @@ class _IndexPageState extends State<IndexPage> {
                     Text(
                       "TV",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         color: _page.toString() == const TvZonePage().toString()
                             ? whiteColor
                             : primaryColor,
@@ -265,49 +265,7 @@ class _IndexPageState extends State<IndexPage> {
               ),
             ),
             Container(),
-            Container(
-              height: 80,
-              width: 100,
-              decoration: const BoxDecoration(
-                color: whiteColor,
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(50),
-                ),
-              ),
-              child: Container(
-                margin: const EdgeInsets.fromLTRB(10, 0.0, 10, 10),
-                padding: const EdgeInsets.fromLTRB(5, 0.0, 5, 5),
-                decoration: const BoxDecoration(
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(40)),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: primaryColor,
-                        offset: Offset(-2.5, 2.5),
-                        spreadRadius: 0,
-                        blurRadius: 0),
-                    BoxShadow(
-                        color: primaryColor,
-                        offset: Offset(2.5, 2.5),
-                        spreadRadius: 0,
-                        blurRadius: 0),
-                  ],
-                ),
-                child: Container(
-                  margin:
-                      const EdgeInsets.only(bottom: 2.5, right: 2.5, left: 2.5),
-                  width: 25,
-                  height: 25,
-                  padding: const EdgeInsets.all(17),
-                  decoration: BoxDecoration(
-                    color: coolYellow,
-                    borderRadius: BorderRadius.circular(60),
-                  ),
-                  child: SvgPicture.asset('assets/icons/launch_ar.svg'),
-                ),
-              ),
-            ),
+            const MiddleItem(),
             Container(),
             GestureDetector(
               onTap: () => setState(() => _page = const LibraryHomePage()),
@@ -326,7 +284,7 @@ class _IndexPageState extends State<IndexPage> {
                     Text(
                       "Books",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         color: _page.toString() ==
                                 const LibraryHomePage().toString()
                             ? whiteColor
@@ -345,7 +303,7 @@ class _IndexPageState extends State<IndexPage> {
                   children: [
                     Icon(
                       Icons.gamepad,
-                      size: 24,
+                      size: 20,
                       color:
                           _page.toString() == const GamesZonePage().toString()
                               ? whiteColor
@@ -354,7 +312,7 @@ class _IndexPageState extends State<IndexPage> {
                     Text(
                       "Games",
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 12,
                         color:
                             _page.toString() == const GamesZonePage().toString()
                                 ? whiteColor
@@ -366,6 +324,57 @@ class _IndexPageState extends State<IndexPage> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class MiddleItem extends StatelessWidget {
+  const MiddleItem({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      width: 100,
+      decoration: const BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(50),
+        ),
+      ),
+      child: Container(
+        margin: const EdgeInsets.fromLTRB(10, 0.0, 10, 10),
+        padding: const EdgeInsets.fromLTRB(5, 0.0, 5, 5),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+                color: primaryColor,
+                offset: Offset(-2.5, 2.5),
+                spreadRadius: 0,
+                blurRadius: 0),
+            BoxShadow(
+                color: primaryColor,
+                offset: Offset(2.5, 2.5),
+                spreadRadius: 0,
+                blurRadius: 0),
+          ],
+        ),
+        child: Container(
+          margin: const EdgeInsets.only(bottom: 2.5, right: 2.5, left: 2.5),
+          width: 25,
+          height: 25,
+          padding: const EdgeInsets.all(17),
+          decoration: BoxDecoration(
+            color: coolYellow,
+            borderRadius: BorderRadius.circular(60),
+          ),
+          child: SvgPicture.asset('assets/icons/launch_ar.svg'),
         ),
       ),
     );

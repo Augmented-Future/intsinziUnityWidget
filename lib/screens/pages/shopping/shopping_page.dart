@@ -90,7 +90,7 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 return isLoading
                     ? const MyCustomShimmerAnimationsWidget()
                     : ProductCard(
-                        size: 190,
+                        size: 170,
                         product: _productsList![index],
                       );
               },

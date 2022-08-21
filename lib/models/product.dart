@@ -62,8 +62,10 @@ List<Product> productsList = [
   Product(
       id: 23,
       productImage1: "https://thumbs.dreamstime.com/b/print-146985740.jpg",
-      productImage2: "https://thumbs.dreamstime.com/b/print-146985740.jpg",
-      productImage3: "https://thumbs.dreamstime.com/b/print-146985740.jpg",
+      productImage2:
+          "https://cdn.pixabay.com/photo/2022/08/06/19/20/woman-7369219_1280.jpg",
+      productImage3:
+          "https://cdn.pixabay.com/photo/2015/07/09/00/29/woman-837156_1280.jpg",
       productVideo: "https://api.intsinzi.app/uploads/media-768163994.mp4",
       product: "Product description - Lorem ipsum text goes here. ",
       name: "Aimelive Pro",

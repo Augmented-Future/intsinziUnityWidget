@@ -36,10 +36,10 @@ class BottomNavigationBarWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: const [
-                  Icon(Icons.home, size: 24, color: primaryColor),
+                  Icon(Icons.home, size: 20, color: primaryColor),
                   Text(
                     "Home",
-                    style: TextStyle(fontSize: 14, color: primaryColor),
+                    style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ],
               ),
@@ -59,10 +59,10 @@ class BottomNavigationBarWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: const [
-                  Icon(Icons.play_circle_fill, size: 24, color: primaryColor),
+                  Icon(Icons.play_circle_fill, size: 20, color: primaryColor),
                   Text(
                     "TV",
-                    style: TextStyle(fontSize: 14, color: primaryColor),
+                    style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ],
               ),
@@ -126,10 +126,10 @@ class BottomNavigationBarWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: const [
-                  Icon(Icons.book, size: 24, color: primaryColor),
+                  Icon(Icons.book, size: 20, color: primaryColor),
                   Text(
                     "Books",
-                    style: TextStyle(fontSize: 14, color: primaryColor),
+                    style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ],
               ),
@@ -148,10 +148,10 @@ class BottomNavigationBarWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: const [
-                  Icon(Icons.gamepad, size: 24, color: primaryColor),
+                  Icon(Icons.gamepad, size: 20, color: primaryColor),
                   Text(
                     "Games",
-                    style: TextStyle(fontSize: 14, color: primaryColor),
+                    style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ],
               ),

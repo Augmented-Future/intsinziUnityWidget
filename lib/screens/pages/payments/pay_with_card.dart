@@ -1,17 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/widgets/proceed_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/widgets/text_field.dart';
 
-class PayWithCardWidget extends StatelessWidget {
-  PayWithCardWidget({
-    Key? key,
-  }) : super(key: key);
+class PayWithCardWidget extends StatefulWidget {
+  const PayWithCardWidget({Key? key, required this.productpay})
+      : super(key: key);
+  final ProductPay productpay;
+
+  @override
+  State<PayWithCardWidget> createState() => _PayWithCardWidgetState();
+}
+
+class _PayWithCardWidgetState extends State<PayWithCardWidget> {
   final TextEditingController _cvvController = TextEditingController();
+
   final TextEditingController _expdateController = TextEditingController();
-  final TextEditingController _productController = TextEditingController();
+
+  late TextEditingController _productController;
+
   final TextEditingController _nameController = TextEditingController();
+
   final TextEditingController _cardNumberController = TextEditingController();
+
+  @override
+  void initState() {
+    _productController =
+        TextEditingController(text: widget.productpay.product.name);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(

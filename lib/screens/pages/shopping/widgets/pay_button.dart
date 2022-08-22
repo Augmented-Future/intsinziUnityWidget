@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/payment_page.dart';
+import 'package:latlong2/latlong.dart';
 
 import '../../../../constants/colors.dart';
 
@@ -21,7 +22,7 @@ class PayButton extends StatelessWidget {
   final int price, quantity;
   final PurchaseType purchaseType;
   final Product product;
-  final String? location;
+  final LatLng? location;
   final String? cellPhone;
 
   @override

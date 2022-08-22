@@ -7,6 +7,7 @@ import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/product_list_view.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/choose_location.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/pay_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/quantity_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/share_widget.dart';
@@ -153,10 +154,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                             return Container(
                               margin: const EdgeInsets.all(5),
                               child: InkWell(
-                                onTap: () =>
-                                    _purchaseChoiceController.deliveryChoosed(
-                                        false,
-                                        priceToPrint * _purchaseQuantity),
+                                onTap: () => _purchaseChoiceController
+                                    .deliveryChoosed(false, priceToPrint),
                                 child: Ink(
                                   width: 40,
                                   height: 40,
@@ -190,57 +189,60 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 20),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset("assets/icons/quantity.svg"),
-                        const Padding(
-                          padding: EdgeInsets.only(left: 20, right: 50),
-                          child: Text(
-                            "Quantity",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        QuantityWidget(
-                          decrease: () => setState(() {
-                            if (_purchaseQuantity > 1) {
-                              _purchaseChoiceController.decrementQuantityPrice(
-                                  _purchaseChoiceController.deliver.isTrue
-                                      ? widget.product.priceToDeliver
-                                      : widget.product.priceToPrint);
-                              _purchaseQuantity--;
-                            }
-                          }),
-                          increase: () => setState(() {
-                            if (_purchaseQuantity < 10) {
-                              _purchaseChoiceController.incrementQuantityPrice(
-                                  _purchaseChoiceController.deliver.isTrue
-                                      ? widget.product.priceToDeliver
-                                      : widget.product.priceToPrint);
-                              _purchaseQuantity++;
-                            }
-                          }),
-                          quantity: _purchaseQuantity,
-                        )
-                      ],
-                    ),
-                  ),
                   Obx(() {
                     if (_purchaseChoiceController.deliver.isTrue) {
                       return Column(
-                        children: const [
-                          TextWidgetProduct(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 20),
+                            child: Row(
+                              children: [
+                                SvgPicture.asset("assets/icons/quantity.svg"),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 20, right: 50),
+                                  child: Text(
+                                    "Quantity",
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
+                                QuantityWidget(
+                                  decrease: () => setState(() {
+                                    if (_purchaseQuantity > 1) {
+                                      _purchaseChoiceController
+                                          .decrementQuantityPrice(
+                                              _purchaseChoiceController
+                                                      .deliver.isTrue
+                                                  ? widget
+                                                      .product.priceToDeliver
+                                                  : widget
+                                                      .product.priceToPrint);
+                                      _purchaseQuantity--;
+                                    }
+                                  }),
+                                  increase: () => setState(() {
+                                    _purchaseQuantity++;
+
+                                    _purchaseChoiceController
+                                        .incrementQuantityPrice(
+                                            widget.product.priceToDeliver);
+                                  }),
+                                  quantity: _purchaseQuantity,
+                                )
+                              ],
+                            ),
+                          ),
+                          const TextWidgetProduct(
                               textInputType: TextInputType.phone,
                               text: "Cell Phone"),
-                          TextWidgetProduct(
+                          const TextWidgetProduct(
                               textInputType: TextInputType.streetAddress,
                               text: "Location"),
-                          Text(
+                          const Text(
                             "Where your products will be delivered",
                             style: TextStyle(color: Colors.red),
-                          )
+                          ),
+                          const FindLocationWidget(),
                         ],
                       );
                     } else {
@@ -267,7 +269,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     },
                   ),
                   const SizedBox(height: 20),
-                  const ShareWidget(),
+                  ShareWidget(product: widget.product),
                   const SizedBox(height: 20),
                   const Text("Recommended Products"),
                   ProductListView(products: productsList),

@@ -6,7 +6,7 @@ import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
-import 'package:globaltrailblazersapp/screens/pages/shopping/product_card_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/components/product_card_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/view_cart.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';

@@ -315,7 +315,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               MaterialPageRoute(
                   builder: (_) => const PageError(
                       errorDescription:
-                          "The webpage you are looking for is still under maintance, please visit others for now.",
+                          "The page you're looking for is under maintainance, Intsinzi App is currently being updated. Visit another page.",
                       errorMessage: "Page not found",
                       statusCode: 404)),
             );

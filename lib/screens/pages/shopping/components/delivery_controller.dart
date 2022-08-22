@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 class DeliveryController extends GetxController {
   var deliver = true.obs;
   var priceToPay = 0.obs;
-  var location = "No choosen location".obs;
+  var location = LatLng(0, 0).obs;
   var cellPhone = "No cell phone provided".obs;
   deliveryChoosed(bool choice, int price) {
     deliver.value = choice;
@@ -18,12 +19,8 @@ class DeliveryController extends GetxController {
     priceToPay.value = priceToPay.value - price;
   }
 
-  changeLocation(String newLocation) {
-    if (newLocation.length > 5) {
-      location.value = newLocation;
-    } else {
-      location.value = "Invalid Location provided";
-    }
+  changeLocation(LatLng newLocation) {
+    location.value = newLocation;
   }
 
   changeCellPhone(String _cellPhone) {

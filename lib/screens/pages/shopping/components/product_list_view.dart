@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 
-import 'product_card.dart';
+import 'product_card_widget.dart';
 
 class ProductListView extends StatefulWidget {
   final List<Product> products;

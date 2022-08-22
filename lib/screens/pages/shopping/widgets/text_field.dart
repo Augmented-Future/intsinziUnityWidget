@@ -50,14 +50,12 @@ class _TextWidgetProductState extends State<TextWidgetProduct> {
                     if (widget.textInputType == TextInputType.phone) {
                       _deliveryController
                           .changeCellPhone(value.removeAllWhitespace);
-                    } else {
-                      _deliveryController.changeLocation(value);
-                    }
+                    } 
                   },
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

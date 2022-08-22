@@ -38,8 +38,7 @@ class PageError extends StatelessWidget {
               SizedBox(
                 height: screenHeight(context) / 2.5,
                 width: screenWidth(context) - 50,
-                child: Lottie.network(
-                    "https://assets7.lottiefiles.com/packages/lf20_j3gumpgp.json"),
+                child: Lottie.asset("assets/lottie/not_found.json"),
               ),
               const SizedBox(height: 50),
               Text(

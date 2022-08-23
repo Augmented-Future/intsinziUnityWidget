@@ -22,6 +22,13 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   bool showModal = false;
   final cartController = Get.find<CartController>();
+  final slideViewController = PageController();
+
+  @override
+  void dispose() {
+    slideViewController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +63,7 @@ class _ProductCardState extends State<ProductCard> {
                                 () => ProductDetails(product: widget.product)),
                             child: Container(
                               height: widget._size * 0.65,
+                              width: double.infinity,
                               decoration: BoxDecoration(
                                 color: const Color(0xFFF8F8F8),
                                 image: DecorationImage(
@@ -63,6 +71,40 @@ class _ProductCardState extends State<ProductCard> {
                                       widget.product.productImage1,
                                     ),
                                     fit: BoxFit.cover),
+                              ),
+                              child: PageView(
+                                controller: slideViewController,
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                            widget.product.productImage1,
+                                          ),
+                                          fit: BoxFit.cover),
+                                    ),
+                                  ),
+                                  if (widget.product.productImage2 != null)
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                              widget.product.productImage2,
+                                            ),
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                  if (widget.product.productImage3 != null)
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                              widget.product.productImage3,
+                                            ),
+                                            fit: BoxFit.cover),
+                                      ),
+                                    ),
+                                ],
                               ),
                             ),
                           ),
@@ -157,14 +199,30 @@ class _ProductCardState extends State<ProductCard> {
             ],
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Icon(Icons.arrow_back_ios),
-            SizedBox(width: widget._size - 30),
-            const Icon(Icons.arrow_forward_ios),
-          ],
-        )
+        if (widget.product.productImage2 != null &&
+            widget.product.productImage3 != null)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                  onPressed: () => slideViewController.previousPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut),
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    color: primaryColor,
+                  )),
+              SizedBox(width: widget._size - 30),
+              IconButton(
+                  onPressed: () => slideViewController.nextPage(
+                      duration: const Duration(milliseconds: 500),
+                      curve: Curves.easeInOut),
+                  icon: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: primaryColor,
+                  )),
+            ],
+          )
       ],
     );
   }

@@ -29,12 +29,6 @@ class ProductType {
   ProductType({required this.id, required this.name});
 }
 
-class Grade {
-  int id;
-  String name;
-  Grade({required this.id, required this.name});
-}
-
 //Pages
 List<AppPage> appPages = [
   AppPage(
@@ -75,19 +69,6 @@ List<Course> courses = [
   Course(id: 5, name: "Science", courseCode: "EST200"),
 ];
 
-//Grades
-List<Grade> grades = [
-  Grade(id: 1, name: "Nursary 1"),
-  Grade(id: 2, name: "Nursary 2"),
-  Grade(id: 3, name: "Nursary 3"),
-  Grade(id: 4, name: "Primary 1"),
-  Grade(id: 5, name: "Primary 2"),
-  Grade(id: 6, name: "Primary 3"),
-  Grade(id: 7, name: "Primary 4"),
-  Grade(id: 8, name: "Primary 5"),
-  Grade(id: 9, name: "Primary 6"),
-];
-
 //Product types
 List<ProductType> productTypes = [
   ProductType(id: 1, name: "Print"),
@@ -125,13 +106,5 @@ ProductType getProductType(int? id) {
     return productTypes.where((product) => (product.id == id)).toList().first;
   } catch (e) {
     return ProductType(id: id ?? 1, name: "No select");
-  }
-}
-
-Grade getGrade(int id) {
-  try {
-    return grades.where((grade) => (grade.id == id)).toList().first;
-  } catch (e) {
-    return Grade(id: id, name: "No select");
   }
 }

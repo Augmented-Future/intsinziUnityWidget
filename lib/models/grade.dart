@@ -4,13 +4,15 @@ class Grade {
     required this.name,
     required this.curriculumnId,
   });
-  String id;
+  int id;
   String name;
-  String curriculumnId;
+  int curriculumnId;
 
   static Grade fromJson(Map<String, dynamic> json) => Grade(
-        id: json["id"],
+        id: int.parse(json["id"]),
         name: json["name"],
-        curriculumnId: json["curriculumnId"],
+        curriculumnId: int.parse(json["curriculumnId"]),
       );
 }
+
+Grade noGrade = Grade(id: 0, name: "No Grade", curriculumnId: 0);

@@ -4,18 +4,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
+import 'package:globaltrailblazersapp/controllers/user_account_controller.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
-import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/games_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
-import 'package:globaltrailblazersapp/services/auth_service.dart';
-import 'package:globaltrailblazersapp/services/database_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../controllers/cart_controller.dart';
 import 'components/navigation_drawer.dart';
+import 'widgets/all_grades_dialog.dart';
 
 class IndexPage extends StatefulWidget {
   final Widget page;
@@ -26,181 +24,124 @@ class IndexPage extends StatefulWidget {
 }
 
 class _IndexPageState extends State<IndexPage> {
+  final userController = Get.put(UserAccountController());
   final cartController = Get.put(CartController());
-  Grade? _selectedGrade;
-  UserAccount? _userAccount;
+  final gradeController = Get.put(GradeController());
   Widget? _page;
 
-  List<Grade>? grades;
-  void _setUserData() async {
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      List<String>? userString = prefs.getStringList("user");
-      dynamic grade =
-          await DatabaseService.fetchOneGrade(int.parse(userString![1]));
-
-      if (mounted) {
-        setState(() {
-          _userAccount = UserAccount(
-            id: int.parse(userString[0]),
-            email: userString[2],
-            firstName: userString[3],
-            lastName: userString[4],
-            avatarUrl: userString[5],
-            gradeId: int.parse(userString[1]),
-          );
-          if (grade != null) {
-            _selectedGrade = grade;
-          } else {
-            _selectedGrade = Grade(
-              id: "null",
-              name: "No category",
-              curriculumnId: "null",
-            );
-          }
-        });
-      }
-    } catch (e) {
-      // print("Something went wrong $e");
+  void _initializeData() async {
+    await userController.setUserData();
+    if (gradeController.currentUserGrade.value == noGrade) {
+      await gradeController
+          .gettingOneGrade(userController.userAccountInfo.value!.gradeId);
     }
-  }
-
-  void _getAllGrades() async {
-    dynamic result = await DatabaseService.fetchAllGrades();
-    if (result.runtimeType != ErrorException) {
-      if (mounted) {
-        setState(() {
-          grades = result;
-        });
-      }
-    } else {}
+    await gradeController.gettingAllGrades();
   }
 
   @override
   void initState() {
     _page = widget.page;
-    _selectedGrade = Grade(
-      id: "null",
-      name: "Loading..",
-      curriculumnId: "null",
-    );
-    _setUserData();
-    _getAllGrades();
+    _initializeData();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Row(children: [
-          Builder(builder: (context) {
-            return InkWell(
-              onTap: () => Scaffold.of(context).openDrawer(),
-              child: Ink(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 15,
+        title: Row(
+          children: [
+            Builder(builder: (context) {
+              return InkWell(
+                onTap: () => Scaffold.of(context).openDrawer(),
+                child: Ink(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 15,
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/icons/menu.svg',
+                  ),
                 ),
-                child: SvgPicture.asset(
-                  'assets/icons/menu.svg',
+              );
+            }),
+            const Spacer(),
+            InkWell(
+              onTap: () => showDialog(
+                context: context,
+                builder: (dialogContext) =>
+                    AllGradesDialog(gradeController: gradeController),
+              ),
+              splashColor: whiteColor.withOpacity(0.5),
+              highlightColor: brandYellowColor.withOpacity(0.5),
+              child: Ink(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+                decoration: BoxDecoration(
+                    color: brandYellowColor,
+                    borderRadius: BorderRadius.circular(7)),
+                child: Row(
+                  children: [
+                    Obx(
+                      () => Text(
+                        gradeController.currentUserGrade.value.name,
+                        style:
+                            const TextStyle(color: primaryColor, fontSize: 14),
+                      ),
+                    ),
+                    const Icon(
+                      Icons.arrow_drop_down,
+                      color: primaryColor,
+                    ),
+                  ],
                 ),
               ),
-            );
-          }),
-          const Spacer(),
-          grades == null
-              ? Container()
-              : InkWell(
-                  onTap: () => showDialog(
-                    context: context,
-                    builder: (_) => Dialog(
-                      backgroundColor: whiteColor,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: SizedBox(
-                        height: 280,
-                        child: ListView.builder(
-                            itemCount: grades?.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  ListTile(
-                                    title: Center(
-                                        child: Text(
-                                      grades![index].name,
-                                      style:
-                                          const TextStyle(color: primaryColor),
-                                    )),
-                                    onTap: () {
-                                      setState(() =>
-                                          _selectedGrade = grades![index]);
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                  const Divider(
-                                    height: 0.0,
-                                  )
-                                ],
-                              );
-                            }),
-                      ),
-                    ),
-                  ),
-                  splashColor: whiteColor.withOpacity(0.5),
-                  highlightColor: brandYellowColor.withOpacity(0.5),
-                  child: Ink(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
-                    decoration: BoxDecoration(
-                        color: brandYellowColor,
-                        borderRadius: BorderRadius.circular(7)),
-                    child: Row(
-                      children: [
-                        Text(
-                          _selectedGrade!.name,
-                          style: const TextStyle(
-                              color: primaryColor, fontSize: 14),
-                        ),
-                        const Icon(
-                          Icons.arrow_drop_down,
-                          color: primaryColor,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-          const SizedBox(width: 20),
-          Badge(
-            badgeContent: const Text(
-              "9+",
-              style: TextStyle(color: whiteColor, fontSize: 12),
             ),
-            elevation: 0.0,
-            child: SvgPicture.asset('assets/icons/notification.svg'),
-            position: BadgePosition.topEnd(),
-          ),
-          const SizedBox(width: 20),
-          CircleAvatar(
-            backgroundColor: brandYellowColor,
-            backgroundImage: _userAccount?.avatarUrl != null
-                ? NetworkImage(_userAccount?.avatarUrl ?? "")
-                : const NetworkImage(
-                    "https://t4.ftcdn.net/jpg/02/29/75/83/240_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg",
-                  ),
-            radius: 25,
-          ),
-        ]),
+            const SizedBox(width: 20),
+            Badge(
+              badgeContent: const Text(
+                "9+",
+                style: TextStyle(color: whiteColor, fontSize: 12),
+              ),
+              elevation: 0.0,
+              child: SvgPicture.asset('assets/icons/notification.svg'),
+              position: BadgePosition.topEnd(),
+            ),
+            const SizedBox(width: 20),
+            Obx(
+              () {
+                if (userController.userAccountInfo.value?.avatarUrl != null) {
+                  return CircleAvatar(
+                    backgroundColor: brandYellowColor,
+                    backgroundImage: NetworkImage(
+                        userController.userAccountInfo.value!.avatarUrl),
+                  );
+                } else {
+                  return const CircleAvatar(
+                    backgroundColor: brandYellowColor,
+                    child: Icon(
+                      Icons.person,
+                      color: whiteColor,
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
         backgroundColor: whiteColor,
         elevation: 0.0,
       ),
       drawer: SizedBox(
         width: screenWidth(context) * 0.95,
-        child: NavigationDrawerWidget(user: _userAccount),
+        child: NavigationDrawerWidget(
+            userAccountController: userController),
       ),
-      body: SingleChildScrollView(child: _page),
+      body: Container(
+          margin: const EdgeInsets.only(bottom: 80),
+          child: SingleChildScrollView(child: _page)),
       backgroundColor: whiteColor,
       bottomNavigationBar: Container(
         height: 80,

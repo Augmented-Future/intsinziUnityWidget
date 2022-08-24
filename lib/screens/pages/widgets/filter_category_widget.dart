@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
 import 'package:globaltrailblazersapp/models/filter_category.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/all_grades_dialog.dart';
 import 'package:shimmer/shimmer.dart';
 
 class FilterCategoryWidget extends StatefulWidget {
   final bool? shopFilter;
-  final int pageId, gradeId;
+  final int pageId;
   final int? typeId, courseId;
 
-  const FilterCategoryWidget(
-      {Key? key,
-      this.shopFilter,
-      this.typeId,
-      this.courseId,
-      required this.pageId,
-      required this.gradeId})
-      : super(key: key);
+  const FilterCategoryWidget({
+    Key? key,
+    this.shopFilter,
+    this.typeId,
+    this.courseId,
+    required this.pageId,
+  }) : super(key: key);
 
   @override
   State<FilterCategoryWidget> createState() => _FilterCategoryWidgetState();
 }
 
 class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
+  final gradeController = Get.find<GradeController>();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,7 +74,8 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                     const Text(" Course")
                   ],
                 ),
-                ChipButtonFilter(text: getCourse(widget.courseId).name, onPressed: () {}),
+                ChipButtonFilter(
+                    text: getCourse(widget.courseId).name, onPressed: () {}),
               ],
             ),
           if (widget.shopFilter == true)
@@ -105,9 +109,14 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                   const Text(" Grade")
                 ],
               ),
-              ChipButtonFilter(
-                text: getGrade(widget.gradeId).name,
-                onPressed: () {},
+              Obx(
+                () => ChipButtonFilter(
+                  text: gradeController.currentUserGrade.value.name,
+                  onPressed: () => showDialog(
+                      context: context,
+                      builder: (dialogContext) =>
+                          AllGradesDialog(gradeController: gradeController)),
+                ),
               ),
             ],
           ),

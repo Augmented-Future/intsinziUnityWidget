@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/widgets/proceed_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/widgets/text_field.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class PayWithCardWidget extends StatefulWidget {
   const PayWithCardWidget({Key? key, required this.productpay})
@@ -48,6 +50,10 @@ class _PayWithCardWidgetState extends State<PayWithCardWidget> {
           PaymentTextField(
             controller: _cardNumberController,
             label: "Card number",
+            textInputType: TextInputType.number,
+            inputFormatters: [
+              CreditCardFormatter(),
+            ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,12 +62,17 @@ class _PayWithCardWidgetState extends State<PayWithCardWidget> {
                 controller: _expdateController,
                 label: "Exp Date",
                 short: true,
+                textInputType: TextInputType.number,
+                inputFormatters: [
+                  DateInputFormatter(),
+                ],
               ),
               PaymentTextField(
-                controller: _cvvController,
-                label: "CVV",
-                short: true,
-              ),
+                  controller: _cvvController,
+                  label: "CVV",
+                  short: true,
+                  textInputType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly]),
             ],
           ),
           const SizedBox(height: 20),

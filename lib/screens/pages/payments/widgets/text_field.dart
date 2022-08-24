@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
 
 import '../../../../constants/colors.dart';
@@ -9,12 +10,15 @@ class PaymentTextField extends StatelessWidget {
       required this.controller,
       required this.label,
       this.short,
-      this.initialText})
+      this.initialText,
+      this.textInputType,this.inputFormatters})
       : super(key: key);
   final TextEditingController controller;
   final String label;
   final bool? short;
   final String? initialText;
+  final TextInputType? textInputType;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,8 @@ class PaymentTextField extends StatelessWidget {
           TextFormField(
             cursorColor: softBlack,
             controller: controller,
+            inputFormatters: inputFormatters,
+            keyboardType: textInputType,
             decoration: InputDecoration(
               labelStyle: const TextStyle(
                 color: softBlack,

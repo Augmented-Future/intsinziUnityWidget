@@ -85,7 +85,6 @@ class _ShoppingPageState extends State<ShoppingPage> {
                 const SizedBox(height: 20),
                 const FilterCategoryWidget(
                   shopFilter: true,
-                  gradeId: 7,
                   pageId: 1,
                   typeId: 2,
                 ),

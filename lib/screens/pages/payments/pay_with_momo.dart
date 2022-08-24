@@ -40,7 +40,11 @@ class _PayWithMomoWidgetState extends State<PayWithMomoWidget> {
             initialText: widget.productpay.product.name,
           ),
           PaymentTextField(controller: _nameController, label: "Name"),
-          PaymentTextField(controller: _phoneController, label: "Phone Number"),
+          PaymentTextField(
+            controller: _phoneController,
+            label: "Phone Number",
+            textInputType: TextInputType.phone,
+          ),
           const SizedBox(height: 20),
           ProceedButton(onPressed: () {}),
         ],

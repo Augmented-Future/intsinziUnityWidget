@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:globaltrailblazersapp/controllers/user_account_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shop_home_page.dart';
 
@@ -13,9 +14,9 @@ import '../profile_page.dart';
 import 'painters.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
-  const NavigationDrawerWidget({Key? key, required this.user})
+  const NavigationDrawerWidget({Key? key, required this.userAccountController})
       : super(key: key);
-  final UserAccount? user;
+  final UserAccountController userAccountController;
   @override
   State<NavigationDrawerWidget> createState() => _NavigationDrawerWidgetState();
 }
@@ -28,6 +29,13 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
     whiteColor,
     Color(0xFFFEB326),
   ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+  late UserAccount? _userAccount;
+  @override
+  void initState() {
+    _userAccount = widget.userAccountController.userAccountInfo.value;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -45,13 +53,13 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(),
-                    if (widget.user?.avatarUrl != null)
+                    if (_userAccount?.avatarUrl != null)
                       CircleAvatar(
                         backgroundColor: primaryColor,
-                        backgroundImage: NetworkImage(widget.user!.avatarUrl),
+                        backgroundImage: NetworkImage(_userAccount!.avatarUrl),
                         radius: 30,
                       ),
-                    if (widget.user?.avatarUrl == null)
+                    if (_userAccount?.avatarUrl == null)
                       const CircleAvatar(
                         backgroundColor: brandYellowColor,
                         radius: 30,
@@ -60,7 +68,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "${widget.user?.firstName} ${widget.user?.lastName}"
+                          "${_userAccount?.firstName} ${_userAccount?.lastName}"
                               .toUpperCase(),
                           style: const TextStyle(
                               color: Color(0xFFEA580C), fontSize: 16),
@@ -71,7 +79,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => ProfilePage(user: widget.user),
+                                builder: (_) => ProfilePage(user: _userAccount),
                               ),
                             );
                           },

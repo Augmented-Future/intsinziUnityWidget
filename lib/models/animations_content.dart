@@ -4,7 +4,7 @@ class AnimationsContent {
   String video;
   String title;
   String curriculumId;
-  String gradeId;
+  int gradeId;
   String courseId;
   String chapterId;
   String slug;
@@ -34,7 +34,7 @@ class AnimationsContent {
       video: json["video"],
       title: json["title"],
       curriculumId: json["curriculumId"],
-      gradeId: json["gradeId"],
+      gradeId: int.parse(json["gradeId"]),
       courseId: json["courseId"],
       chapterId: json["chapterId"],
       slug: json["slug"],

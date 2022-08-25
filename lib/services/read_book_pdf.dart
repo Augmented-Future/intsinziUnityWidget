@@ -4,7 +4,7 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ReadBookPDFService {
-  static Future<File> loadNetwork(String url) async {
+  static Future<File> loadFromNetwork(String url) async {
     Uri uri = Uri.parse(url);
     final response = await http.get(uri);
     final bytes = response.bodyBytes;

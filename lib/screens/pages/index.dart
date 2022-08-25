@@ -136,8 +136,7 @@ class _IndexPageState extends State<IndexPage> {
       ),
       drawer: SizedBox(
         width: screenWidth(context) * 0.95,
-        child: NavigationDrawerWidget(
-            userAccountController: userController),
+        child: NavigationDrawerWidget(userAccountController: userController),
       ),
       body: Container(
           margin: const EdgeInsets.only(bottom: 80),

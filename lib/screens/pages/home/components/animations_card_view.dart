@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
 import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations/animations_page.dart';
@@ -22,10 +24,12 @@ class AnimationsCardView extends StatefulWidget {
 class _AnimationsCardViewState extends State<AnimationsCardView> {
   List<AnimationsContent>? animationList;
   IsLoading isLoading = IsLoading.loading;
+  final gradeController = Get.find<GradeController>();
 
   void getAnimations() async {
     isLoading = IsLoading.loading;
-    dynamic result = await DatabaseService.fetchAnimations();
+    dynamic result = await DatabaseService.fetchAnimations(
+        gradeId: gradeController.currentUserGrade.value.id);
     if (result.runtimeType == ErrorException) {
       isLoading = IsLoading.error;
       if (mounted) {
@@ -167,7 +171,7 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                   );
                 }
               }),
-        )
+        ),
       ],
     );
   }

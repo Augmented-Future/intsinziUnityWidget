@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 
 class DatabaseService {
   //Getting animations from Database
-  static Future fetchAnimations() async {
+  static Future fetchAnimations({required int gradeId}) async {
     try {
       Uri url = Uri.parse(databaseUrl + '/animations');
       final response = await http.get(url);
@@ -22,7 +22,8 @@ class DatabaseService {
           remoteAnimations
               .add(AnimationsContent.fromJson(decoded['data']["rows"][i]));
         }
-        return remoteAnimations;
+        return remoteAnimations
+            .where((animation) => animation.gradeId == gradeId).toList();
       } else {
         final message = decoded['message'];
         return _error(response.statusCode, message);

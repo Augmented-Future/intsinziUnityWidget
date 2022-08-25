@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations/video_portrait_page.dart';
@@ -23,9 +25,10 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   Map? data;
   bool isLoading = true;
   List<AnimationsContent>? animationList;
+  final gradeController = Get.find<GradeController>();
 
   void getAnimations() async {
-    dynamic result = await DatabaseService.fetchAnimations();
+    dynamic result = await DatabaseService.fetchAnimations(gradeId: gradeController.currentUserGrade.value.id);
     if (result.runtimeType == ErrorException) {
       if (mounted) {
         Navigator.push(

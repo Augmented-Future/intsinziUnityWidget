@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/screens/pages/home/tip_two_card_view.dart';
-import 'package:globaltrailblazersapp/screens/pages/home/components/animations_card_view.dart';
+
+import 'components/animations_card_view.dart';
+import 'tip_two_card_view.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

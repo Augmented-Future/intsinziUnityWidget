@@ -98,7 +98,6 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
                 ),
               ],
             ),
-          if (fileBook?.path != null) Text(fileBook!.path)
         ],
       ),
       bottomNavigationBar: const BottomNavigationBarWidget(),

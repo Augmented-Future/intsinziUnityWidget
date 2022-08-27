@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:globaltrailblazersapp/helpers/validate.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
-import 'package:globaltrailblazersapp/screens/pages/payments/payment_page.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 
 import '../../../../constants/colors.dart';
 
@@ -16,31 +16,39 @@ class PayButton extends StatelessWidget {
       required this.product,
       required this.quantity,
       required this.location,
-      required this.cellPhone})
+      required this.cellPhone,
+      required this.deliveryController})
       : super(key: key);
 
   final int price, quantity;
   final PurchaseType purchaseType;
   final Product product;
-  final LatLng? location;
+  final DeliverLocation? location;
   final String? cellPhone;
+  final DeliveryController deliveryController;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.to(
-        () => PaymentPage(
-          productPay: ProductPay(
-            product: product,
-            priceToBePaid: price,
-            purchaseType: purchaseType,
-            quantity: quantity,
-            cellPhone:
-                (purchaseType == PurchaseType.delivery) ? cellPhone : null,
-            location: (purchaseType == PurchaseType.delivery) ? location : null,
-          ),
-        ),
-      ),
+      onTap: () {
+        if (deliveryController.deliver.isTrue) {
+          ValidateInput.phoneNumber(deliveryController.cellPhone.value ?? "");
+          // Get.to(
+          //   () => PaymentPage(
+          //     productPay: ProductPay(
+          //       product: product,
+          //       priceToBePaid: price,
+          //       purchaseType: purchaseType,
+          //       quantity: quantity,
+          //       cellPhone:
+          //           (purchaseType == PurchaseType.delivery) ? cellPhone : null,
+          //       location:
+          //           (purchaseType == PurchaseType.delivery) ? location : null,
+          //     ),
+          //   ),
+          // );
+        }
+      },
       splashColor: color100.withOpacity(0.5),
       highlightColor: whiteColor.withOpacity(0.2),
       child: Ink(

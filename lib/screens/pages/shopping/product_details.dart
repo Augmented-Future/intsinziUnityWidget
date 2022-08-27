@@ -7,7 +7,7 @@ import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/product_list_view.dart';
-import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/choose_location.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/choose_location_dialog.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/pay_button.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/quantity_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/share_widget.dart';
@@ -235,14 +235,20 @@ class _ProductDetailsState extends State<ProductDetails> {
                           const TextWidgetProduct(
                               textInputType: TextInputType.phone,
                               text: "Cell Phone"),
-                          const TextWidgetProduct(
-                              textInputType: TextInputType.streetAddress,
-                              text: "Location"),
+                          TextWidgetProduct(
+                            textInputType: TextInputType.streetAddress,
+                            text: "Location",
+                            showCursor: false,
+                            onTap: () => showDialog(
+                              context: context,
+                              builder: (dialogContext) =>
+                                  const ChooseLocationDialog(),
+                            ),
+                          ),
                           const Text(
                             "Where your products will be delivered",
                             style: TextStyle(color: Colors.red),
                           ),
-                          const FindLocationWidget(),
                         ],
                       );
                     } else {
@@ -253,6 +259,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   Obx(
                     () {
                       return PayButton(
+                        deliveryController: _purchaseChoiceController,
                         price: _purchaseChoiceController.priceToPay.value,
                         purchaseType: _purchaseChoiceController.deliver.isTrue
                             ? PurchaseType.delivery

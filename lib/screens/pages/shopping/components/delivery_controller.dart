@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:latlong2/latlong.dart';
+import 'package:globaltrailblazersapp/models/product_pay.dart';
 
 class DeliveryController extends GetxController {
   var deliver = true.obs;
   var priceToPay = 0.obs;
-  var location = LatLng(0, 0).obs;
-  var cellPhone = "No cell phone provided".obs;
+  var location = Rx<DeliverLocation?>(null);
+  var cellPhone = Rx<String?>(null);
   deliveryChoosed(bool choice, int price) {
     deliver.value = choice;
     priceToPay.value = price;
@@ -19,7 +19,7 @@ class DeliveryController extends GetxController {
     priceToPay.value = priceToPay.value - price;
   }
 
-  changeLocation(LatLng newLocation) {
+  changeLocation(DeliverLocation newLocation) {
     location.value = newLocation;
   }
 

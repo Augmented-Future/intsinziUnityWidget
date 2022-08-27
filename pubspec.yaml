@@ -54,6 +54,9 @@ dependencies:
   flutter_map: ^2.2.0
   latlong: ^0.6.1
   pattern_formatter: ^2.0.0
+  google_maps_flutter: ^2.1.12
+  google_place: ^0.4.7
+  geocoding: ^2.0.5
 
   path: ^1.7.0
   path_provider: ^2.0.11

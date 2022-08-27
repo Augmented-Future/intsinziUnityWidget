@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
+import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 class GradeController extends GetxController {
-  var currentUserGrade =
-      Rx<Grade>(noGrade);
+  var currentUserGrade = Rx<Grade>(noGrade);
 
   List<Grade> grades = RxList<Grade>([]);
   //Getting one grade
@@ -18,8 +18,10 @@ class GradeController extends GetxController {
   //Getting all grades
   gettingAllGrades() async {
     dynamic result = await DatabaseService.fetchAllGrades();
-    if (result != null) {
+    if (result != null && result == ErrorException) {
       grades = result;
+    } else {
+      print("Error Happened while fetching all grades");
     }
   }
 }

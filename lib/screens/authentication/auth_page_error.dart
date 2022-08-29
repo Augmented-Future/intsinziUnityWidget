@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 

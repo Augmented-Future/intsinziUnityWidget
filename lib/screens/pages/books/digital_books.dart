@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/models/book.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/read_book_pdf_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/home_cards_shimmer.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
@@ -91,10 +92,13 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
                 ),
                 const SizedBox(height: 12),
                 _books == null
-                    ? const Center(
-                        child: Text(
-                          "Loading, Please wait..",
-                          style: TextStyle(fontSize: 18.0, color: grayColor),
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          children: const [
+                            HomeCardShimmerWidget(fullWidth: true),
+                            HomeCardShimmerWidget(fullWidth: true),
+                          ],
                         ),
                       )
                     : Column(

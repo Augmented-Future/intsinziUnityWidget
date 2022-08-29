@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
@@ -10,9 +10,9 @@ import 'package:globaltrailblazersapp/screens/pages/animations/animations_page.d
 import 'package:globaltrailblazersapp/screens/pages/animations/video_portrait_page.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../../widgets/custom_card_widget.dart';
+import '../../widgets/home_cards_shimmer.dart';
 
 class AnimationsCardView extends StatefulWidget {
   const AnimationsCardView({Key? key}) : super(key: key);
@@ -55,8 +55,8 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
 
   @override
   void initState() {
-    super.initState();
     getAnimations();
+    super.initState();
   }
 
   @override
@@ -110,7 +110,7 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
           height: 150,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: animationList?.length ?? 4,
+              itemCount: animationList?.length ?? 2,
               itemBuilder: (context, index) {
                 if (isLoading == IsLoading.loading) {
                   return const HomeCardShimmerWidget();
@@ -173,80 +173,6 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
               }),
         ),
       ],
-    );
-  }
-}
-
-class HomeCardShimmerWidget extends StatelessWidget {
-  const HomeCardShimmerWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: screenWidth(context) * 0.7,
-      child: Row(
-        children: [
-          Shimmer.fromColors(
-            baseColor: Colors.grey[200]!,
-            highlightColor: Colors.grey[100]!,
-            child: Container(
-              width: 110,
-              margin: const EdgeInsets.fromLTRB(10, 10, 5, 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: whiteColor,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Shimmer.fromColors(
-                  baseColor: Colors.grey[200]!,
-                  highlightColor: Colors.grey[100]!,
-                  child: Container(
-                    height: 28,
-                    margin: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: whiteColor,
-                    ),
-                  ),
-                ),
-                Shimmer.fromColors(
-                  baseColor: Colors.grey[200]!,
-                  highlightColor: Colors.grey[100]!,
-                  child: Container(
-                    height: 28,
-                    width: 85,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: whiteColor,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 5),
-                Shimmer.fromColors(
-                  baseColor: Colors.grey[200]!,
-                  highlightColor: Colors.grey[100]!,
-                  child: Container(
-                    height: 20,
-                    margin: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: whiteColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

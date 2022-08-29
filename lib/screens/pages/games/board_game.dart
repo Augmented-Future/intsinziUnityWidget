@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/components/fun_facts_view.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/components/leaderboard_table.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/fun_facts.dart';

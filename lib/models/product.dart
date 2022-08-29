@@ -53,8 +53,10 @@ class Product {
         grade: json["grade"],
         course: json["course"],
         typeId: 1,
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        createdAt:
+            DateTime.parse(json["createdAt"] ?? "2022-08-16T22:42:52.225Z"),
+        updatedAt:
+            DateTime.parse(json["updatedAt"] ?? "2022-08-16T22:42:52.225Z"),
       );
 }
 

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class VideoPlayerWidget extends StatefulWidget {

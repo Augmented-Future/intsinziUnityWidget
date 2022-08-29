@@ -2,8 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
 import 'package:globaltrailblazersapp/controllers/user_account_controller.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
@@ -11,7 +10,7 @@ import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart
 import 'package:globaltrailblazersapp/screens/pages/games/games_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/tv_zone_page.dart';
-import '../../controllers/cart_controller.dart';
+import '../../shared/funcs.dart';
 import 'components/navigation_drawer.dart';
 import 'widgets/all_grades_dialog.dart';
 
@@ -25,7 +24,6 @@ class IndexPage extends StatefulWidget {
 
 class _IndexPageState extends State<IndexPage> {
   final userController = Get.put(UserAccountController());
-  final cartController = Get.put(CartController());
   final gradeController = Get.put(GradeController());
   Widget? _page;
 

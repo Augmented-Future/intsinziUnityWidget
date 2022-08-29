@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
@@ -28,7 +28,8 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   final gradeController = Get.find<GradeController>();
 
   void getAnimations() async {
-    dynamic result = await DatabaseService.fetchAnimations(gradeId: gradeController.currentUserGrade.value.id);
+    dynamic result = await DatabaseService.fetchAnimations(
+        gradeId: gradeController.currentUserGrade.value.id);
     if (result.runtimeType == ErrorException) {
       if (mounted) {
         Navigator.push(

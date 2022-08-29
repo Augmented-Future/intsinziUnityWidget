@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../shared/colors.dart';
 
 class TextWidgetProduct extends StatefulWidget {
   const TextWidgetProduct(

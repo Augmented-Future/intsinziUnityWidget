@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 
 class QuantityWidget extends StatelessWidget {
   const QuantityWidget(

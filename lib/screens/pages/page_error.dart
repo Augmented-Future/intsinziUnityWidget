@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:lottie/lottie.dart';
 
 class PageError extends StatelessWidget {

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../constants/colors.dart';
+import '../../../shared/colors.dart';
 import '../../../controllers/grade_controller.dart';
 
 class AllGradesDialog extends StatelessWidget {

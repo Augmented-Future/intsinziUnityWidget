@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/models/book.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/services/read_book_pdf.dart';

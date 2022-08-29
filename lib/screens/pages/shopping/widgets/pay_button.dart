@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/helpers/validate.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../shared/colors.dart';
+import '../../payments/payment_page.dart';
 
 class PayButton extends StatelessWidget {
   const PayButton(
@@ -31,23 +33,22 @@ class PayButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if (deliveryController.deliver.isTrue) {
-          ValidateInput.phoneNumber(deliveryController.cellPhone.value ?? "");
-          // Get.to(
-          //   () => PaymentPage(
-          //     productPay: ProductPay(
-          //       product: product,
-          //       priceToBePaid: price,
-          //       purchaseType: purchaseType,
-          //       quantity: quantity,
-          //       cellPhone:
-          //           (purchaseType == PurchaseType.delivery) ? cellPhone : null,
-          //       location:
-          //           (purchaseType == PurchaseType.delivery) ? location : null,
-          //     ),
-          //   ),
-          // );
+        final validNumber =
+            ValidateInput.phoneNumber(deliveryController.cellPhone.value ?? "");
+
+        if (deliveryController.deliver.isFalse) {
+          gotoPayment(context: context);
+          return;
         }
+        if (validNumber.inValid) {
+          showToast(validNumber.message);
+          return;
+        }
+        if (deliveryController.location.value == null) {
+          showToast("Please choose location");
+          return;
+        }
+        gotoPayment(context: context, cellPhone: cellPhone, location: location);
       },
       splashColor: color100.withOpacity(0.5),
       highlightColor: whiteColor.withOpacity(0.2),
@@ -67,6 +68,36 @@ class PayButton extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  gotoPayment(
+      {required BuildContext context,
+      String? cellPhone,
+      DeliverLocation? location}) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => PaymentPage(
+          productPay: ProductPay(
+            product: product,
+            priceToBePaid: price,
+            purchaseType: purchaseType,
+            quantity: quantity,
+            cellPhone: cellPhone,
+            location: location,
+          ),
+        ),
+        fullscreenDialog: true,
+      ),
+    );
+  }
+
+  showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      backgroundColor: color100,
+      textColor: whiteColor,
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../constants/colors.dart';
+import '../../../shared/colors.dart';
 
 class ShadedColorText extends StatelessWidget {
   final double fontSize;

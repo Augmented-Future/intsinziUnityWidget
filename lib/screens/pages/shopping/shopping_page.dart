@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
-import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/product_card_widget.dart';
-import 'package:globaltrailblazersapp/screens/pages/shopping/view_cart.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_cart_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
@@ -26,7 +25,6 @@ class ShoppingPage extends StatefulWidget {
 class _ShoppingPageState extends State<ShoppingPage> {
   List<Product>? _productsList;
   bool isLoading = true;
-  final cartController = Get.find<CartController>();
   void getProducts() async {
     dynamic result = await DatabaseService.fetchAllProducts();
     if (result.runtimeType == ErrorException) {
@@ -111,15 +109,15 @@ class _ShoppingPageState extends State<ShoppingPage> {
         ],
       ),
       backgroundColor: whiteColor,
-      floatingActionButton: buildCartButton(cartController),
+      floatingActionButton: buildCartButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
 
-  Widget buildCartButton(CartController cartController) {
+  Widget buildCartButton() {
     return GestureDetector(
-      onTap: () => Get.to(() => const CartViewPage()),
+      onTap: () => Get.to(() => const ShoppingCartPage()),
       child: Container(
         height: 60,
         width: 60,
@@ -132,12 +130,10 @@ class _ShoppingPageState extends State<ShoppingPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(() {
-              return Text(
-                "${cartController.cartProducts.length}",
-                style: const TextStyle(fontSize: 15, color: primaryColor),
-              );
-            }),
+            const Text(
+              "5",
+              style: TextStyle(fontSize: 15, color: primaryColor),
+            ),
             SvgPicture.asset('assets/icons/cart.svg'),
           ],
         ),

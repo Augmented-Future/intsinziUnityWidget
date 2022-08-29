@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/forgot_pwd.dart';
 import 'package:globaltrailblazersapp/screens/authentication/register.dart';

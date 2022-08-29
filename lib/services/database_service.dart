@@ -1,33 +1,53 @@
 import 'dart:convert';
 
-import 'package:globaltrailblazersapp/constants/url.dart';
+import 'package:globaltrailblazersapp/shared/keys.dart';
+import 'package:globaltrailblazersapp/shared/url.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/models/avatar.dart';
 import 'package:globaltrailblazersapp/models/book.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_cart.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:http/http.dart' as http;
 
 class DatabaseService {
+  static var headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer $userAdminToken',
+  };
+  //Creating GET request
+  static Future<RequestResponse> createGetRequest(String apiRoute) async {
+    try {
+      Uri url = Uri.parse(databaseUrl + apiRoute);
+      final response = await http.get(url, headers: headers);
+
+      final decoded = jsonDecode(response.body);
+      return RequestResponse(decoded: decoded, statusCode: response.statusCode);
+    } catch (e) {
+      return RequestResponse(decoded: null, statusCode: 500);
+    }
+  }
+
   //Getting animations from Database
   static Future fetchAnimations({required int gradeId}) async {
     try {
       Uri url = Uri.parse(databaseUrl + '/animations');
       final response = await http.get(url);
       final decoded = jsonDecode(response.body);
-      List<AnimationsContent> remoteAnimations = [];
-      if (response.statusCode == 200) {
-        for (var i = 0; i < decoded['data']['rows'].length; i++) {
-          remoteAnimations
-              .add(AnimationsContent.fromJson(decoded['data']["rows"][i]));
-        }
-        return remoteAnimations
-            .where((animation) => animation.gradeId == gradeId).toList();
-      } else {
-        final message = decoded['message'];
-        return _error(response.statusCode, message);
+
+      if (response.statusCode != 200) {
+        return _error(response.statusCode, decoded['message']);
       }
+
+      List<AnimationsContent> animations = [];
+      for (var animation in decoded['data']['rows']) {
+        animations.add(AnimationsContent.fromJson(animation));
+      }
+      return animations
+          .where((animation) => animation.gradeId == gradeId)
+          .toList();
     } catch (e) {
       return _error(500, "Something went wrong, $e");
     }
@@ -39,16 +59,15 @@ class DatabaseService {
       Uri url = Uri.parse(databaseUrl + '/avatars');
       final response = await http.get(url);
       final decoded = jsonDecode(response.body);
-      List<Avatar> remoteAvatars = [];
-      if (response.statusCode == 200) {
-        for (var i = 0; i < decoded['data'].length; i++) {
-          remoteAvatars.add(Avatar.fromJson(decoded['data'][i]));
-        }
-        return remoteAvatars;
-      } else {
-        final message = decoded['message'];
-        return _error(response.statusCode, message);
+
+      if (response.statusCode != 200) {
+        return _error(response.statusCode, decoded['message']);
       }
+      List<Avatar> avatars = [];
+      for (var i = 0; i < decoded['data'].length; i++) {
+        avatars.add(Avatar.fromJson(decoded['data'][i]));
+      }
+      return avatars;
     } catch (e) {
       return _error(500, "Something went wrong, $e");
     }
@@ -63,7 +82,6 @@ class DatabaseService {
       for (var i = 0; i < decoded['data']['rows'].length; i++) {
         grades.add(Grade.fromJson(decoded['data']['rows'][i]));
       }
-
       return grades;
     } catch (e) {
       return _error(500, "Something went wrong, $e");
@@ -86,15 +104,12 @@ class DatabaseService {
       Uri url = Uri.parse(databaseUrl + '/books');
       final response = await http.get(url);
       final decoded = jsonDecode(response.body);
-      List<Book> books = [];
-      if (response.statusCode == 200) {
-        books = dummyBooks;
-        return books;
-      } else {
+
+      if (response.statusCode != 200) {
         return _error(response.statusCode, decoded['message']);
       }
+      return dummyBooks;
     } catch (e) {
-      //print("Something went wrong! $e");
       return _error(500, "Something went wrong, $e");
     }
   }
@@ -104,15 +119,49 @@ class DatabaseService {
       Uri url = Uri.parse(databaseUrl + '/products');
       final response = await http.get(url);
       final decoded = jsonDecode(response.body);
-      List<Product> products = [];
-      if (response.statusCode == 200) {
-        for (var product in decoded['data']) {
-          products.add(Product.fromJson(product));
-        }
-        return products;
-      } else {
+
+      if (response.statusCode != 200) {
         return _error(response.statusCode, decoded['message']);
       }
+      List<Product> products = [];
+      for (var product in decoded['data']) {
+        products.add(Product.fromJson(product));
+      }
+      return products;
+    } catch (e) {
+      return _error(500, "Something went wrong, $e");
+    }
+  }
+
+  //Getting all products from cart in DB
+  static Future fetchAllCarts() async {
+    try {
+      RequestResponse result = await createGetRequest('/carts');
+      if (result.decoded == null) throw "[GET] Request failed. /carts";
+      if (result.statusCode != 200) {
+        return _error(result.statusCode, result.decoded['message']);
+      }
+
+      List<ProductCart> productCarts = [];
+      for (var i = 0; i < result.decoded['data'].length; i++) {
+        productCarts.add(ProductCart.fromJson(result.decoded['data'][i]));
+      }
+
+      return productCarts;
+    } catch (e) {
+      return _error(500, "Something went wrong, $e");
+    }
+  }
+
+  static Future removeFromCart(int cartId) async {
+    try {
+      Uri url = Uri.parse(databaseUrl + '/carts/' + cartId.toString());
+      final response = await http.delete(url, headers: headers);
+      final decoded = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        return _error(response.statusCode, decoded["message"]);
+      }
+      return true;
     } catch (e) {
       return _error(500, "Something went wrong, $e");
     }
@@ -121,4 +170,10 @@ class DatabaseService {
   static ErrorException _error(int statusCode, String message) {
     return ErrorException(statusCode: statusCode, errorMessage: message);
   }
+}
+
+class RequestResponse {
+  int statusCode;
+  dynamic decoded;
+  RequestResponse({required this.decoded, required this.statusCode});
 }

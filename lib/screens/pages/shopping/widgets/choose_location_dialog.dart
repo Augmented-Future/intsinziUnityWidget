@@ -9,8 +9,8 @@ import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
 
-import '../../../../constants/colors.dart';
-import '../../../../constants/shared.dart';
+import '../../../../shared/colors.dart';
+import '../../../../shared/funcs.dart';
 import '../../../../models/product_pay.dart';
 
 class ChooseLocationDialog extends StatefulWidget {

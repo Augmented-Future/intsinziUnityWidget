@@ -1,6 +1,6 @@
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/choose_avatar.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
@@ -365,7 +365,11 @@ class _CreateProfileScreenState extends State<CreateProfileScreen> {
                         ),
                       );
                     } else {
-                      Navigator.push(context, MaterialPageRoute(builder: (_)=>ChooseAvatarScreen(userInfo:result)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) =>
+                                  ChooseAvatarScreen(userInfo: result)));
                     }
                   },
                   child: Container(

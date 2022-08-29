@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 
 class BoardGameButton extends StatelessWidget {
   final VoidCallback onTap;

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/screens/onboarding/vars.dart';
 import 'package:shared_preferences/shared_preferences.dart';

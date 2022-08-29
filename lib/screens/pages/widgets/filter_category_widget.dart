@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
 import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
 import 'package:globaltrailblazersapp/models/filter_category.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/all_grades_dialog.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../../../shared/colors.dart';
+import '../../../shared/funcs.dart';
 
 class FilterCategoryWidget extends StatefulWidget {
   final bool? shopFilter;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
-import 'package:globaltrailblazersapp/constants/shared.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/components/fun_facts_view.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_page.dart';

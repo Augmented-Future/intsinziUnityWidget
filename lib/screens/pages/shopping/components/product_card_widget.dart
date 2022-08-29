@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/product_details.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../shared/colors.dart';
 import '../../../../models/product.dart';
 
 class ProductCard extends StatefulWidget {
@@ -21,7 +20,6 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   bool showModal = false;
-  final cartController = Get.find<CartController>();
   final slideViewController = PageController();
 
   @override
@@ -138,8 +136,7 @@ class _ProductCardState extends State<ProductCard> {
                                     fontWeight: FontWeight.w500),
                               ),
                               InkWell(
-                                onTap: () =>
-                                    cartController.addToCart(widget.product),
+                                onTap: () {},
                                 child: Ink(
                                   child: const Text(
                                     "Add to cart",

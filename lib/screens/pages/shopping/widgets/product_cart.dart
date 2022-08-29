@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
+import 'package:globaltrailblazersapp/models/product_cart.dart';
+import 'package:globaltrailblazersapp/services/database_service.dart';
 
-import '../../../../constants/colors.dart';
-import '../../../../constants/shared.dart';
-import '../../../../models/product.dart';
+import '../../../../shared/colors.dart';
+import '../../../../shared/funcs.dart';
 
 class ProductCartCardTile extends StatefulWidget {
   const ProductCartCardTile({
     Key? key,
-    required this.product,
+    required this.productCart,
     required this.actualTime,
     required this.date,
   }) : super(key: key);
-  final Product product;
+  final ProductCart productCart;
   final DateTime date;
   final String actualTime;
 
@@ -23,8 +24,7 @@ class ProductCartCardTile extends StatefulWidget {
 }
 
 class _ProductCartCardTileState extends State<ProductCartCardTile> {
-  final cartController = Get.find<CartController>();
-
+  final _cart = Get.find<CartController>();
   @override
   Widget build(BuildContext context) {
     String showYear = "-${widget.date.year}\n";
@@ -55,7 +55,7 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
             width: screenWidth(context) / 4,
             height: 100,
             child: Image.network(
-              widget.product.productImage1,
+              widget.productCart.product.productImage1,
               fit: BoxFit.cover,
             ),
           ),
@@ -66,15 +66,15 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.product.name,
+                    widget.productCart.product.name,
                     style: const TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
                     ),
                   ),
-                  Text("${widget.product.price} RWF"),
+                  Text("${widget.productCart.product.price} RWF"),
                   Text(
-                      "${widget.product.ages} years | ${widget.product.grade}"),
+                      "${widget.productCart.product.ages} years | ${widget.productCart.product.grade}"),
                   Row(
                     children: [
                       const Icon(Icons.av_timer),
@@ -101,7 +101,7 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
                 icon: const Icon(Icons.more_vert),
                 onSelected: (value) {
                   if (value == 0) {
-                    showRemoveFromCartModal(widget.product);
+                    showRemoveFromCartModal(widget.productCart);
                   }
                 },
                 itemBuilder: (context) => [
@@ -165,12 +165,13 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
     );
   }
 
-  showRemoveFromCartModal(Product product) {
+  showRemoveFromCartModal(ProductCart productCart) {
     BorderRadius radius = BorderRadius.circular(40);
     return showDialog(
         context: context,
         builder: (dialogContext) {
           bool isChecked = false;
+          String action = "APPLY";
           return StatefulBuilder(
             builder: (stfContext, stfSetState) {
               return Dialog(
@@ -210,11 +211,23 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
                                   margin:
                                       const EdgeInsets.symmetric(vertical: 10),
                                   child: ElevatedButton(
-                                    onPressed: () {
-                                      cartController.removeFromCart(product);
+                                    onPressed: () async {
+                                      stfSetState(() {
+                                        action = "Removing..";
+                                      });
+                                      dynamic result =
+                                          await DatabaseService.removeFromCart(
+                                              productCart.id);
+                                      if (result != true) {
+                                        stfSetState(() {
+                                          action = "Failed";
+                                        });
+                                        return;
+                                      }
+                                      _cart.refreshPage();
                                       Navigator.pop(context);
                                     },
-                                    child: const Text("APPLY"),
+                                    child: Text(action),
                                     style: ElevatedButton.styleFrom(
                                         primary: grayColor,
                                         shape: RoundedRectangleBorder(

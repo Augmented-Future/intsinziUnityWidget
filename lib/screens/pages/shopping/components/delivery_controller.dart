@@ -24,10 +24,6 @@ class DeliveryController extends GetxController {
   }
 
   changeCellPhone(String _cellPhone) {
-    if (_cellPhone.length <= 13 && _cellPhone.length >= 10) {
-      cellPhone.value = _cellPhone;
-    } else {
-      cellPhone.value = "Invalid cell phone provided";
-    }
+    cellPhone.value = _cellPhone;
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../shared/colors.dart';
 
 class ProceedButton extends StatelessWidget {
   const ProceedButton({Key? key, required this.onPressed}) : super(key: key);

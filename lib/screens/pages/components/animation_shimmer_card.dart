@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../constants/colors.dart';
+import '../../../shared/colors.dart';
 
 class MyCustomShimmerAnimationsWidget extends StatelessWidget {
   const MyCustomShimmerAnimationsWidget({

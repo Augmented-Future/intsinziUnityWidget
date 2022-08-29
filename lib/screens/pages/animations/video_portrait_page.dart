@@ -1,9 +1,9 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/models/animations_content.dart';
-import 'package:globaltrailblazersapp/screens/pages/home/tip_two_card_view.dart';
+import 'package:globaltrailblazersapp/screens/pages/home/quick_access_view.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 
@@ -135,6 +135,7 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
                   ),
                   style: ElevatedButton.styleFrom(
                     elevation: 0.0,
+                    shadowColor: Colors.transparent,
                     primary: const Color(0xFFFBBF24),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/games_zone_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';

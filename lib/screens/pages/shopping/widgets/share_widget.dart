@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../shared/colors.dart';
 
 class ShareWidget extends StatelessWidget {
   const ShareWidget({Key? key, required this.product}) : super(key: key);

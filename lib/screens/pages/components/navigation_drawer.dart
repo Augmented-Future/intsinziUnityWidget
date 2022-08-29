@@ -4,7 +4,7 @@ import 'package:globaltrailblazersapp/controllers/user_account_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shop_home_page.dart';
 
-import '../../../constants/colors.dart';
+import '../../../shared/colors.dart';
 import '../../../models/user.dart';
 import '../animations/animations_page.dart';
 import '../books/library_home_page.dart';

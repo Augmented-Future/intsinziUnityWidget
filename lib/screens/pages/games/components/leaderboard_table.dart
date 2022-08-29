@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../constants/colors.dart';
+import '../../../../shared/colors.dart';
 import '../../../../models/leaderboard.dart';
 
 class LeaderboardTable extends StatefulWidget {

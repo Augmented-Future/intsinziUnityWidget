@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:globaltrailblazersapp/constants/url.dart';
+import 'package:globaltrailblazersapp/shared/url.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
@@ -29,14 +29,17 @@ class AuthService extends GetxController {
   static Future loginWithEmailAndPassword(String email, String password) async {
     try {
       Uri url = Uri.parse(databaseUrl + '/auth/signin');
-      final response =
-          await http.post(url, body: {"email": email, "password": password});
-      if (response.statusCode == 200) {
-        return UserAccount.fromJson(jsonDecode(response.body)['user']);
-      } else {
-        final message = jsonDecode(response.body)['message'];
-        return _error(response.statusCode, message);
+      final response = await http.post(url, body: {
+        "email": email,
+        "password": password,
+      });
+      if (response.statusCode != 200) {
+        return _error(
+          response.statusCode,
+          jsonDecode(response.body)['message'],
+        );
       }
+      return UserAccount.fromJson(jsonDecode(response.body)['user']);
     } catch (error) {
       return _error(500, "Something went wrong! $error");
     }
@@ -47,14 +50,18 @@ class AuthService extends GetxController {
       String email, String password, String firstName) async {
     try {
       Uri url = Uri.parse(databaseUrl + '/auth/student/register');
-      final response = await http.post(url,
-          body: {"email": email, "password": password, "firstName": firstName});
-      if (response.statusCode == 201) {
-        return UserAccount.fromJson(jsonDecode(response.body)["user"]);
-      } else {
-        final message = jsonDecode(response.body)['message'];
-        return _error(response.statusCode, message);
+      final response = await http.post(url, body: {
+        "email": email,
+        "password": password,
+        "firstName": firstName,
+      });
+      if (response.statusCode != 201) {
+        return _error(
+          response.statusCode,
+          jsonDecode(response.body)['message'],
+        );
       }
+      return UserAccount.fromJson(jsonDecode(response.body)["user"]);
     } catch (error) {
       return _error(500, "Something went wrong! $error");
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:globaltrailblazersapp/constants/colors.dart';
+import 'package:globaltrailblazersapp/shared/colors.dart';
 
 class VerifyOtpScreen extends StatelessWidget {
   const VerifyOtpScreen({Key? key}) : super(key: key);

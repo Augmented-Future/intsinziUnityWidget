@@ -5,10 +5,10 @@ import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
 import 'package:globaltrailblazersapp/models/product_cart.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/checkout_product.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/home_cards_shimmer.dart';
-import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../../models/product.dart';
 import '../../../shared/colors.dart';
 import '../widgets/back_app_bar.dart';
 import 'widgets/cart_list_items.dart';
@@ -26,6 +26,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
   List<ProductCart>? _productCarts;
   ErrorException? _error;
   int? checkoutPrice;
+  List<Product> products = [];
   getCarts() async {
     if (mounted) isLoading = IsLoading.loading;
 
@@ -41,6 +42,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
         checkoutPrice = 0;
         for (var i = 0; i < _productCarts!.length; i++) {
           checkoutPrice = _productCarts![i].product.price + checkoutPrice!;
+          products.add(_productCarts![i].product);
         }
         isLoading = IsLoading.done;
       });
@@ -64,26 +66,27 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
         elevation: 0.0,
         centerTitle: false,
         actions: [
-          Stack(
-            alignment: Alignment.centerRight,
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 8),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(8)),
-                child: Row(
-                  children: const [
-                    Text("ACTIONS"),
-                    Icon(Icons.arrow_drop_down)
-                  ],
+          if (isLoading == IsLoading.done)
+            Stack(
+              alignment: Alignment.centerRight,
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Row(
+                    children: const [
+                      Text("ACTIONS"),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
                 ),
-              ),
-              buildActionButton(),
-            ],
-          ),
+                buildActionButton(context, products, checkoutPrice!),
+              ],
+            ),
           const SizedBox(width: 20)
         ],
       ),
@@ -101,7 +104,8 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                   ? ListView.builder(
                       itemCount: 4,
                       itemBuilder: (context, index) =>
-                          const HomeCardShimmerWidget())
+                          const HomeCardShimmerWidget(),
+                    )
                   : Column(
                       children: [
                         Lottie.asset("assets/lottie/empty_cart.json"),
@@ -109,25 +113,26 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                           "(${_error!.statusCode}) ${_error!.errorMessage.toUpperCase()} ",
                           textAlign: TextAlign.center,
                           style: const TextStyle(
-                              color: colorPurple,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              letterSpacing: 1,
-                              wordSpacing: 5),
+                            color: colorPurple,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1,
+                            wordSpacing: 5,
+                          ),
                         ),
                       ],
                     )),
         );
       }),
       bottomSheet: checkoutPrice != null && isLoading == IsLoading.done
-          ? buildBottomSheetCheckout(checkoutPrice!, _productCarts!, context)
+          ? buildBottomSheetCheckout(checkoutPrice!, products, context)
           : Container(height: 0),
     );
   }
 }
 
 Container buildBottomSheetCheckout(
-    int price, List<ProductCart> producst, BuildContext context) {
+    int price, List<Product> productsA, BuildContext context) {
   return Container(
     height: 150,
     decoration: BoxDecoration(
@@ -167,7 +172,8 @@ Container buildBottomSheetCheckout(
             onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (_) => const CheckoutPage(),
+                    builder: (_) =>
+                        CheckoutPage(price: price, products: productsA),
                     fullscreenDialog: true)),
             icon: const Icon(
               Icons.arrow_back,
@@ -193,7 +199,8 @@ Container buildBottomSheetCheckout(
   );
 }
 
-PopupMenuButton<int> buildActionButton() {
+PopupMenuButton<int> buildActionButton(
+    BuildContext context, List<Product> products, int price) {
   return PopupMenuButton(
     icon: const Text(
       "ACTIONS",
@@ -204,9 +211,19 @@ PopupMenuButton<int> buildActionButton() {
     ),
     tooltip: "Show Actions",
     onSelected: (selected) {
-      if (selected == 1) {
-        //Do checkout logic
-      } else {}
+      if (selected == 0) {
+        //Remove all cart from database.
+        return;
+      }
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => CheckoutPage(
+            products: products,
+            price: price,
+          ),
+        ),
+      );
     },
     color: primaryColor,
     itemBuilder: (context) => [

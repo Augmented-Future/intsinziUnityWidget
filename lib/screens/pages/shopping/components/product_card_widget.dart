@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/product_details.dart';
+import 'package:globaltrailblazersapp/services/database_service.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 
 import '../../../../shared/colors.dart';
 import '../../../../models/product.dart';
@@ -21,6 +23,7 @@ class ProductCard extends StatefulWidget {
 class _ProductCardState extends State<ProductCard> {
   bool showModal = false;
   final slideViewController = PageController();
+  String action = "Add to cart";
 
   @override
   void dispose() {
@@ -136,11 +139,34 @@ class _ProductCardState extends State<ProductCard> {
                                     fontWeight: FontWeight.w500),
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () async {
+                                  setState(() {
+                                    action = "Adding";
+                                  });
+                                  dynamic result =
+                                      await DatabaseService.addToCart(
+                                          widget.product.id);
+                                  if (result != true) {
+                                    setState(() {
+                                      action = "Try again";
+                                      showToast(
+                                          message: result.errorMessage,
+                                          success: false);
+                                    });
+                                    return;
+                                  }
+                                  setState(() {
+                                    action = "Added";
+                                    showToast(
+                                      message:
+                                          "${widget.product.name} Added to cart successfully!",
+                                    );
+                                  });
+                                },
                                 child: Ink(
-                                  child: const Text(
-                                    "Add to cart",
-                                    style: TextStyle(
+                                  child: Text(
+                                    action,
+                                    style: const TextStyle(
                                       color: grayColor200,
                                     ),
                                   ),

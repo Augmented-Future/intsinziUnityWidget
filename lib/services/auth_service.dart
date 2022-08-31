@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/shared/url.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -10,10 +11,18 @@ enum IsSubmitting { submitting, error, failed, done }
 
 class AuthService extends GetxController {
   final _googleSignin = GoogleSignIn();
+
   var googleAccount = Rx<GoogleSignInAccount?>(null);
-  loginWithGoogleCredentials() async {
+  var googleGmail = Rx<GoogleSignInAccount?>(null);
+
+  registerWithGoogleCredentials() async {
     await _googleSignin.signOut();
     googleAccount.value = await _googleSignin.signIn();
+  }
+
+  loginWithGoogleCredentials() async {
+    await _googleSignin.signOut();
+    googleGmail.value = await _googleSignin.signIn();
   }
 
   static Future<bool> googleSignOut() async {
@@ -22,6 +31,23 @@ class AuthService extends GetxController {
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  //Login with Google API.
+  static Future loginGoogle(String email) async {
+    try {
+      Uri url = Uri.parse(databaseUrl + '/auth/signin/google');
+      final response = await http.post(url, body: {"email": email});
+      if (response.statusCode != 200) {
+        return errorMethod(
+          response.statusCode,
+          jsonDecode(response.body)['message'],
+        );
+      }
+      return UserAccount.fromJson(jsonDecode(response.body)['user']);
+    } catch (error) {
+      return errorMethod(500, "Something went wrong! $error");
     }
   }
 
@@ -34,14 +60,14 @@ class AuthService extends GetxController {
         "password": password,
       });
       if (response.statusCode != 200) {
-        return _error(
+        return errorMethod(
           response.statusCode,
           jsonDecode(response.body)['message'],
         );
       }
       return UserAccount.fromJson(jsonDecode(response.body)['user']);
     } catch (error) {
-      return _error(500, "Something went wrong! $error");
+      return errorMethod(500, "Something went wrong! $error");
     }
   }
 
@@ -56,25 +82,14 @@ class AuthService extends GetxController {
         "firstName": firstName,
       });
       if (response.statusCode != 201) {
-        return _error(
+        return errorMethod(
           response.statusCode,
           jsonDecode(response.body)['message'],
         );
       }
       return UserAccount.fromJson(jsonDecode(response.body)["user"]);
     } catch (error) {
-      return _error(500, "Something went wrong! $error");
+      return errorMethod(500, "Something went wrong! $error");
     }
   }
-
-  static ErrorException _error(int statusCode, String message) {
-    return ErrorException(statusCode: statusCode, errorMessage: message);
-  }
-  //static UserAccount _userAccount(String user){}
-}
-
-class ErrorException {
-  int statusCode;
-  String errorMessage;
-  ErrorException({required this.statusCode, required this.errorMessage});
 }

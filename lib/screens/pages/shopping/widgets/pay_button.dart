@@ -80,7 +80,7 @@ class PayButton extends StatelessWidget {
       MaterialPageRoute(
         builder: (_) => PaymentPage(
           productPay: ProductPay(
-            product: product,
+            products: [product],
             priceToBePaid: price,
             purchaseType: purchaseType,
             quantity: quantity,

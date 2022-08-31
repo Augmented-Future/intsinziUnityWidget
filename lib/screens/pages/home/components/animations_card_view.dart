@@ -8,7 +8,6 @@ import 'package:globaltrailblazersapp/models/animations_content.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations/animations_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations/video_portrait_page.dart';
-import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 import '../../widgets/custom_card_widget.dart';

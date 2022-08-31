@@ -8,7 +8,6 @@ import 'package:globaltrailblazersapp/screens/pages/books/read_book_pdf_page.dar
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/home_cards_shimmer.dart';
-import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 import '../widgets/back_app_bar.dart';

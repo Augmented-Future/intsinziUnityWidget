@@ -5,13 +5,13 @@ enum PurchaseType { delivery, print }
 
 class ProductPay {
   int priceToBePaid, quantity;
-  Product product;
+  List<Product> products;
   String? cellPhone;
   DeliverLocation? location;
   PurchaseType purchaseType;
 
   ProductPay(
-      {required this.product,
+      {required this.products,
       required this.priceToBePaid,
       required this.purchaseType,
       required this.quantity,

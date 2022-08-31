@@ -67,7 +67,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        signInWithGoogleController.loginWithGoogleCredentials();
+                        signInWithGoogleController.registerWithGoogleCredentials();
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(

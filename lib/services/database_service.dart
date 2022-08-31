@@ -8,8 +8,9 @@ import 'package:globaltrailblazersapp/models/book.dart';
 import 'package:globaltrailblazersapp/models/grade.dart';
 import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/models/product_cart.dart';
-import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:http/http.dart' as http;
+
+import '../shared/funcs.dart';
 
 class DatabaseService {
   static var headers = {
@@ -38,7 +39,7 @@ class DatabaseService {
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode != 200) {
-        return _error(response.statusCode, decoded['message']);
+        return errorMethod(response.statusCode, decoded['message']);
       }
 
       List<AnimationsContent> animations = [];
@@ -49,7 +50,7 @@ class DatabaseService {
           .where((animation) => animation.gradeId == gradeId)
           .toList();
     } catch (e) {
-      return _error(500, "Something went wrong, $e");
+      return errorMethod(500, "Something went wrong, $e");
     }
   }
 
@@ -61,7 +62,7 @@ class DatabaseService {
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode != 200) {
-        return _error(response.statusCode, decoded['message']);
+        return errorMethod(response.statusCode, decoded['message']);
       }
       List<Avatar> avatars = [];
       for (var i = 0; i < decoded['data'].length; i++) {
@@ -69,7 +70,7 @@ class DatabaseService {
       }
       return avatars;
     } catch (e) {
-      return _error(500, "Something went wrong, $e");
+      return errorMethod(500, "Something went wrong, $e");
     }
   }
 
@@ -84,7 +85,7 @@ class DatabaseService {
       }
       return grades;
     } catch (e) {
-      return _error(500, "Something went wrong, $e");
+      return errorMethod(500, "Something went wrong, $e");
     }
   }
 
@@ -106,11 +107,11 @@ class DatabaseService {
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode != 200) {
-        return _error(response.statusCode, decoded['message']);
+        return errorMethod(response.statusCode, decoded['message']);
       }
       return dummyBooks;
     } catch (e) {
-      return _error(500, "Something went wrong, $e");
+      return errorMethod(500, "Something went wrong, $e");
     }
   }
 
@@ -121,7 +122,7 @@ class DatabaseService {
       final decoded = jsonDecode(response.body);
 
       if (response.statusCode != 200) {
-        return _error(response.statusCode, decoded['message']);
+        return errorMethod(response.statusCode, decoded['message']);
       }
       List<Product> products = [];
       for (var product in decoded['data']) {
@@ -129,7 +130,7 @@ class DatabaseService {
       }
       return products;
     } catch (e) {
-      return _error(500, "Something went wrong, $e");
+      return errorMethod(500, "Something went wrong, $e");
     }
   }
 
@@ -139,7 +140,7 @@ class DatabaseService {
       RequestResponse result = await createGetRequest('/carts');
       if (result.decoded == null) throw "[GET] Request failed. /carts";
       if (result.statusCode != 200) {
-        return _error(result.statusCode, result.decoded['message']);
+        return errorMethod(result.statusCode, result.decoded['message']);
       }
 
       List<ProductCart> productCarts = [];
@@ -149,7 +150,7 @@ class DatabaseService {
 
       return productCarts;
     } catch (e) {
-      return _error(500, "Something went wrong, $e");
+      return errorMethod(500, "Something went wrong, $e");
     }
   }
 
@@ -159,17 +160,35 @@ class DatabaseService {
       final response = await http.delete(url, headers: headers);
       final decoded = jsonDecode(response.body);
       if (response.statusCode != 200) {
-        return _error(response.statusCode, decoded["message"]);
+        return errorMethod(response.statusCode, decoded["message"]);
       }
       return true;
     } catch (e) {
-      return _error(500, "Something went wrong, $e");
+      return errorMethod(500, "Something went wrong, $e");
     }
   }
 
-  static ErrorException _error(int statusCode, String message) {
-    return ErrorException(statusCode: statusCode, errorMessage: message);
+  static Future addToCart(int productId) async {
+    try {
+      Uri url = Uri.parse(databaseUrl + '/carts');
+      final response = await http.post(
+        url,
+        headers: {
+          'Authorization': 'Bearer $userAdminToken',
+        },
+        body: {"productId": productId.toString()},
+      );
+      final decoded = jsonDecode(response.body);
+      if (response.statusCode != 201) {
+        return errorMethod(response.statusCode, decoded["message"]);
+      }
+      return true;
+    } catch (e) {
+      return errorMethod(500, "Something went wrong, $e");
+    }
   }
+
+  
 }
 
 class RequestResponse {

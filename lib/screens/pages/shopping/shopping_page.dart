@@ -10,7 +10,6 @@ import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_cart_page.
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
-import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 import '../components/animation_shimmer_card.dart';
@@ -121,22 +120,13 @@ class _ShoppingPageState extends State<ShoppingPage> {
       child: Container(
         height: 60,
         width: 60,
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           color: whiteColor,
           borderRadius: BorderRadius.circular(50),
           border: Border.all(color: primaryColor, width: 2.0),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              "5",
-              style: TextStyle(fontSize: 15, color: primaryColor),
-            ),
-            SvgPicture.asset('assets/icons/cart.svg'),
-          ],
-        ),
+        child: SvgPicture.asset('assets/icons/cart.svg'),
       ),
     );
   }

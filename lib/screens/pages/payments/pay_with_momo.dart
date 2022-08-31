@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/screens/pages/payments/momo_payment_process.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/helpers/validate.dart';
@@ -28,8 +30,13 @@ class _PayWithMomoWidgetState extends State<PayWithMomoWidget> {
 
   @override
   void initState() {
-    _productController =
-        TextEditingController(text: widget.productpay.product.name);
+    String products = "";
+    for (int i = 0; i < widget.productpay.products.length; i++) {
+      products += widget.productpay.products[i].name;
+      if (i + 1 == widget.productpay.products.length) continue;
+      products += ", ";
+    }
+    _productController = TextEditingController(text: products);
     super.initState();
   }
 
@@ -49,7 +56,6 @@ class _PayWithMomoWidgetState extends State<PayWithMomoWidget> {
           PaymentTextField(
             controller: _productController,
             label: "Product",
-            initialText: widget.productpay.product.name,
             showCursor: false,
             hintText: "Product name",
           ),
@@ -66,7 +72,7 @@ class _PayWithMomoWidgetState extends State<PayWithMomoWidget> {
             hintText: "0780000000",
           ),
           const SizedBox(height: 20),
-          ProceedButton(onPressed: () {
+          ProceedButton(onPressed: () async {
             final invalidName = ValidateInput.name(_nameController.text);
             final invalidNumber =
                 ValidateInput.momoNumber(_phoneController.text);
@@ -79,7 +85,16 @@ class _PayWithMomoWidgetState extends State<PayWithMomoWidget> {
               showToastError(invalidName.message, _mobileNumberFocusNode);
               return;
             }
-            //Do API Call here.
+            ProcessResponse result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PaymentProcessPageMomo(
+                    mobileNumber: _phoneController.text,
+                    momoName: _nameController.text,
+                    productPay: widget.productpay),
+                fullscreenDialog: true,
+              ),
+            );
           }),
         ],
       ),

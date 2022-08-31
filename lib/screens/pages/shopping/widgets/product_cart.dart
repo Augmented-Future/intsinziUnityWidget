@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/controllers/cart_controller.dart';
 import 'package:globaltrailblazersapp/models/product_cart.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/checkout_product.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 import '../../../../shared/colors.dart';
@@ -102,7 +103,17 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
                 onSelected: (value) {
                   if (value == 0) {
                     showRemoveFromCartModal(widget.productCart);
+                    return;
                   }
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => CheckoutPage(
+                        products: [widget.productCart.product],
+                        price: widget.productCart.product.price,
+                      ),
+                    ),
+                  );
                 },
                 itemBuilder: (context) => [
                   const PopupMenuItem<int>(
@@ -218,7 +229,7 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
                                       dynamic result =
                                           await DatabaseService.removeFromCart(
                                               productCart.id);
-                                      if (result != true) {
+                                      if (result != true && mounted) {
                                         stfSetState(() {
                                           action = "Failed";
                                         });

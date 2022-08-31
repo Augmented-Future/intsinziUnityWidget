@@ -5,7 +5,6 @@ import 'package:globaltrailblazersapp/models/avatar.dart';
 import 'package:globaltrailblazersapp/models/user.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/authentication/signup_complete.dart';
-import 'package:globaltrailblazersapp/services/auth_service.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 class ChooseAvatarScreen extends StatefulWidget {

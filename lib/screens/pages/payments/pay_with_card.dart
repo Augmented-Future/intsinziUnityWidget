@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:globaltrailblazersapp/screens/pages/payments/card_payment_process.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/helpers/validate.dart';
@@ -34,8 +35,13 @@ class _PayWithCardWidgetState extends State<PayWithCardWidget> {
 
   @override
   void initState() {
-    _productController =
-        TextEditingController(text: widget.productpay.product.name);
+    String products = "";
+    for (int i = 0; i < widget.productpay.products.length; i++) {
+      products += widget.productpay.products[i].name;
+      if (i + 1 == widget.productpay.products.length) continue;
+      products += ", ";
+    }
+    _productController = TextEditingController(text: products);
     super.initState();
   }
 
@@ -99,7 +105,7 @@ class _PayWithCardWidgetState extends State<PayWithCardWidget> {
           ),
           const SizedBox(height: 20),
           ProceedButton(
-            onPressed: () {
+            onPressed: () async {
               final validName = ValidateInput.name(_nameController.text);
               final validCard =
                   ValidateInput.visaCard(_cardNumberController.text);
@@ -121,7 +127,19 @@ class _PayWithCardWidgetState extends State<PayWithCardWidget> {
                 showToastError(validCVV.message, _cvvFocusNode);
                 return;
               }
-              //There we go to call an API here.
+              ProcessResponse result = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaymentProcessPageCard(
+                    card: _cardNumberController.text,
+                    cvv: _cvvController.text,
+                    expDate: _expdateController.text,
+                    names: _nameController.text,
+                    productPay: widget.productpay,
+                  ),
+                  fullscreenDialog: true,
+                ),
+              );
             },
           )
         ],

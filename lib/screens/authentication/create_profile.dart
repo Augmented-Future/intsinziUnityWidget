@@ -6,6 +6,8 @@ import 'package:globaltrailblazersapp/screens/authentication/choose_avatar.dart'
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';
 
+import '../../shared/funcs.dart';
+
 class CreateProfileScreen extends StatefulWidget {
   const CreateProfileScreen(
       {Key? key, required this.email, required this.password})

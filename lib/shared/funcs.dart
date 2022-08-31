@@ -7,6 +7,8 @@ double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
 enum IsLoading { loading, done, failed, error, none }
 
+enum ProcessResponse { success, fail }
+
 List months = [
   "Mon",
   "Feb",
@@ -28,4 +30,14 @@ showToast({required String message, bool? success}) {
     textColor: whiteColor,
     backgroundColor: success == false ? color100 : coolGreen,
   );
+}
+
+class ErrorException {
+  int statusCode;
+  String errorMessage;
+  ErrorException({required this.statusCode, required this.errorMessage});
+}
+
+ErrorException errorMethod(int statusCode, String message) {
+  return ErrorException(statusCode: statusCode, errorMessage: message);
 }

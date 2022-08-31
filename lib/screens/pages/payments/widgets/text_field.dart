@@ -10,7 +10,6 @@ class PaymentTextField extends StatelessWidget {
       required this.controller,
       required this.label,
       this.short,
-      this.initialText,
       this.textInputType,
       this.inputFormatters,
       this.showCursor,
@@ -20,7 +19,6 @@ class PaymentTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final bool? short;
-  final String? initialText;
   final TextInputType? textInputType;
   final List<TextInputFormatter>? inputFormatters;
   final bool? showCursor;

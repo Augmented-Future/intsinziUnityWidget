@@ -11,6 +11,8 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../shared/funcs.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -23,6 +25,56 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _password = TextEditingController();
 
   final signInWithGoogleController = Get.put(AuthService());
+
+  loginWithGoogle(String gmail) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (context) => const BottomSheetLoadingIndicator(),
+      );
+    });
+
+    dynamic result = await AuthService.loginGoogle(gmail);
+
+    if (result.runtimeType == ErrorException) {
+      if (mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => AuthPageError(
+              statusCode: result.statusCode,
+              message: result.errorMessage,
+            ),
+          ),
+        );
+      }
+    } else {
+      List<String> userData = [
+        result.id.toString(),
+        result.gradeId.toString(),
+        result.email,
+        result.firstName,
+        result.lastName,
+        result.avatarUrl
+      ];
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setStringList("user", userData);
+      if (prefs.getStringList("user") != null &&
+          prefs.getStringList("user") != [] &&
+          await prefs.setBool("signedIn", true)) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const IndexPage(
+              page: HomePage(),
+            ),
+          ),
+          (route) => false,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +121,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => signInWithGoogleController
+                          .loginWithGoogleCredentials(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 12),
@@ -92,7 +145,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 15),
+                    Obx(() {
+                      if (signInWithGoogleController.googleGmail.value !=
+                          null) {
+                        loginWithGoogle(signInWithGoogleController
+                            .googleGmail.value!.email);
+                      }
+                      return const SizedBox(height: 15);
+                    }),
                     Container(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: const Text(

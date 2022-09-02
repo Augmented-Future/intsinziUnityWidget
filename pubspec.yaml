@@ -57,6 +57,8 @@ dependencies:
   google_maps_flutter: ^2.1.12
   google_place: ^0.4.7
   geocoding: ^2.0.5
+  audioplayers: ^1.0.1
+  flutter_sound: ^9.2.13
 
   path: ^1.7.0
   path_provider: ^2.0.11

@@ -25,7 +25,7 @@ class Book {
   String description;
   String title;
   String narration;
-  dynamic augmented; //The book which is augmented
+  String? augmented;
   String pdfUrl;
   String level;
   String time;
@@ -66,7 +66,8 @@ List<Book> dummyBooks = [
         "Dear students, this book is published to engage learning faster and clean.",
     title: "tThe ABS of Rwanda",
     narration: "null",
-    augmented: "null",
+    augmented:
+        "https://res.cloudinary.com/dofeqwgfb/video/upload/v1662049509/guitar-electro-sport-trailer-115571_hxuzim.mp3",
     level: "Intermediate",
     time: "5 min",
     pdfUrl:
@@ -86,7 +87,7 @@ List<Book> dummyBooks = [
     description: "An I hope you'll find this cool also yohoooooooo",
     title: "Hello world, children",
     narration: "null",
-    augmented: "null",
+    augmented: null,
     pdfUrl:
         "https://andonovicmilica.files.wordpress.com/2018/07/short-stories-for-children.pdf",
     level: "Advanced",

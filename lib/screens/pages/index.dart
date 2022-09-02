@@ -190,7 +190,7 @@ class _IndexPageState extends State<IndexPage> {
                           : primaryColor,
                     ),
                     Text(
-                      "TV",
+                      "Animation",
                       style: TextStyle(
                         fontSize: 12,
                         color: _page.toString() == const TvZonePage().toString()

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:globaltrailblazersapp/models/product.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/momo_payment_process.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';

@@ -1,10 +1,18 @@
 # This is a generated file; do not edit or check into version control.
+audioplayers=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers-1.0.1/
+audioplayers_android=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers_android-1.0.1/
+audioplayers_darwin=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers_darwin-1.0.1/
+audioplayers_linux=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers_linux-1.0.0/
+audioplayers_web=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers_web-1.0.0/
+audioplayers_windows=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/audioplayers_windows-1.0.0/
 firebase_auth=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.6.2/
 firebase_auth_web=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-4.2.2/
 firebase_core=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.20.0/
 firebase_core_web=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.7.1/
 flutter_pdfview=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_pdfview-1.2.3/
 flutter_plugin_android_lifecycle=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_plugin_android_lifecycle-2.0.7/
+flutter_sound=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_sound-9.2.13/
+flutter_sound_web=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_sound_web-9.2.13/
 fluttertoast=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/fluttertoast-8.0.9/
 geocoding=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/geocoding-2.0.5/
 google_maps_flutter=/Users/andelarwanda/FlutterDev/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.12/

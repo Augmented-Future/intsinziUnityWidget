@@ -1,4 +1,4 @@
-package com.augmentedfuture.augmentedfuturecore
+package com.augmentedfuture.augmentedfutureappcore
 
 import io.flutter.embedding.android.FlutterActivity
 

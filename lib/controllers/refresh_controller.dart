@@ -1,3 +1,4 @@
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
 class RefreshController extends GetxController {
@@ -7,6 +8,8 @@ class RefreshController extends GetxController {
   }
 
   unrefreshPage() {
-    refreshValue.value = false;
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      refreshValue.value = false;
+    });
   }
 }

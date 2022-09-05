@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:831413394400:android:1678777d55f8342085e985",
         "android_client_info": {
-          "package_name": "com.augmentedfuture.augmentedfuturecore"
+          "package_name": "com.augmentedfuture.augmentedfutureappcore"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "831413394400-5li14ub6o1oklplmsmu0uchs16vfcstr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.augmentedfuture.augmentedfuturecore",
+            "package_name": "com.augmentedfuture.augmentedfutureappcore",
             "certificate_hash": "b0d5bcc15f7200613cf2e8fccdae89477bb73252"
           }
         },

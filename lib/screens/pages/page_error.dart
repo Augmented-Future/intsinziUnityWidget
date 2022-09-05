@@ -54,7 +54,7 @@ class PageError extends StatelessWidget {
                   style: TextStyle(fontSize: 16),
                 ),
                 style: ElevatedButton.styleFrom(
-                    primary: primaryColor,
+                    backgroundColor: primaryColor,
                     elevation: 0.0,
                     padding: const EdgeInsets.symmetric(
                         vertical: 12, horizontal: 30),

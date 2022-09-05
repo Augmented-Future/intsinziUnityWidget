@@ -96,7 +96,7 @@ class _PaymentProcessPageMomoState extends State<PaymentProcessPageMomo> {
                         fontSize: 13),
                   ),
                   style: ElevatedButton.styleFrom(
-                      primary: coolYellow,
+                      backgroundColor: coolYellow,
                       shadowColor: Colors.transparent,
                       shape: const StadiumBorder(),
                       padding: const EdgeInsets.symmetric(horizontal: 20)),

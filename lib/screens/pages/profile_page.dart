@@ -129,7 +129,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
+                  backgroundColor: primaryColor,
                   elevation: 0.0,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 60, vertical: 15),

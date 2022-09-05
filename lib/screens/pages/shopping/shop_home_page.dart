@@ -53,7 +53,7 @@ class _ShoppingHomePageState extends State<ShoppingHomePage> {
                       child: ElevatedButton(
                         onPressed: () => Get.to(() => const ShoppingPage()),
                         style: ElevatedButton.styleFrom(
-                          primary: filterYellow,
+                          backgroundColor: filterYellow,
                           shadowColor: whiteColor,
                           elevation: 0.0,
                           shape: RoundedRectangleBorder(

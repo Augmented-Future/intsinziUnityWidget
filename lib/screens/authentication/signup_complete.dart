@@ -35,8 +35,8 @@ class SignupComplete extends StatelessWidget {
                       msg: "We can not open Gmail App for now.");
                 }
               },
-              style:
-                  ElevatedButton.styleFrom(primary: coolGreen, elevation: 0.0),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: coolGreen, elevation: 0.0),
               child: const Text("Verify / Open Gmail App"),
             ),
             const SizedBox(height: 20),
@@ -48,7 +48,7 @@ class SignupComplete extends StatelessWidget {
                   ),
                   (route) => false),
               style: ElevatedButton.styleFrom(
-                  primary: primaryColor, elevation: 0.0),
+                  backgroundColor: primaryColor, elevation: 0.0),
               child: const Text("Go to Login"),
             ),
           ],

@@ -107,7 +107,7 @@ class _AnimationsCardViewState extends State<AnimationsCardView> {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    primary: coolYellow,
+                    backgroundColor: coolYellow,
                     elevation: 0.0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(6),

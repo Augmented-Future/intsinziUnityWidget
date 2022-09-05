@@ -367,7 +367,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                 },
                 child: const Text("CONTINUE"),
                 style: ElevatedButton.styleFrom(
-                  primary: primaryColor,
+                  backgroundColor: primaryColor,
                   shadowColor: Colors.transparent,
                   shape: const StadiumBorder(),
                 ),

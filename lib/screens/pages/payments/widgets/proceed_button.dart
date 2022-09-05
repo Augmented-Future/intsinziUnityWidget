@@ -18,7 +18,7 @@ class ProceedButton extends StatelessWidget {
             fontWeight: FontWeight.bold),
       ),
       style: ElevatedButton.styleFrom(
-        primary: primaryColor,
+        backgroundColor: primaryColor,
         elevation: 0.0,
         padding: const EdgeInsets.symmetric(
           horizontal: 50,

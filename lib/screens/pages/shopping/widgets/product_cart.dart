@@ -240,7 +240,7 @@ class _ProductCartCardTileState extends State<ProductCartCardTile> {
                                     },
                                     child: Text(action),
                                     style: ElevatedButton.styleFrom(
-                                        primary: grayColor,
+                                        backgroundColor: grayColor,
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(8))),

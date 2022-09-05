@@ -30,7 +30,7 @@ class AuthPageError extends StatelessWidget {
             ElevatedButton(
               onPressed: () => Navigator.pop(context),
               style: ElevatedButton.styleFrom(
-                  primary: primaryColor, elevation: 0.0),
+                  backgroundColor: primaryColor, elevation: 0.0),
               child: const Text("Retry"),
             ),
             if (statusCode == 401)
@@ -45,7 +45,7 @@ class AuthPageError extends StatelessWidget {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                    primary: coolGreen, elevation: 0.0),
+                    backgroundColor: coolGreen, elevation: 0.0),
                 child: const Text("Verify / Open Gmail App"),
               ),
           ],

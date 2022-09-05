@@ -109,7 +109,7 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
                   style: ElevatedButton.styleFrom(
                     elevation: 0.0,
                     shadowColor: Colors.transparent,
-                    primary: const Color(0xFFFBBF24),
+                    backgroundColor: const Color(0xFFFBBF24),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30,
                       vertical: 15,

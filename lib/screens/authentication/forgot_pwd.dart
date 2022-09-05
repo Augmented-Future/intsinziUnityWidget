@@ -234,7 +234,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 (route) => false,
               ),
               style: ElevatedButton.styleFrom(
-                  primary: primaryColor, elevation: 0.0),
+                  backgroundColor: primaryColor, elevation: 0.0),
               child: const Text("Go to Login"),
             ),
             const Spacer()

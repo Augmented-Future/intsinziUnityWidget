@@ -171,7 +171,7 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
                     const Text("Read", style: TextStyle(color: primaryColor)),
                 icon: SvgPicture.asset('assets/icons/open_book.svg'),
                 style: ElevatedButton.styleFrom(
-                  primary: const Color(0xFFFBBF24),
+                  backgroundColor: const Color(0xFFFBBF24),
                   elevation: 0.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5.5),

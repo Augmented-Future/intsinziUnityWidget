@@ -157,7 +157,7 @@ class _TutorsPageState extends State<TutorsPage> {
                               style: TextStyle(color: primaryColor),
                             ),
                             style: ElevatedButton.styleFrom(
-                                primary: filterYellow,
+                                backgroundColor: filterYellow,
                                 elevation: 0.0,
                                 shadowColor: Colors.transparent,
                                 shape: const StadiumBorder()),

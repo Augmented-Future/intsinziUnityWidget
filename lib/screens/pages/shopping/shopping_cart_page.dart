@@ -184,7 +184,7 @@ Container buildBottomSheetCheckout(
               style: TextStyle(color: primaryColor),
             ),
             style: ElevatedButton.styleFrom(
-              primary: filterYellow,
+              backgroundColor: filterYellow,
               elevation: 0.0,
               shadowColor: Colors.transparent,
               shape: RoundedRectangleBorder(

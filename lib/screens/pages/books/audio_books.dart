@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:globaltrailblazersapp/models/audio_book_model.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/filter_widget/filter_category_widget.dart';
+
+import 'widgets/audio_book_tile.dart';
 
 class AudioBooksZone extends StatefulWidget {
   const AudioBooksZone({Key? key}) : super(key: key);
@@ -59,18 +62,48 @@ class _AudioBooksZoneState extends State<AudioBooksZone> {
               ),
             ),
           ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
                 const SizedBox(height: 12),
-                const FilterCategoryWidget(pageId: 7),
-                const SizedBox(height: 12),
+                const FilterCategoryWidget(pageId: 5),
+                Container(
+                  color: Colors.grey.shade200.withOpacity(0.7),
+                  height: 160,
+                  margin: const EdgeInsets.all(20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.network(
+                        "https://images.unsplash.com/photo-1558979107-4a08e5c24281?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+                        width: (screenWidth(context) - 40) * 0.45,
+                        height: 160,
+                        fit: BoxFit.cover,
+                      ),
+                      const Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Description",
+                            style: TextStyle(color: primaryColor, fontSize: 18),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              return  AudioBookTile(book:audioBooks[index]);
+            }, childCount: audioBooks.length),
           ),
         ],
       ),
       bottomNavigationBar: const BottomNavigationBarWidget(),
+      backgroundColor: whiteColor,
     );
   }
 }

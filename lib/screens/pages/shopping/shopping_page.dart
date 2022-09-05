@@ -3,13 +3,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
-import 'package:globaltrailblazersapp/screens/pages/shopping/components/product_card_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/product_card_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_cart_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/filter_widget/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 import '../components/animation_shimmer_card.dart';
@@ -113,21 +113,21 @@ class _ShoppingPageState extends State<ShoppingPage> {
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
+}
 
-  Widget buildCartButton() {
-    return GestureDetector(
-      onTap: () => Get.to(() => const ShoppingCartPage()),
-      child: Container(
-        height: 60,
-        width: 60,
-        padding: const EdgeInsets.all(15),
-        decoration: BoxDecoration(
-          color: whiteColor,
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(color: primaryColor, width: 2.0),
-        ),
-        child: SvgPicture.asset('assets/icons/cart.svg'),
+Widget buildCartButton() {
+  return GestureDetector(
+    onTap: () => Get.to(() => const ShoppingCartPage()),
+    child: Container(
+      height: 60,
+      width: 60,
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(50),
+        border: Border.all(color: primaryColor, width: 2.0),
       ),
-    );
-  }
+      child: SvgPicture.asset('assets/icons/cart.svg'),
+    ),
+  );
 }

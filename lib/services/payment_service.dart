@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:globaltrailblazersapp/shared/url.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
-import 'package:globaltrailblazersapp/models/user.dart';
+import 'package:globaltrailblazersapp/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../shared/funcs.dart';

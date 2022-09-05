@@ -1,4 +1,4 @@
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 
 class ProductCart {
   int id;

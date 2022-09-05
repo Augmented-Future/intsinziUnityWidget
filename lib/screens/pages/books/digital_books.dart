@@ -3,10 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
-import 'package:globaltrailblazersapp/models/book.dart';
+import 'package:globaltrailblazersapp/models/book_model.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/read_book_pdf_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/filter_widget/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/home_cards_shimmer.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 

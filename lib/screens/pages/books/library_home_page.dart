@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/audio_books.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/digital_books.dart';
+import 'package:globaltrailblazersapp/shared/funcs.dart';
 
 class LibraryHomePage extends StatefulWidget {
   const LibraryHomePage({Key? key}) : super(key: key);
@@ -43,11 +44,12 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
         Container(
           margin: const EdgeInsets.all(20),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                height: 300,
-                width: 200,
+                height: screenWidth(context) * 0.6,
+                width: screenWidth(context) * 0.45,
+                padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
                   color: coolYellow,
                 ),

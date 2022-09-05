@@ -4,9 +4,11 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/loading_indicator.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/shimmer_card.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
-import 'package:globaltrailblazersapp/models/book.dart';
+import 'package:globaltrailblazersapp/models/book_model.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/services/read_book_pdf.dart';
 
@@ -23,6 +25,8 @@ class ReadBookPdfPage extends StatefulWidget {
 class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
   final audioPlayer = AudioPlayer();
   bool isAudioPlaying = false;
+  IsLoading _isLoading = IsLoading.none;
+  bool everPlayed = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
 
@@ -43,6 +47,7 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
     audioPlayer.onPlayerStateChanged.listen((state) {
       setState(() {
         isAudioPlaying = state == PlayerState.playing;
+        _isLoading = IsLoading.none;
       });
     });
 
@@ -84,20 +89,21 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
                       style: const TextStyle(fontSize: 20, color: primaryColor),
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10),
-                    decoration: const BoxDecoration(color: Color(0xFFF8F8F8)),
-                    child: totalPages != null
-                        ? Text(
+                  totalPages != null
+                      ? Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 10),
+                          decoration:
+                              const BoxDecoration(color: Color(0xFFF8F8F8)),
+                          child: Text(
                             "$currentPage of $totalPages",
                             style: const TextStyle(
                               fontSize: 18.0,
                               color: primaryColor,
                             ),
-                          )
-                        : const Text("Loading..."),
-                  ),
+                          ),
+                        )
+                      : const ShimmerCard(width: 120, height: 30),
                 ],
               ),
             ),
@@ -105,7 +111,16 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
               width: screenWidth(context),
               height: screenHeight(context) * 0.6,
               child: fileBook == null
-                  ? const Text("File Loading, please wait..")
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          CircularProgressIndicator(color: primaryColor),
+                          SizedBox(height: 15),
+                          Text("Book Loading, please wait.."),
+                        ],
+                      ),
+                    )
                   : PDFView(
                       filePath: fileBook!.path,
                       swipeHorizontal: true,
@@ -160,20 +175,35 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
                             style: const TextStyle(color: whiteColor),
                           ),
                           const Spacer(),
-                          IconButton(
-                            onPressed: () async {
-                              if (isAudioPlaying) {
-                                await audioPlayer.pause();
-                              } else {
-                                await audioPlayer
-                                    .play(UrlSource(widget.book.augmented!));
-                              }
-                            },
-                            icon: Icon(isAudioPlaying
-                                ? Icons.pause_circle
-                                : Icons.play_circle),
-                            color: whiteColor,
-                          ),
+                          _isLoading == IsLoading.loading
+                              ? Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      horizontal: 10, vertical: 20),
+                                  child: const LinearLoadingIndicator(),
+                                )
+                              : IconButton(
+                                  onPressed: () async {
+                                    if (isAudioPlaying) {
+                                      await audioPlayer.pause();
+                                    } else {
+                                      if (!everPlayed) {
+                                        setState(() {
+                                          _isLoading = IsLoading.loading;
+                                        });
+                                      }
+
+                                      await audioPlayer.play(
+                                          UrlSource(widget.book.augmented!));
+                                      setState(() {
+                                        everPlayed = true;
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(isAudioPlaying
+                                      ? Icons.pause_circle
+                                      : Icons.play_circle),
+                                  color: whiteColor,
+                                ),
                           SvgPicture.asset(
                             'assets/icons/sound.svg',
                             color: whiteColor,
@@ -194,13 +224,5 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
       ),
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
-  }
-
-  String formatTime(Duration duration) {
-    String twoDigits(int n) => n.toString().padLeft(2, '0');
-    final hours = twoDigits(duration.inHours);
-    final minutes = twoDigits(duration.inMinutes.remainder(60));
-    final seconds = twoDigits(duration.inSeconds.remainder(60));
-    return [if (duration.inHours > 0) hours, minutes, seconds].join(':');
   }
 }

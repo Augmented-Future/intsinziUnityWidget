@@ -5,12 +5,13 @@ import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shop_home_page.dart';
 
 import '../../../shared/colors.dart';
-import '../../../models/user.dart';
+import '../../../models/user_model.dart';
 import '../animations/animations_page.dart';
 import '../books/library_home_page.dart';
 import '../index.dart';
 import '../page_error.dart';
 import '../profile_page.dart';
+import '../tutors/tutor_homepage.dart';
 import 'painters.dart';
 
 class NavigationDrawerWidget extends StatefulWidget {
@@ -168,6 +169,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     child: Image.asset('assets/icons/tutors.png'),
                   ),
                 ),
+                direction: const IndexPage(page: TutorHomePage()),
               ),
               buildMenuItem(
                 text: "Sakwe Sakwe",

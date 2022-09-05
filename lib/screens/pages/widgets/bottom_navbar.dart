@@ -61,7 +61,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                 children: const [
                   Icon(Icons.play_circle_fill, size: 20, color: primaryColor),
                   Text(
-                    "TV",
+                    "Animations",
                     style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ],
@@ -150,7 +150,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
                 children: const [
                   Icon(Icons.gamepad, size: 20, color: primaryColor),
                   Text(
-                    "Games",
+                    "Games Zone",
                     style: TextStyle(fontSize: 12, color: primaryColor),
                   ),
                 ],

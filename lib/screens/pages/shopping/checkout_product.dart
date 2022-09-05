@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geocoding/geocoding.dart';
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/payments/payment_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';

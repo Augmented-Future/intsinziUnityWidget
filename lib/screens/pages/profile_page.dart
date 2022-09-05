@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
-import 'package:globaltrailblazersapp/models/user.dart';
+import 'package:globaltrailblazersapp/models/user_model.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';

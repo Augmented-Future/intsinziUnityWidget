@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/shared/url.dart';
-import 'package:globaltrailblazersapp/models/user.dart';
+import 'package:globaltrailblazersapp/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 

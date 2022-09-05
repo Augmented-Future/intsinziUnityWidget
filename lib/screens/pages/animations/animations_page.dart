@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:globaltrailblazersapp/controllers/refresh_controller.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/controllers/grade_controller.dart';
-import 'package:globaltrailblazersapp/models/animations_content.dart';
+import 'package:globaltrailblazersapp/models/animation_content_model.dart';
 import 'package:globaltrailblazersapp/screens/authentication/auth_page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations/video_portrait_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/filter_category_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/filter_widget/filter_category_widget.dart';
 import 'package:globaltrailblazersapp/services/database_service.dart';
 
 import '../../../shared/funcs.dart';
@@ -23,13 +24,15 @@ class AnimationsPageScreen extends StatefulWidget {
 
 class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   Map? data;
-  bool isLoading = true;
+  late bool isLoading;
   List<AnimationsContent>? animationList;
   final gradeController = Get.find<GradeController>();
+  final refresh = Get.find<RefreshController>();
 
   void getAnimations() async {
+    isLoading = true;
     dynamic result = await DatabaseService.fetchAnimations(
-        gradeId: gradeController.currentUserGrade.value.id);
+        gradeId: gradeController.currentUserGrade.value?.id ?? 1);
     if (result.runtimeType == ErrorException) {
       if (mounted) {
         Navigator.push(
@@ -39,6 +42,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
               statusCode: result.statusCode,
               message: result.errorMessage,
             ),
+            fullscreenDialog: true,
           ),
         );
       }
@@ -54,25 +58,31 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
 
   @override
   void initState() {
-    super.initState();
     getAnimations();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          const SliverPersistentHeader(
-            delegate: CustomSliverAppBarDelegate(expandedHeight: 300),
-            pinned: true,
-          ),
-          const SliverToBoxAdapter(
-            child: FilterCategoryWidget(pageId: 0, courseId: 5),
-          ),
-          buildAnimationWidget(),
-        ],
-      ),
+      body: Obx(() {
+        if (refresh.refreshValue.value == true) {
+          getAnimations();
+          refresh.unrefreshPage();
+        }
+        return CustomScrollView(
+          slivers: [
+            const SliverPersistentHeader(
+              delegate: CustomSliverAppBarDelegate(expandedHeight: 300),
+              pinned: true,
+            ),
+            const SliverToBoxAdapter(
+              child: FilterCategoryWidget(pageId: 0, courseId: 5),
+            ),
+            buildAnimationWidget(),
+          ],
+        );
+      }),
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }
@@ -85,10 +95,10 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
             margin: const EdgeInsets.all(10),
             child: isLoading
                 ? const MyCustomShimmerAnimationsWidget()
-                : buildGridCard(index, context, animationList),
+                : buildGridCard(index, context, animationList!),
           );
         },
-        childCount: isLoading ? 8 : animationList?.length,
+        childCount: isLoading ? 8 : animationList!.length,
       ),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -97,7 +107,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
   }
 
   Column buildGridCard(int index, BuildContext context,
-      List<AnimationsContent>? _animationsList) {
+      List<AnimationsContent> _animationsList) {
     return Column(
       children: [
         CustomCardWidget(
@@ -109,7 +119,7 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Unit ${_animationsList?[index].chapterId}: ${_animationsList?[index].title}',
+              'Unit ${_animationsList[index].chapterId}: ${_animationsList[index].title}',
               overflow: TextOverflow.visible,
               style: const TextStyle(color: blackColor, fontSize: 16),
             ),

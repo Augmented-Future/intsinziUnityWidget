@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/helpers/validate.dart';
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 

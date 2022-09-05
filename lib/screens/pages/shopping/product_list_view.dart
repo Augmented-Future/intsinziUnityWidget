@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 
 import '../../../shared/colors.dart';
-import 'components/product_card_widget.dart';
+import 'widgets/product_card_widget.dart';
 
 class ProductListView extends StatefulWidget {
   final List<Product> products;

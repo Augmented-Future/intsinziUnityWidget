@@ -1,12 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:globaltrailblazersapp/shared/keys.dart';
 import 'package:globaltrailblazersapp/shared/url.dart';
-import 'package:globaltrailblazersapp/models/animations_content.dart';
+import 'package:globaltrailblazersapp/models/animation_content_model.dart';
 import 'package:globaltrailblazersapp/models/avatar.dart';
-import 'package:globaltrailblazersapp/models/book.dart';
-import 'package:globaltrailblazersapp/models/grade.dart';
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/book_model.dart';
+import 'package:globaltrailblazersapp/models/grade_model.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 import 'package:globaltrailblazersapp/models/product_cart.dart';
 import 'package:http/http.dart' as http;
 
@@ -49,6 +50,8 @@ class DatabaseService {
       return animations
           .where((animation) => animation.gradeId == gradeId)
           .toList();
+    } on SocketException catch (_) {
+      return errorMethod(400, "No Internet");
     } catch (e) {
       return errorMethod(500, "Something went wrong, $e");
     }
@@ -187,8 +190,6 @@ class DatabaseService {
       return errorMethod(500, "Something went wrong, $e");
     }
   }
-
-  
 }
 
 class RequestResponse {

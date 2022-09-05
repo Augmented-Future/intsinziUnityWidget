@@ -8,7 +8,7 @@ import 'package:globaltrailblazersapp/screens/pages/widgets/home_cards_shimmer.d
 import 'package:globaltrailblazersapp/services/database_service.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../../models/product.dart';
+import '../../../models/product_model.dart';
 import '../../../shared/colors.dart';
 import '../widgets/back_app_bar.dart';
 import 'widgets/cart_list_items.dart';

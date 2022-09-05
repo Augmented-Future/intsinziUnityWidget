@@ -1,4 +1,4 @@
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 enum PurchaseType { delivery, print }

@@ -6,6 +6,7 @@ import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
 import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/tutors/tutors_page.dart';
 
 import '../screens/pages/books/digital_books.dart';
 
@@ -58,6 +59,7 @@ List<AppPage> appPages = [
   ),
   AppPage(pageId: 5, content: "Audio Books", page: const AudioBooksZone()),
   AppPage(pageId: 6, content: "Digital Books", page: const DigitalBooksZone()),
+  AppPage(pageId: 7, content: "Tutors", page: const TutorsPage())
 ];
 
 //Courses

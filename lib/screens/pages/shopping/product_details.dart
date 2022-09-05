@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_page.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
-import 'package:globaltrailblazersapp/models/product.dart';
+import 'package:globaltrailblazersapp/models/product_model.dart';
 import 'package:globaltrailblazersapp/models/product_pay.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/delivery_controller.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/components/product_list_view.dart';
@@ -15,6 +16,8 @@ import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/text_field.
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/video_player_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
+
+import 'widgets/addcart_button.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({Key? key, required this.product}) : super(key: key);
@@ -275,6 +278,31 @@ class _ProductDetailsState extends State<ProductDetails> {
                       );
                     },
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Row(
+                      children: const [
+                        SizedBox(width: 10),
+                        Expanded(
+                            child: Divider(
+                          color: grayColor,
+                        )),
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Text(
+                            "OR",
+                            style: TextStyle(color: grayColor),
+                          ),
+                        ),
+                        Expanded(
+                            child: Divider(
+                          color: grayColor,
+                        )),
+                        SizedBox(width: 10),
+                      ],
+                    ),
+                  ),
+                  AddCartButton(product: widget.product),
                   const SizedBox(height: 20),
                   ShareWidget(product: widget.product),
                   const SizedBox(height: 20),
@@ -287,6 +315,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         ],
       ),
       backgroundColor: whiteColor,
+      floatingActionButton: buildCartButton(),
       bottomNavigationBar: const BottomNavigationBarWidget(),
     );
   }

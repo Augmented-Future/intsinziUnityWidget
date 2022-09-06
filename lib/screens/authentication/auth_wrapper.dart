@@ -32,6 +32,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
     return isSignedIn ?? false
         ? const IndexPage(
             page: HomePage(),
+            active: "Home",
           )
         : const LoginScreen();
   }

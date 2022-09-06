@@ -124,7 +124,9 @@ class _VideoPortraitFormState extends State<VideoPortraitForm> {
           ),
         ),
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "Animations",
+      ),
     );
   }
 }

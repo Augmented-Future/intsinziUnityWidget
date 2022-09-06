@@ -71,6 +71,7 @@ class PageError extends StatelessWidget {
           MaterialPageRoute(
             builder: (_) => const IndexPage(
               page: HomePage(),
+              active: "Home",
             ),
           ),
         ),

@@ -67,7 +67,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        signInWithGoogleController.registerWithGoogleCredentials();
+                        signInWithGoogleController
+                            .registerWithGoogleCredentials();
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -277,11 +278,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           );
                         } else {
                           Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => SignupComplete(user: result),
-                              ),
-                              ((route) => false));
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => SignupComplete(user: result),
+                            ),
+                            ((route) => false),
+                          );
                         }
                       },
                       child: Container(
@@ -346,13 +348,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                         const SizedBox(width: 4),
                         GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginScreen()),
-                            );
-                          },
+                          onTap: () => Navigator.pop(context),
                           child: const Text(
                             'Login',
                             style: TextStyle(

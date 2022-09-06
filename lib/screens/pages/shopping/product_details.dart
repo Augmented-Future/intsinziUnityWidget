@@ -316,7 +316,9 @@ class _ProductDetailsState extends State<ProductDetails> {
       ),
       backgroundColor: whiteColor,
       floatingActionButton: buildCartButton(),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "",
+      ),
     );
   }
 

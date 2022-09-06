@@ -45,17 +45,26 @@ List<AppPage> appPages = [
   AppPage(
     pageId: 2,
     content: "Library",
-    page: const IndexPage(page: LibraryHomePage()),
+    page: const IndexPage(
+      page: LibraryHomePage(),
+      active: "Library",
+    ),
   ),
   AppPage(
     pageId: 3,
     content: "Board Game",
-    page: const IndexPage(page: BoardGame()),
+    page: const IndexPage(
+      page: BoardGame(),
+      active: "",
+    ),
   ),
   AppPage(
     pageId: 4,
     content: "Game Page",
-    page: const IndexPage(page: BoardGame()),
+    page: const IndexPage(
+      page: BoardGame(),
+      active: "",
+    ),
   ),
   AppPage(pageId: 5, content: "Audio Books", page: const AudioBooksZone()),
   AppPage(pageId: 6, content: "Digital Books", page: const DigitalBooksZone()),

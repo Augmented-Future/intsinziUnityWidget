@@ -109,7 +109,9 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
           ),
         ],
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "Library",
+      ),
     );
   }
 

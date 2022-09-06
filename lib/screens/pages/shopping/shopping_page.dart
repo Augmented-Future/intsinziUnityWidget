@@ -110,7 +110,9 @@ class _ShoppingPageState extends State<ShoppingPage> {
       backgroundColor: whiteColor,
       floatingActionButton: buildCartButton(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "",
+      ),
     );
   }
 }

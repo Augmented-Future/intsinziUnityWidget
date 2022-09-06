@@ -138,7 +138,27 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Already have an account?',
+                          style: TextStyle(color: grayColor200),
+                        ),
+                        const SizedBox(width: 4),
+                        GestureDetector(
+                          onTap: () => Navigator.pop(context),
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                                color: grayColor200,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -183,47 +203,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               " Please check and come back. ",
               style: TextStyle(fontSize: 18.0),
             ),
-            domain == 'gmail.com'
-                ? TextButton.icon(
-                    icon: const Icon(Icons.open_in_browser),
-                    onPressed: () async {
-                      Uri url = Uri.parse("https://gmail.com");
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: "You do not have proper app to open this link. ",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 2,
-                          backgroundColor: Colors.grey[200],
-                          textColor: primaryColor,
-                          fontSize: 16.0,
-                        );
-                      }
-                    },
-                    label: const Text("Open Gmail App"),
-                  )
-                : TextButton.icon(
-                    icon: const Icon(Icons.link),
-                    onPressed: () async {
-                      Uri url = Uri.parse("https://$domain");
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: "You do not have proper app to open this link. ",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 2,
-                          backgroundColor: Colors.grey[200],
-                          textColor: primaryColor,
-                          fontSize: 16.0,
-                        );
-                      }
-                    },
-                    label: Text('Visit https://$domain'),
-                  ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () => Navigator.pushAndRemoveUntil(

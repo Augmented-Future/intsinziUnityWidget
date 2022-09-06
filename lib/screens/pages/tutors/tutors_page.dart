@@ -172,7 +172,9 @@ class _TutorsPageState extends State<TutorsPage> {
           ),
         ],
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "",
+      ),
     );
   }
 }

@@ -83,7 +83,9 @@ class _AnimationsPageScreenState extends State<AnimationsPageScreen> {
           ],
         );
       }),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "Animations",
+      ),
     );
   }
 

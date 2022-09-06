@@ -222,7 +222,9 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "Library",
+      ),
     );
   }
 }

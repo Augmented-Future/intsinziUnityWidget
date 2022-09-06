@@ -126,7 +126,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Library",
-                direction: const IndexPage(page: LibraryHomePage()),
+                direction: const IndexPage(
+                  page: LibraryHomePage(),
+                  active: "Library",
+                ),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: LibraryCustomPainter(),
@@ -149,7 +152,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Board Game",
-                direction: const IndexPage(page: BoardGame()),
+                direction: const IndexPage(
+                  page: BoardGame(),
+                  active: "",
+                ),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: BoardCustomPainter(),
@@ -169,7 +175,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                     child: Image.asset('assets/icons/tutors.png'),
                   ),
                 ),
-                direction: const IndexPage(page: TutorHomePage()),
+                direction: const IndexPage(
+                  page: TutorHomePage(),
+                  active: "",
+                ),
               ),
               buildMenuItem(
                 text: "Sakwe Sakwe",
@@ -230,7 +239,10 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Shop",
-                direction: const IndexPage(page: ShoppingHomePage()),
+                direction: const IndexPage(
+                  page: ShoppingHomePage(),
+                  active: "",
+                ),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: PastPapersCustomPainter(

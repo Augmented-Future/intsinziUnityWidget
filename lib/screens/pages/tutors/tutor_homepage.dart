@@ -371,7 +371,7 @@ class _TutorHomePageState extends State<TutorHomePage> {
             ],
           ),
           const SizedBox(height: 20),
-          const Text("TOP RATED TUTORS")
+          const Text("TOP RATED TUTORS"),
         ],
       ),
     );

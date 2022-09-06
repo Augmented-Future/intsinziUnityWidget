@@ -68,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
           MaterialPageRoute(
             builder: (_) => const IndexPage(
               page: HomePage(),
+              active: "Home",
             ),
           ),
           (route) => false,
@@ -264,6 +265,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               MaterialPageRoute(
                                 builder: (_) => const IndexPage(
                                   page: HomePage(),
+                                  active: "Home",
                                 ),
                               ),
                               (route) => false,
@@ -316,7 +318,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const SizedBox(width: 4),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const RegisterScreen()),

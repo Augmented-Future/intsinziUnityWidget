@@ -177,7 +177,9 @@ class _PaymentPageState extends State<PaymentPage> {
           ],
         ),
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "",
+      ),
     );
   }
 }

@@ -97,12 +97,14 @@ class _AudioBooksZoneState extends State<AudioBooksZone> {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
-              return  AudioBookTile(book:audioBooks[index]);
+              return AudioBookTile(book: audioBooks[index]);
             }, childCount: audioBooks.length),
           ),
         ],
       ),
-      bottomNavigationBar: const BottomNavigationBarWidget(),
+      bottomNavigationBar: const BottomNavigationBarWidget(
+        active: "Library",
+      ),
       backgroundColor: whiteColor,
     );
   }

@@ -26,7 +26,7 @@ class _AugmentedWorldPageState extends State<AugmentedWorldPage> {
             pinned: true,
           ),
           const SliverToBoxAdapter(
-            child: FilterCategoryWidget(pageId: 9, courseId: 5),
+            child: FilterCategoryWidget(pageId: 9),
           ),
           buildAugmentedWorldWidget(),
         ],

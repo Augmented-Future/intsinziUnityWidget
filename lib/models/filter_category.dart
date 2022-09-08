@@ -21,12 +21,7 @@ class AppPage {
   AppPage({required this.pageId, required this.content, required this.page});
 }
 
-class Course {
-  int id;
-  String courseCode;
-  String name;
-  Course({required this.id, required this.name, required this.courseCode});
-}
+
 
 class ProductType {
   int id;
@@ -76,15 +71,6 @@ List<AppPage> appPages = [
   AppPage(pageId: 10, content: "Cormics", page: const CormicsPage()),
 ];
 
-//Courses
-List<Course> courses = [
-  Course(id: 1, name: "Mathematics", courseCode: "MAT116"),
-  Course(id: 2, name: "English", courseCode: "Phy116"),
-  Course(id: 3, name: "Social Studies", courseCode: "SSC89"),
-  Course(id: 4, name: "Kinyarwanda", courseCode: "Kiny201"),
-  Course(id: 5, name: "Science", courseCode: "EST200"),
-];
-
 //Product types
 List<ProductType> productTypes = [
   ProductType(id: 1, name: "Print"),
@@ -106,14 +92,6 @@ AppPage getContent(int id) {
         statusCode: 404,
       ),
     );
-  }
-}
-
-Course getCourse(int? id) {
-  try {
-    return courses.where((course) => (course.id == id)).toList().first;
-  } catch (e) {
-    return Course(id: id ?? 4, name: "No select", courseCode: "No select");
   }
 }
 

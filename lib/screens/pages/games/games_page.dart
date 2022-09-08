@@ -76,7 +76,7 @@ class _GamesPageState extends State<GamesPage> {
               pinned: true,
             ),
             const SliverToBoxAdapter(
-              child: FilterCategoryWidget(pageId: 4, courseId: 5),
+              child: FilterCategoryWidget(pageId: 4),
             ),
             if (isLoading == IsLoading.loading)
               buildLoadingWidget()

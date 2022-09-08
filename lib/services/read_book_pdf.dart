@@ -12,7 +12,10 @@ class ReadBookPDFService {
       final bytes = response.bodyBytes;
       return _storeFile(url, bytes);
     } on SocketException catch (_) {
-      showToast(message: "No internet", success: false);
+      showToast(
+        message: "No internet, Internet connection problem detected",
+        success: false,
+      );
       return null;
     } catch (e) {
       return null;

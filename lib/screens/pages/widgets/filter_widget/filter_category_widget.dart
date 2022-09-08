@@ -6,21 +6,22 @@ import 'package:globaltrailblazersapp/controllers/refresh_controller.dart';
 import 'package:globaltrailblazersapp/models/filter_category.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_widget/all_grades_dialog.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/filter_widget/filter_list_dialog_widget.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/shimmer_card.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../controllers/course_controller.dart';
 import '../../../../shared/colors.dart';
 import '../../../../shared/funcs.dart';
 
 class FilterCategoryWidget extends StatefulWidget {
   final bool? shopFilter;
   final int pageId;
-  final int? typeId, courseId;
+  final int? typeId;
 
   const FilterCategoryWidget({
     Key? key,
     this.shopFilter,
     this.typeId,
-    this.courseId,
     required this.pageId,
   }) : super(key: key);
 
@@ -31,6 +32,7 @@ class FilterCategoryWidget extends StatefulWidget {
 class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
   final gradeController = Get.find<GradeController>();
   final refresh = Get.find<RefreshController>();
+  final courseController = Get.put(CourseController());
 
   @override
   Widget build(BuildContext context) {
@@ -79,8 +81,59 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
                     const Text(" Course")
                   ],
                 ),
-                ChipButtonFilter(
-                    text: getCourse(widget.courseId).name, onPressed: () {}),
+                courseController.obx(
+                  (courses) => ChipButtonFilter(
+                    text: capitalizeFirstLetter(
+                        courseController.selectedCourse.value!.abbreviation),
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (_) {
+                          return Dialog(
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
+                            child: SizedBox(
+                              height: courses!.length > 7
+                                  ? screenHeight(context) * 0.4
+                                  : 58.0 * courses.length,
+                              child: ListView.builder(
+                                itemCount: courses.length,
+                                itemBuilder: (context, index) {
+                                  bool active = courses[index].id ==
+                                      courseController.selectedCourse.value!.id;
+                                  return FilterDialogTile(
+                                      active: active,
+                                      isLast: index == courses.length - 1,
+                                      text: courses[index].name,
+                                      onClick: () {
+                                        Navigator.pop(context);
+                                        if (active) return;
+                                        courseController.selectedCourse.value =
+                                            courses[index];
+                                        setState(() {});
+                                        refresh.refreshPage();
+                                      });
+                                },
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                  onLoading: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: const ShimmerCard(width: 100, height: 35),
+                  ),
+                  onEmpty: ChipButtonFilter(
+                    text: "No Courses",
+                    onPressed: () => showToast(message: "No courses available"),
+                  ),
+                  onError: (error) => ChipButtonFilter(
+                    text: "No Course",
+                    onPressed: () => showToast(
+                      message: "Error happened, $error",
+                    ),
+                  ),
+                ),
               ],
             ),
           if (widget.shopFilter == true)
@@ -135,6 +188,7 @@ class _FilterCategoryWidgetState extends State<FilterCategoryWidget> {
   }
 
   Dialog buildContentModal(BuildContext context) {
+    appPages.sort((a, b) => a.content.compareTo(b.content));
     return Dialog(
       elevation: 0.0,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

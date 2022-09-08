@@ -113,7 +113,24 @@ class DatabaseService {
       if (response.statusCode != 200) {
         return errorMethod(response.statusCode, decoded['message']);
       }
-      return dummyBooks;
+      List<Book> books = [];
+      for (var book in decoded['data']['rows']) {
+        books.add(Book.fromJson(book));
+      }
+      if (books.isEmpty) {
+        return ErrorException(
+          statusCode: 204,
+          error: "No Content",
+          errorMessage: "No book found for the selected course or grade",
+        );
+      }
+      return books;
+    } on SocketException catch (_) {
+      return ErrorException(
+          statusCode: 504,
+          error: "No Internet",
+          errorMessage:
+              "Poor connection is detected, try again when your connection is back");
     } catch (e) {
       return errorMethod(500, "Something went wrong, $e");
     }

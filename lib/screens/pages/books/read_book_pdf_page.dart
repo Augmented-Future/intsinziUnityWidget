@@ -1,10 +1,7 @@
 import 'dart:io';
-
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:globaltrailblazersapp/screens/pages/widgets/loading_indicator.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/shimmer_card.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
@@ -23,13 +20,6 @@ class ReadBookPdfPage extends StatefulWidget {
 }
 
 class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
-  final audioPlayer = AudioPlayer();
-  bool isAudioPlaying = false;
-  IsLoading _isLoading = IsLoading.none;
-  bool everPlayed = false;
-  Duration duration = Duration.zero;
-  Duration position = Duration.zero;
-
   PDFViewController? pdfViewController;
   int? totalPages;
   int? currentPage = 1;
@@ -41,32 +31,13 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
 
   @override
   void initState() {
-    initBook(widget.book.pdfUrl);
+    initBook(widget.book.pdf);
     super.initState();
-
-    audioPlayer.onPlayerStateChanged.listen((state) {
-      setState(() {
-        isAudioPlaying = state == PlayerState.playing;
-        _isLoading = IsLoading.none;
-      });
-    });
-
-    audioPlayer.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
-    });
-
-    audioPlayer.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
-    });
   }
 
   @override
   void dispose() {
-    audioPlayer.dispose();
+    //audioPlayer.dispose();
     super.dispose();
   }
 
@@ -85,7 +56,7 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
                 children: [
                   Expanded(
                     child: Text(
-                      widget.book.title,
+                      widget.book.name,
                       style: const TextStyle(fontSize: 20, color: primaryColor),
                     ),
                   ),
@@ -146,79 +117,6 @@ class _ReadBookPdfPageState extends State<ReadBookPdfPage> {
                 ],
               ),
             SvgPicture.asset('assets/icons/mic_record.svg'),
-            if (widget.book.augmented != null)
-              Container(
-                color: Colors.black,
-                margin:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                child: Column(
-                  children: [
-                    Slider(
-                      min: 0,
-                      max: duration.inSeconds.toDouble(),
-                      value: position.inSeconds.toDouble(),
-                      onChanged: (value) async {
-                        final _position = Duration(seconds: value.toInt());
-                        await audioPlayer.seek(_position);
-
-                        await audioPlayer.resume();
-                      },
-                      activeColor: coolYellow,
-                      inactiveColor: Colors.grey,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        children: [
-                          Text(
-                            formatTime(position),
-                            style: const TextStyle(color: whiteColor),
-                          ),
-                          const Spacer(),
-                          _isLoading == IsLoading.loading
-                              ? Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 20),
-                                  child: const LinearLoadingIndicator(),
-                                )
-                              : IconButton(
-                                  onPressed: () async {
-                                    if (isAudioPlaying) {
-                                      await audioPlayer.pause();
-                                    } else {
-                                      if (!everPlayed) {
-                                        setState(() {
-                                          _isLoading = IsLoading.loading;
-                                        });
-                                      }
-
-                                      await audioPlayer.play(
-                                          UrlSource(widget.book.augmented!));
-                                      setState(() {
-                                        everPlayed = true;
-                                      });
-                                    }
-                                  },
-                                  icon: Icon(isAudioPlaying
-                                      ? Icons.pause_circle
-                                      : Icons.play_circle),
-                                  color: whiteColor,
-                                ),
-                          SvgPicture.asset(
-                            'assets/icons/sound.svg',
-                            color: whiteColor,
-                          ),
-                          const Spacer(),
-                          Text(
-                            formatTime(duration - position),
-                            style: const TextStyle(color: whiteColor),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
           ],
         ),
       ),

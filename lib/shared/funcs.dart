@@ -53,3 +53,6 @@ String formatTime(Duration duration) {
   final seconds = twoDigits(duration.inSeconds.remainder(60));
   return [if (duration.inHours > 0) hours, minutes, seconds].join(':');
 }
+
+String capitalizeFirstLetter(String str) =>
+    str[0].toUpperCase() + str.substring(1).toLowerCase();

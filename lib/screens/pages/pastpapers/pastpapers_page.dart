@@ -40,7 +40,7 @@ class _PastPapersPageState extends State<PastPapersPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const FilterCategoryWidget(pageId: 8, courseId: 1),
+                const FilterCategoryWidget(pageId: 8),
                 const SizedBox(height: 5),
               ],
             ),

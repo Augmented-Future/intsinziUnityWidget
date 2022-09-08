@@ -35,7 +35,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 75,
+      height: 65,
       decoration: const BoxDecoration(
           color: brandYellowColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(35))),
@@ -57,7 +57,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                     (route) => false,
                   ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.only(top: 15),
               child: Column(
                 children: [
                   SvgPicture.asset(
@@ -87,7 +87,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                     ),
                   ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.only(top: 15),
               child: Column(
                 children: [
                   SvgPicture.asset(
@@ -123,7 +123,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                     (route) => false,
                   ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.only(top: 15),
               child: Column(
                 children: [
                   SvgPicture.asset(
@@ -152,7 +152,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                     ),
                   ),
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.only(top: 15),
               child: Column(
                 children: [
                   SvgPicture.asset(

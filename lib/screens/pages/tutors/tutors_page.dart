@@ -63,7 +63,7 @@ class _TutorsPageState extends State<TutorsPage> {
             ),
           ),
           const SliverToBoxAdapter(
-            child: FilterCategoryWidget(pageId: 7, courseId: 1),
+            child: FilterCategoryWidget(pageId: 7),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {

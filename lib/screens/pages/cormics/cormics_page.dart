@@ -38,7 +38,7 @@ class _CormicsPageState extends State<CormicsPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const FilterCategoryWidget(pageId: 10, courseId: 1),
+                const FilterCategoryWidget(pageId: 10),
                 const SizedBox(height: 5),
               ],
             ),

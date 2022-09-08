@@ -24,21 +24,20 @@ class HomePage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                  "Coucou, \nWelcome back to the\nhome of engaging\nlearning",
+            children: const [
+              Text("Coucou, \nWelcome back to the\nhome of engaging\nlearning",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
-              Column(
-                children: [
-                  const Text("Tutoring"),
-                  Container(
-                    padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.only(top: 2),
-                    decoration: const BoxDecoration(color: whiteColor),
-                    child: const Text("3"),
-                  )
-                ],
-              )
+              // Column(
+              //   children: [
+              //     const Text("Tutoring"),
+              //     Container(
+              //       padding: const EdgeInsets.all(20),
+              //       margin: const EdgeInsets.only(top: 2),
+              //       decoration: const BoxDecoration(color: whiteColor),
+              //       child: const Text("3"),
+              //     )
+              //   ],
+              // )
             ],
           ),
         ),

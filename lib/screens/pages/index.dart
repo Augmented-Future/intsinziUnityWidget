@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/controllers/refresh_controller.dart';
-import 'package:globaltrailblazersapp/screens/pages/animations/animations_page.dart';
+import 'package:globaltrailblazersapp/models/notification_model.dart';
+import 'package:globaltrailblazersapp/screens/pages/notifications/notification_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/profile_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/shimmer_card.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
@@ -16,7 +18,7 @@ import 'widgets/filter_widget/all_grades_dialog.dart';
 class IndexPage extends StatefulWidget {
   final Widget page;
   final String active;
-  const IndexPage({Key? key, required this.page,required this.active})
+  const IndexPage({Key? key, required this.page, required this.active})
       : super(key: key);
 
   @override
@@ -56,9 +58,10 @@ class _IndexPageState extends State<IndexPage> {
               Builder(builder: (context) {
                 return InkWell(
                   onTap: () => Scaffold.of(context).openDrawer(),
+                  borderRadius: BorderRadius.circular(5),
                   child: Ink(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 15,
+                      horizontal: 12,
                       vertical: 15,
                     ),
                     child: SvgPicture.asset(
@@ -107,23 +110,47 @@ class _IndexPageState extends State<IndexPage> {
                 }
               }),
               const SizedBox(width: 20),
-              Badge(
-                badgeContent: const Text(
-                  "9+",
-                  style: TextStyle(color: whiteColor, fontSize: 12),
+              GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const NotificationPage(),
+                  ),
                 ),
-                elevation: 0.0,
-                child: SvgPicture.asset('assets/icons/notification.svg'),
-                position: BadgePosition.topEnd(),
+                child: Badge(
+                  badgeContent: Text(
+                    "${notifications.length < 10 ? notifications.length : "9+"}",
+                    style: const TextStyle(color: whiteColor, fontSize: 12),
+                  ),
+                  elevation: 0.0,
+                  child: SvgPicture.asset('assets/icons/notification.svg'),
+                  position: BadgePosition.topEnd(),
+                ),
               ),
               const SizedBox(width: 20),
               Obx(
                 () {
                   if (userController.userAccountInfo.value?.avatarUrl != null) {
-                    return CircleAvatar(
-                      backgroundColor: brandYellowColor,
-                      backgroundImage: NetworkImage(
-                          userController.userAccountInfo.value!.avatarUrl),
+                    return InkWell(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ProfilePage(
+                            user: userController.userAccountInfo.value,
+                          ),
+                          fullscreenDialog: true,
+                        ),
+                      ),
+                      borderRadius: BorderRadius.circular(30),
+                      highlightColor: brandYellowColor,
+                      child: Ink(
+                        padding: const EdgeInsets.all(3),
+                        child: CircleAvatar(
+                          backgroundColor: brandYellowColor,
+                          backgroundImage: NetworkImage(
+                              userController.userAccountInfo.value!.avatarUrl),
+                        ),
+                      ),
                     );
                   } else {
                     return const CircleAvatar(
@@ -142,7 +169,7 @@ class _IndexPageState extends State<IndexPage> {
           elevation: 0.0,
         ),
         drawer: SizedBox(
-          width: screenWidth(context) * 0.95,
+          width: screenWidth(context) * 0.85,
           child: NavigationDrawerWidget(userAccountController: userController),
         ),
         body: Container(

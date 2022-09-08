@@ -9,7 +9,7 @@ import 'package:globaltrailblazersapp/screens/pages/index.dart';
 import '../games/games_page.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
-  const BottomNavigationBarWidget({Key? key, required this.active})
+  const BottomNavigationBarWidget({Key? key, this.active = ""})
       : super(key: key);
   final String active;
 
@@ -35,7 +35,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
+      height: 75,
       decoration: const BoxDecoration(
           color: brandYellowColor,
           borderRadius: BorderRadius.vertical(top: Radius.circular(35))),
@@ -60,8 +60,12 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  Icon(Icons.home,
-                      size: 20, color: activeHome ? whiteColor : primaryColor),
+                  SvgPicture.asset(
+                    'assets/icons/home.svg',
+                    color: activeHome ? whiteColor : primaryColor,
+                    height: 20,
+                    width: 20,
+                  ),
                   Text(
                     "Home",
                     style: TextStyle(
@@ -76,7 +80,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           GestureDetector(
             onTap: () => activeAnimations
                 ? null
-                : Navigator.pushReplacement(
+                : Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => const AnimationsPageScreen(),
@@ -86,9 +90,12 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  Icon(Icons.play_circle_fill,
-                      size: 20,
-                      color: activeAnimations ? whiteColor : primaryColor),
+                  SvgPicture.asset(
+                    'assets/icons/tv_zone.svg',
+                    color: activeAnimations ? whiteColor : primaryColor,
+                    height: 20,
+                    width: 20,
+                  ),
                   Text(
                     "Animations",
                     style: TextStyle(
@@ -105,7 +112,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           GestureDetector(
             onTap: () => activeLibrary
                 ? null
-                : Navigator.pushReplacement(
+                : Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
                       builder: (_) => const IndexPage(
@@ -113,14 +120,18 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
                         active: "Library",
                       ),
                     ),
+                    (route) => false,
                   ),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  Icon(Icons.book,
-                      size: 20,
-                      color: activeLibrary ? whiteColor : primaryColor),
+                  SvgPicture.asset(
+                    'assets/icons/digital_book.svg',
+                    color: activeLibrary ? whiteColor : primaryColor,
+                    height: 20,
+                    width: 20,
+                  ),
                   Text(
                     "Library",
                     style: TextStyle(
@@ -134,7 +145,7 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
           GestureDetector(
             onTap: () => activeGames
                 ? null
-                : Navigator.pushReplacement(
+                : Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) => const GamesPage(),
@@ -144,8 +155,12 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 children: [
-                  Icon(Icons.gamepad,
-                      size: 20, color: activeGames ? whiteColor : primaryColor),
+                  SvgPicture.asset(
+                    'assets/icons/gamepad.svg',
+                    color: activeGames ? whiteColor : primaryColor,
+                    height: 20,
+                    width: 20,
+                  ),
                   Text(
                     "Games Zone",
                     style: TextStyle(
@@ -170,17 +185,17 @@ class MiddleItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      width: 100,
+      height: 60,
+      width: 80,
       decoration: const BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(50),
+          bottom: Radius.circular(40),
         ),
       ),
       child: Container(
-        margin: const EdgeInsets.fromLTRB(10, 0.0, 10, 10),
-        padding: const EdgeInsets.fromLTRB(5, 0.0, 5, 5),
+        margin: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+        padding: const EdgeInsets.fromLTRB(5, 0.0, 5, 4),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
           color: Colors.white,
@@ -199,12 +214,10 @@ class MiddleItem extends StatelessWidget {
         ),
         child: Container(
           margin: const EdgeInsets.only(bottom: 2.5, right: 2.5, left: 2.5),
-          width: 25,
-          height: 25,
-          padding: const EdgeInsets.all(17),
+          padding: const EdgeInsets.all(12.5),
           decoration: BoxDecoration(
             color: coolYellow,
-            borderRadius: BorderRadius.circular(60),
+            borderRadius: BorderRadius.circular(50),
           ),
           child: SvgPicture.asset('assets/icons/launch_ar.svg'),
         ),

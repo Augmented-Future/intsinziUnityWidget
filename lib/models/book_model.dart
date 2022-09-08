@@ -64,7 +64,7 @@ List<Book> dummyBooks = [
     price: "500",
     description:
         "Dear students, this book is published to engage learning faster and clean.",
-    title: "tThe ABS of Rwanda",
+    title: "The ABS of Rwanda",
     narration: "null",
     augmented:
         "https://res.cloudinary.com/dofeqwgfb/video/upload/v1662049509/guitar-electro-sport-trailer-115571_hxuzim.mp3",

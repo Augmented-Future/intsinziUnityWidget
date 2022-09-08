@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:globaltrailblazersapp/controllers/user_account_controller.dart';
+import 'package:globaltrailblazersapp/screens/pages/augmented/augmented_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
+import 'package:globaltrailblazersapp/screens/pages/games/games_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/pastpapers/pastpapers_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shop_home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/support_page.dart';
 
 import '../../../shared/colors.dart';
 import '../../../models/user_model.dart';
 import '../animations/animations_page.dart';
 import '../books/library_home_page.dart';
 import '../index.dart';
-import '../page_error.dart';
+import '../error_page.dart';
 import '../profile_page.dart';
 import '../tutors/tutor_homepage.dart';
 import 'painters.dart';
@@ -23,13 +27,6 @@ class NavigationDrawerWidget extends StatefulWidget {
 }
 
 class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
-  final LinearGradient _gradient = const LinearGradient(colors: <Color>[
-    whiteColor,
-    whiteColor,
-    Color(0xFFFEB326),
-    whiteColor,
-    Color(0xFFFEB326),
-  ], begin: Alignment.topCenter, end: Alignment.bottomCenter);
   late UserAccount? _userAccount;
   @override
   void initState() {
@@ -46,17 +43,15 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
         children: [
           ListView(
             children: <Widget>[
-              const SizedBox(height: 48),
+              const SizedBox(height: 40),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(15),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(),
+                    const SizedBox(width: 10),
                     if (_userAccount?.avatarUrl != null)
                       CircleAvatar(
-                        backgroundColor: primaryColor,
+                        backgroundColor: brandYellowColor,
                         backgroundImage: NetworkImage(_userAccount!.avatarUrl),
                         radius: 30,
                       ),
@@ -65,49 +60,53 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                         backgroundColor: brandYellowColor,
                         radius: 30,
                       ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${_userAccount?.firstName} ${_userAccount?.lastName}"
-                              .toUpperCase(),
-                          style: const TextStyle(
-                              color: Color(0xFFEA580C), fontSize: 16),
-                        ),
-                        const SizedBox(height: 3),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => ProfilePage(user: _userAccount),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${_userAccount?.firstName} ${_userAccount?.lastName}"
+                                .toUpperCase(),
+                            style: const TextStyle(
+                                color: Color(0xFFEA580C), fontSize: 16),
+                          ),
+                          const SizedBox(height: 3),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) =>
+                                      ProfilePage(user: _userAccount),
+                                ),
+                              );
+                            },
+                            child: Ink(
+                              child: const Text(
+                                'View profile',
+                                style: TextStyle(
+                                    color: Color(0xFFC4C4C4),
+                                    decoration: TextDecoration.underline,
+                                    fontSize: 16),
                               ),
-                            );
-                          },
-                          child: Ink(
-                            child: const Text(
-                              'View profile',
-                              style: TextStyle(
-                                  color: Color(0xFFC4C4C4),
-                                  decoration: TextDecoration.underline,
-                                  fontSize: 15),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    Container(),
-                    InkWell(
-                      onTap: () => Navigator.pop(context),
-                      splashColor: whiteColor,
-                      highlightColor: brandYellowColor.withOpacity(0.5),
-                      child: Ink(
-                        padding: const EdgeInsets.only(right: 10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20)),
-                        child: SvgPicture.asset('assets/icons/close.svg'),
+                        ],
                       ),
                     ),
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const CircleAvatar(
+                        backgroundColor: primaryColor,
+                        foregroundColor: whiteColor,
+                        radius: 16,
+                        child: Icon(
+                          Icons.close,
+                          size: 22,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -141,6 +140,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Games",
+                direction: const GamesPage(),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: GamesCustomPainter(),
@@ -152,10 +152,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Board Game",
-                direction: const IndexPage(
-                  page: BoardGame(),
-                  active: "",
-                ),
+                direction: const BoardGame(),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: BoardCustomPainter(),
@@ -203,6 +200,21 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 ),
               ),
               buildMenuItem(
+                text: "Augmented World",
+                direction: const AugmentedWorldPage(),
+                leading: CustomPaint(
+                  size: Size(40, (40 * 1).toDouble()),
+                  painter: LibraryCustomPainter(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: SizedBox(
+                        height: 23,
+                        width: 23,
+                        child: SvgPicture.asset('assets/icons/launch_ar.svg')),
+                  ),
+                ),
+              ),
+              buildMenuItem(
                 text: "Safe Guarding Tips",
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
@@ -215,6 +227,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Past papers",
+                direction: const PastPapersPage(),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: PastPapersCustomPainter(
@@ -267,6 +280,7 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
               ),
               buildMenuItem(
                 text: "Support",
+                direction: const SupportPage(),
                 leading: CustomPaint(
                   size: Size(40, (40 * 1).toDouble()),
                   painter: PastPapersCustomPainter(
@@ -277,14 +291,14 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                   ),
                 ),
               ),
-              const SizedBox(height: 100),
+              const SizedBox(height: 80),
             ],
           ),
           Container(
             color: whiteColor,
+            padding: const EdgeInsets.all(20),
             child: Container(
-              height: 60,
-              margin: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 gradient: const LinearGradient(
@@ -300,13 +314,17 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset('assets/icons/switch_ar.png'),
-                  ShaderMask(
-                    shaderCallback: (Rect rect) {
-                      return _gradient.createShader(rect);
-                    },
-                    child: const Text(
-                      'Switch to Augmented Reality',
-                      style: TextStyle(color: whiteColor, fontSize: 15.0),
+                  Expanded(
+                    child: ShaderMask(
+                      shaderCallback: (Rect rect) => const LinearGradient(
+                        colors: <Color>[brandYellowColor, whiteColor],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ).createShader(rect),
+                      child: const Text(
+                        'Switch to Augmented Reality',
+                        style: TextStyle(color: whiteColor, fontSize: 15.0),
+                      ),
                     ),
                   )
                 ],
@@ -335,11 +353,12 @@ class _NavigationDrawerWidgetState extends State<NavigationDrawerWidget> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (_) => const PageError(
-                      errorDescription:
-                          "The page you're looking for is under maintainance, Intsinzi App is currently being updated. Visit another page.",
-                      errorMessage: "Page not found",
-                      statusCode: 404)),
+                builder: (_) => const PageError(
+                    errorDescription:
+                        "The page you're looking for is under maintainance, Intsinzi App is currently being updated. Visit another page.",
+                    errorMessage: "Page not found",
+                    statusCode: 404),
+              ),
             );
           }
         },

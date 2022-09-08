@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -144,7 +143,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Already have an account?',
+                          'Remember an account?',
                           style: TextStyle(color: grayColor200),
                         ),
                         const SizedBox(width: 4),
@@ -170,14 +169,11 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   }
 
   Future<dynamic> displayBottomSheet(BuildContext context, String email) {
-    final String domain = email.substring(email.indexOf('@') + 1);
-
     return showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
       builder: (context) => Container(
         padding: const EdgeInsets.all(20),
-        // height: 300,
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           color: whiteColor,

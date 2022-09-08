@@ -166,7 +166,7 @@ class CustomSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   @override
   double get maxExtent => expandedHeight;
   @override
-  double get minExtent => kToolbarHeight + 50;
+  double get minExtent => kToolbarHeight + 30;
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) => true;
 }

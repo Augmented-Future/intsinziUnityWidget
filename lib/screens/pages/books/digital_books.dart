@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:globaltrailblazersapp/screens/pages/widgets/custom_blur_image.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/models/book_model.dart';
@@ -129,11 +130,10 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.network(
-                  book.cover,
-                  width: 200,
-                  height: 120,
-                  fit: BoxFit.fill,
+                CustomBlurImage(
+                  height: screenWidth(context) / 3,
+                  imgUrl: book.cover,
+                  width: screenWidth(context) / 2.2,
                 ),
                 Expanded(
                   child: Padding(
@@ -150,25 +150,41 @@ class _DigitalBooksZoneState extends State<DigitalBooksZone> {
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Text(book.title),
-                      const SizedBox(width: 20),
-                      SvgPicture.asset("assets/icons/aug.svg"),
-                      const SizedBox(width: 10),
-                      SvgPicture.asset("assets/icons/sound.svg"),
-                    ],
-                  ),
-                  Text("Author: ${book.author}"),
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            book.title,
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        Icon(
+                          book.augmented != null
+                              ? Icons.volume_up_outlined
+                              : Icons.volume_off_outlined,
+                          size: 16,
+                        ),
+                        SizedBox(width: screenWidth(context) / 5)
+                      ],
+                    ),
+                    Text(
+                      "Author: ${book.author}",
+                      style: const TextStyle(
+                        color: primaryColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               ElevatedButton.icon(
                 onPressed: () => Get.to(() => ReadBookPdfPage(book: book)),
+                
                 label:
                     const Text("Read", style: TextStyle(color: primaryColor)),
                 icon: SvgPicture.asset('assets/icons/open_book.svg'),

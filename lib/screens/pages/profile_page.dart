@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/models/user_model.dart';
 import 'package:globaltrailblazersapp/screens/authentication/login.dart';
-import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
+import 'package:globaltrailblazersapp/screens/pages/error_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/bottom_navbar.dart';
 import 'package:globaltrailblazersapp/services/auth_service.dart';

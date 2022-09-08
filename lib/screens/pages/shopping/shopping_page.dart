@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
 import 'package:globaltrailblazersapp/shared/funcs.dart';
 import 'package:globaltrailblazersapp/models/product_model.dart';
-import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
+import 'package:globaltrailblazersapp/screens/pages/error_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/widgets/product_card_widget.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_cart_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/widgets/back_app_bar.dart';

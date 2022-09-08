@@ -35,7 +35,11 @@ showToast({required String message, bool? success}) {
 class ErrorException {
   int statusCode;
   String errorMessage;
-  ErrorException({required this.statusCode, required this.errorMessage});
+  String error;
+  ErrorException(
+      {required this.statusCode,
+      required this.errorMessage,
+      this.error = "Error Happened"});
 }
 
 ErrorException errorMethod(int statusCode, String message) {

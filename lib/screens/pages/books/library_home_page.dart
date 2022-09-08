@@ -53,7 +53,10 @@ class _LibraryHomePageState extends State<LibraryHomePage> {
                 decoration: const BoxDecoration(
                   color: coolYellow,
                 ),
-                child: Image.asset('assets/images/read_books.png'),
+                child: Image.asset(
+                  'assets/images/read_books.png',
+                  fit: BoxFit.contain,
+                ),
               ),
               Expanded(
                 child: Padding(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:globaltrailblazersapp/models/game_model.dart';
 import 'package:globaltrailblazersapp/shared/keys.dart';
 import 'package:globaltrailblazersapp/shared/url.dart';
 import 'package:globaltrailblazersapp/models/animation_content_model.dart';
@@ -51,7 +52,7 @@ class DatabaseService {
           .where((animation) => animation.gradeId == gradeId)
           .toList();
     } on SocketException catch (_) {
-      return errorMethod(400, "No Internet");
+      return errorMethod(503, "No Internet");
     } catch (e) {
       return errorMethod(500, "Something went wrong, $e");
     }
@@ -186,6 +187,33 @@ class DatabaseService {
         return errorMethod(response.statusCode, decoded["message"]);
       }
       return true;
+    } catch (e) {
+      return errorMethod(500, "Something went wrong, $e");
+    }
+  }
+
+  //Getting all games
+  static Future fetchGames({required int gradeId}) async {
+    try {
+      Uri url = Uri.parse(databaseUrl + '/games');
+      final response = await http.get(url);
+      final decoded = jsonDecode(response.body);
+
+      if (response.statusCode != 200) {
+        return errorMethod(response.statusCode, decoded['message']);
+      }
+
+      List<Game> games = [];
+      for (var game in decoded['data']['rows']) {
+        games.add(Game.fromJson(game));
+      }
+      return games.where((game) => int.parse(game.gradeId) == gradeId).toList();
+    } on SocketException catch (_) {
+      return ErrorException(
+        statusCode: 503,
+        error: "No Internet",
+        errorMessage: "Please try again when your connection is back.",
+      );
     } catch (e) {
       return errorMethod(500, "Something went wrong, $e");
     }

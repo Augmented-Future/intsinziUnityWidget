@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:globaltrailblazersapp/screens/pages/animations/animations_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/augmented/augmented_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/audio_books.dart';
 import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/cormics/cormics_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/games/board_game.dart';
+import 'package:globaltrailblazersapp/screens/pages/games/games_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/index.dart';
-import 'package:globaltrailblazersapp/screens/pages/page_error.dart';
+import 'package:globaltrailblazersapp/screens/pages/error_page.dart';
+import 'package:globaltrailblazersapp/screens/pages/pastpapers/pastpapers_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/shopping/shopping_page.dart';
 import 'package:globaltrailblazersapp/screens/pages/tutors/tutors_page.dart';
 
@@ -53,22 +57,23 @@ List<AppPage> appPages = [
   AppPage(
     pageId: 3,
     content: "Board Game",
-    page: const IndexPage(
-      page: BoardGame(),
-      active: "",
-    ),
+    page: const BoardGame(),
   ),
   AppPage(
     pageId: 4,
-    content: "Game Page",
-    page: const IndexPage(
-      page: BoardGame(),
-      active: "",
-    ),
+    content: "Games",
+    page: const GamesPage(),
   ),
   AppPage(pageId: 5, content: "Audio Books", page: const AudioBooksZone()),
   AppPage(pageId: 6, content: "Digital Books", page: const DigitalBooksZone()),
-  AppPage(pageId: 7, content: "Tutors", page: const TutorsPage())
+  AppPage(pageId: 7, content: "Tutors", page: const TutorsPage()),
+  AppPage(pageId: 8, content: "Papers Page", page: const PastPapersPage()),
+  AppPage(
+    pageId: 9,
+    content: "Augmented World",
+    page: const AugmentedWorldPage(),
+  ),
+  AppPage(pageId: 10, content: "Cormics", page: const CormicsPage()),
 ];
 
 //Courses

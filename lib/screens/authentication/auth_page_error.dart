@@ -20,7 +20,7 @@ class AuthPageError extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              message,
+              "$statusCode ($message)",
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 20,

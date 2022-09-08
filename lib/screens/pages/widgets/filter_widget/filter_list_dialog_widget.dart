@@ -54,7 +54,7 @@ class _FilterDialogTileState extends State<FilterDialogTile> {
             ),
           ),
         ),
-        if (widget.isLast)
+        if (!widget.isLast)
           Divider(
             height: 1.0,
             color: blackColor.withOpacity(0.2),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../shared/colors.dart';
-import 'components/animations_card_view.dart';
 import 'quick_access.dart';
 
 class HomePage extends StatelessWidget {
@@ -54,7 +53,6 @@ class HomePage extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         const QuickAccessView(),
-        const AnimationsCardView(),
       ],
     );
   }

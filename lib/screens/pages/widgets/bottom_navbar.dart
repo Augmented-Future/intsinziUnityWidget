@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:globaltrailblazersapp/screens/pages/animations/animations_page.dart';
 import 'package:globaltrailblazersapp/shared/colors.dart';
-import 'package:globaltrailblazersapp/screens/pages/books/library_home_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/home/home_page.dart';
-import 'package:globaltrailblazersapp/screens/pages/index.dart';
-
-import '../games/games_page.dart';
 
 class BottomNavigationBarWidget extends StatefulWidget {
-  const BottomNavigationBarWidget({Key? key, this.active = ""})
-      : super(key: key);
-  final String active;
+  const BottomNavigationBarWidget({Key? key}) : super(key: key);
 
   @override
   State<BottomNavigationBarWidget> createState() =>
@@ -19,16 +11,8 @@ class BottomNavigationBarWidget extends StatefulWidget {
 }
 
 class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
-  late bool activeHome;
-  late bool activeAnimations;
-  late bool activeLibrary;
-  late bool activeGames;
   @override
   void initState() {
-    activeHome = widget.active == "Home";
-    activeAnimations = widget.active == "Animations";
-    activeLibrary = widget.active == "Library";
-    activeGames = widget.active == "Games";
     super.initState();
   }
 
@@ -43,132 +27,81 @@ class _BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          GestureDetector(
-            onTap: () => activeHome
-                ? null
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const IndexPage(
-                        page: HomePage(),
-                        active: "Home",
-                      ),
-                    ),
-                    (route) => false,
-                  ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/home.svg',
-                    color: activeHome ? whiteColor : primaryColor,
-                    height: 20,
-                    width: 20,
-                  ),
-                  Text(
-                    "Home",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: activeHome ? whiteColor : primaryColor),
-                  ),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/home.svg',
+                  color: primaryColor,
+                  height: 20,
+                  width: 20,
+                ),
+                const Text(
+                  "Home",
+                  style: TextStyle(fontSize: 12, color: primaryColor),
+                ),
+              ],
+            ),
+          ),
+          Container(),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/tv_zone.svg',
+                  color: primaryColor,
+                  height: 20,
+                  width: 20,
+                ),
+                const Text(
+                  "Animations",
+                  style: TextStyle(fontSize: 12, color: primaryColor),
+                ),
+              ],
             ),
           ),
           Container(),
           GestureDetector(
-            onTap: () => activeAnimations
-                ? null
-                : Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const AnimationsPageScreen(),
-                    ),
-                  ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/tv_zone.svg',
-                    color: activeAnimations ? whiteColor : primaryColor,
-                    height: 20,
-                    width: 20,
-                  ),
-                  Text(
-                    "Animations",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: activeAnimations ? whiteColor : primaryColor),
-                  ),
-                ],
-              ),
-            ),
+            onTap: () {
+              //Launch AR
+            },
+            child: const MiddleItem(),
           ),
           Container(),
-          const MiddleItem(),
-          Container(),
-          GestureDetector(
-            onTap: () => activeLibrary
-                ? null
-                : Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const IndexPage(
-                        page: LibraryHomePage(),
-                        active: "Library",
-                      ),
-                    ),
-                    (route) => false,
-                  ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/digital_book.svg',
-                    color: activeLibrary ? whiteColor : primaryColor,
-                    height: 20,
-                    width: 20,
-                  ),
-                  Text(
-                    "Library",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: activeLibrary ? whiteColor : primaryColor),
-                  ),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/digital_book.svg',
+                  color: primaryColor,
+                  height: 20,
+                  width: 20,
+                ),
+                const Text(
+                  "Library",
+                  style: TextStyle(fontSize: 12, color: primaryColor),
+                ),
+              ],
             ),
           ),
-          GestureDetector(
-            onTap: () => activeGames
-                ? null
-                : Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const GamesPage(),
-                    ),
-                  ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Column(
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/gamepad.svg',
-                    color: activeGames ? whiteColor : primaryColor,
-                    height: 20,
-                    width: 20,
-                  ),
-                  Text(
-                    "Games Zone",
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: activeGames ? whiteColor : primaryColor),
-                  ),
-                ],
-              ),
+          Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Column(
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/gamepad.svg',
+                  color: primaryColor,
+                  height: 20,
+                  width: 20,
+                ),
+                const Text(
+                  "Games Zone",
+                  style: TextStyle(fontSize: 12, color: primaryColor),
+                ),
+              ],
             ),
           ),
         ],

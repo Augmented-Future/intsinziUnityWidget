@@ -1,3 +1,0 @@
-//This token has be to be changed later or being listened dynamicallt.
-String userAdminToken =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImVtYWlsIjoiYWRtaW5AYXVnbWVudGVkLmNvbSIsImZpcnN0TmFtZSI6ImFkbWluIiwic3RhdHVzIjoxLCJhY3RpdmUiOnRydWUsImlhdCI6MTY2MTkzMTUyMCwiZXhwIjoxNjYyMDE3OTIwfQ.6YVCWELT-2E-eg9VAsXThkYRqtyY2iwD7A6feKxufZ8";
